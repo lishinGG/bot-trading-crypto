@@ -1,0 +1,42 @@
+name: Bot de trading horaire
+
+on:
+  schedule:
+    # Toutes les heures, à la minute 0 (heure UTC)
+    - cron: "0 * * * *"
+  workflow_dispatch: {}  # permet aussi de le lancer manuellement depuis GitHub
+
+# Permission nécessaire pour que le bot puisse sauvegarder son état
+# (state.json, trading_log.csv) en les committant dans le dépôt.
+permissions:
+  contents: write
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code du dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Lancer le bot
+        env:
+          OKX_API_KEY: ${{ secrets.OKX_API_KEY }}
+          OKX_API_SECRET: ${{ secrets.OKX_API_SECRET }}
+          OKX_PASSPHRASE: ${{ secrets.OKX_PASSPHRASE }}
+        run: python main.py
+
+      - name: Sauvegarder l'état et les logs dans le dépôt
+        run: |
+          git config user.name "trading-bot"
+          git config user.email "trading-bot@users.noreply.github.com"
+          git add state.json trading_log.csv
+          git diff --staged --quiet || git commit -m "Mise à jour état du bot - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
