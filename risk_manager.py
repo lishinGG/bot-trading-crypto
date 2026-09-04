@@ -169,7 +169,13 @@ class RiskManager:
 
         # Sortie temporelle : le trade est "mort" -- ouvert depuis
         # longtemps sans bouger significativement.
-        opened_at = pos["opened_at"] if isinstance(pos, dict) else pos.opened_at
+        # .get() avec valeur par défaut : compatibilité avec d'anciennes
+        # positions ouvertes avant l'ajout de ce champ (évite un plantage,
+        # traite juste la position comme "ouverte maintenant" dans ce cas).
+        if isinstance(pos, dict):
+            opened_at = pos.get("opened_at", time.time())
+        else:
+            opened_at = getattr(pos, "opened_at", time.time())
         entry_price = pos["entry_price"] if isinstance(pos, dict) else pos.entry_price
         age_hours = (time.time() - opened_at) / 3600
 
