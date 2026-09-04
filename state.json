@@ -9,7 +9,14 @@
     "starting_capital": 500.0,
     "current_balance": 500.0,
     "trading_halted": false,
-    "open_positions": {}
+    "open_positions": {
+      "XLM-USDT": {
+        "entry_price": 0.18286,
+        "quantity": 273.43322761,
+        "stop_loss_price": 0.1805,
+        "take_profit_price": 0.1875
+      }
+    }
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
