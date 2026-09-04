@@ -37,6 +37,6 @@ jobs:
         run: |
           git config user.name "trading-bot"
           git config user.email "trading-bot@users.noreply.github.com"
-          git add state.json trading_log.csv
+          for f in state.json trading_log.csv; do if [ -f "$f" ]; then git add "$f" fi done
           git diff --staged --quiet || git commit -m "Mise à jour état du bot - $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
