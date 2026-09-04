@@ -15,6 +15,12 @@
         "quantity": 273.43322761,
         "stop_loss_price": 0.1805,
         "take_profit_price": 0.1875
+      },
+      "ETH-USDT": {
+        "entry_price": 2439.84,
+        "quantity": 0.02049315,
+        "stop_loss_price": 2410.7636,
+        "take_profit_price": 2497.9929
       }
     }
   },
