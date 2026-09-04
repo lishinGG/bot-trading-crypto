@@ -1,0 +1,20 @@
+{
+  "trend_following": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "open_positions": {}
+  },
+  "mean_reversion": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "open_positions": {}
+  },
+  "adaptive_hybrid": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "open_positions": {}
+  }
+}
