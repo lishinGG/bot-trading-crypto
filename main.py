@@ -19,6 +19,7 @@ Actions. À chaque exécution :
 import json
 import os
 import csv
+import time
 from datetime import datetime, timezone
 
 from okx_client import OKXDemoClient
@@ -86,7 +87,8 @@ def dump_risk_manager(rm: RiskManager) -> dict:
                 "quantity": pos.quantity if hasattr(pos, "quantity") else pos["quantity"],
                 "stop_loss_price": pos.stop_loss_price if hasattr(pos, "stop_loss_price") else pos["stop_loss_price"],
                 "take_profit_price": pos.take_profit_price if hasattr(pos, "take_profit_price") else pos["take_profit_price"],
-                "opened_at": pos.opened_at if hasattr(pos, "opened_at") else pos["opened_at"],
+                "opened_at": getattr(pos, "opened_at", None) if hasattr(pos, "opened_at")
+                             else (pos.get("opened_at", time.time()) if isinstance(pos, dict) else time.time()),
             }
             for sym, pos in rm.open_positions.items()
         },
