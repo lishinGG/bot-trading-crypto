@@ -1,3 +1,4 @@
 timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-04T06:01:35.983605+00:00,mean_reversion,XLM-USDT,buy,0.18286,273.43322761,0.0,SL=0.1805 TP=0.1875
 2026-09-04T14:01:37.465251+00:00,mean_reversion,ETH-USDT,buy,2439.84,0.02049315,0.0,SL=2410.7636 TP=2497.9929
+2026-09-04T23:15:14.658670+00:00,mean_reversion,XLM-USDT,close,0.17924,273.43322761,-0.99,stop_loss

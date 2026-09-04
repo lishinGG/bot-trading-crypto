@@ -3,24 +3,25 @@
     "starting_capital": 500.0,
     "current_balance": 500.0,
     "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
     "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 499.0101717160518,
     "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [
+      -0.9898282839481958
+    ],
     "open_positions": {
-      "XLM-USDT": {
-        "entry_price": 0.18286,
-        "quantity": 273.43322761,
-        "stop_loss_price": 0.1805,
-        "take_profit_price": 0.1875
-      },
       "ETH-USDT": {
         "entry_price": 2439.84,
         "quantity": 0.02049315,
         "stop_loss_price": 2410.7636,
-        "take_profit_price": 2497.9929
+        "take_profit_price": 2497.9929,
+        "opened_at": 1788563715.8505387
       }
     }
   },
@@ -28,6 +29,8 @@
     "starting_capital": 500.0,
     "current_balance": 500.0,
     "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
     "open_positions": {}
   }
 }
