@@ -2,12 +2,9 @@ name: Bot de trading horaire
 
 on:
   schedule:
-    # Toutes les heures, à la minute 0 (heure UTC)
     - cron: "0 * * * *"
-  workflow_dispatch: {}  # permet aussi de le lancer manuellement depuis GitHub
+  workflow_dispatch: {}
 
-# Permission nécessaire pour que le bot puisse sauvegarder son état
-# (state.json, trading_log.csv) en les committant dans le dépôt.
 permissions:
   contents: write
 
@@ -37,6 +34,7 @@ jobs:
         run: |
           git config user.name "trading-bot"
           git config user.email "trading-bot@users.noreply.github.com"
-          for f in state.json trading_log.csv; do if [ -f "$f" ]; then git add "$f" fi done
-          git diff --staged --quiet || git commit -m "Mise à jour état du bot - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          [ -f state.json ] && git add state.json
+          [ -f trading_log.csv ] && git add trading_log.csv
+          git diff --staged --quiet || git commit -m "Mise a jour etat du bot"
           git push
