@@ -13,18 +13,15 @@ STARTING_CAPITAL_PER_STRATEGY = 500.0
 
 # Intervalle des bougies utilisées pour l'analyse
 CANDLE_INTERVAL = "1H"
-CANDLES_HISTORY_LENGTH = 250  # 250 pour laisser de la marge à la tendance de fond (200 périodes)
+CANDLES_HISTORY_LENGTH = 250
 
 STATE_FILE = "state.json"
 LOG_FILE = "trading_log.csv"
 
 # ----------------------------------------------------------------------
-# COUCHE IA (Niveau 2) -- désactivée par défaut, prête à l'emploi
+# COUCHE IA (Niveau 2) -- prete a l'emploi
 # ----------------------------------------------------------------------
-# Pour activer : mets USE_AI_LAYER = True et choisis AI_PROVIDER.
-#   "openrouter" -> gratuit, nécessite OPENROUTER_API_KEY dans les secrets
-#   "anthropic"  -> payant (Claude), nécessite ANTHROPIC_API_KEY
- USE_AI_LAYER = True
+USE_AI_LAYER = True
 AI_PROVIDER = "openrouter"
 
 OPENROUTER_MODEL = "inclusionai/ling-3.0-flash-fin:free"
