@@ -17,21 +17,14 @@
   },
   "mean_reversion": {
     "starting_capital": 500.0,
-    "current_balance": 499.0101717160518,
+    "current_balance": 499.2739185565518,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.9898282839481958
+      -0.9898282839481958,
+      0.2637468404999978
     ],
-    "open_positions": {
-      "ETH-USDT": {
-        "entry_price": 2439.84,
-        "quantity": 0.02049315,
-        "stop_loss_price": 2410.7636,
-        "take_profit_price": 2497.9929,
-        "opened_at": 1788563715.8505387
-      }
-    }
+    "open_positions": {}
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
