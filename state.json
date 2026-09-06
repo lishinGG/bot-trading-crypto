@@ -1,10 +1,12 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 500.2269993091,
     "trading_halted": false,
     "strategy_paused": false,
-    "pnl_history": [],
+    "pnl_history": [
+      0.2269993091000015
+    ],
     "open_positions": {
       "XLM-USDT": {
         "entry_price": 0.18477,
@@ -12,13 +14,6 @@
         "stop_loss_price": 0.1819,
         "take_profit_price": 0.1904,
         "opened_at": 1788634860.4133708
-      },
-      "ETH-USDT": {
-        "entry_price": 2460.36,
-        "quantity": 0.02032223,
-        "stop_loss_price": 2455.5782,
-        "take_profit_price": 2469.9236,
-        "opened_at": 1788685272.9859366
       }
     }
   },
@@ -35,10 +30,12 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 500.2269993091,
     "trading_halted": false,
     "strategy_paused": false,
-    "pnl_history": [],
+    "pnl_history": [
+      0.2269993091000015
+    ],
     "open_positions": {
       "XLM-USDT": {
         "entry_price": 0.18477,
@@ -46,13 +43,6 @@
         "stop_loss_price": 0.1819,
         "take_profit_price": 0.1904,
         "opened_at": 1788634862.9620218
-      },
-      "ETH-USDT": {
-        "entry_price": 2460.36,
-        "quantity": 0.02032223,
-        "stop_loss_price": 2455.5782,
-        "take_profit_price": 2469.9236,
-        "opened_at": 1788685275.0401547
       }
     }
   }
