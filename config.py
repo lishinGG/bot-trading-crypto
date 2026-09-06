@@ -24,7 +24,7 @@ LOG_FILE = "trading_log.csv"
 # Pour activer : mets USE_AI_LAYER = True et choisis AI_PROVIDER.
 #   "openrouter" -> gratuit, nécessite OPENROUTER_API_KEY dans les secrets
 #   "anthropic"  -> payant (Claude), nécessite ANTHROPIC_API_KEY
- USE_AI_LAYER = True.
+ USE_AI_LAYER = True
 AI_PROVIDER = "openrouter"
 
 OPENROUTER_MODEL = "inclusionai/ling-3.0-flash-fin:free"
