@@ -12,40 +12,26 @@
   },
   "mean_reversion": {
     "starting_capital": 500.0,
-    "current_balance": 499.2739185565518,
+    "current_balance": 498.6896189875518,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       -0.9898282839481958,
-      0.2637468404999978
+      0.2637468404999978,
+      -0.5842995689999954
     ],
-    "open_positions": {
-      "BNB-USDT": {
-        "entry_price": 743.4,
-        "quantity": 0.06716087,
-        "stop_loss_price": 737.7429,
-        "take_profit_price": 754.7143,
-        "opened_at": 1788775285.61468
-      }
-    }
+    "open_positions": {}
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.9805307265256,
+    "current_balance": 501.3930635745256,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       0.2269993091000015,
-      1.7535314174256036
+      1.7535314174256036,
+      -0.5874671519999953
     ],
-    "open_positions": {
-      "BNB-USDT": {
-        "entry_price": 743.4,
-        "quantity": 0.06752496,
-        "stop_loss_price": 737.7429,
-        "take_profit_price": 754.7143,
-        "opened_at": 1788775286.7496262
-      }
-    }
+    "open_positions": {}
   }
 }

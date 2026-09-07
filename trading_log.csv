@@ -13,3 +13,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-07T05:01:32.839602+00:00,adaptive_hybrid,XLM-USDT,close,0.19125,270.60670022,1.75,take_profit
 2026-09-07T10:01:26.005026+00:00,mean_reversion,BNB-USDT,buy,743.4,0.06716087,0.0,score=60 | SL=737.7429 TP=754.7143
 2026-09-07T10:01:26.988174+00:00,adaptive_hybrid,BNB-USDT,buy,743.4,0.06752496,0.0,score=60 | SL=737.7429 TP=754.7143
+2026-09-07T16:01:24.088925+00:00,mean_reversion,BNB-USDT,close,734.7,0.06716087,-0.58,stop_loss
+2026-09-07T16:01:25.319394+00:00,adaptive_hybrid,BNB-USDT,close,734.7,0.06752496,-0.59,stop_loss
