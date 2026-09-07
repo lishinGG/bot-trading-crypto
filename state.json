@@ -19,7 +19,15 @@
       -0.9898282839481958,
       0.2637468404999978
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": {
+        "entry_price": 743.4,
+        "quantity": 0.06716087,
+        "stop_loss_price": 737.7429,
+        "take_profit_price": 754.7143,
+        "opened_at": 1788775285.61468
+      }
+    }
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
@@ -30,6 +38,14 @@
       0.2269993091000015,
       1.7535314174256036
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": {
+        "entry_price": 743.4,
+        "quantity": 0.06752496,
+        "stop_loss_price": 737.7429,
+        "take_profit_price": 754.7143,
+        "opened_at": 1788775286.7496262
+      }
+    }
   }
 }
