@@ -1,21 +1,14 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 500.2269993091,
+    "current_balance": 501.9805307265256,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      0.2269993091000015
+      0.2269993091000015,
+      1.7535314174256036
     ],
-    "open_positions": {
-      "XLM-USDT": {
-        "entry_price": 0.18477,
-        "quantity": 270.60670022,
-        "stop_loss_price": 0.1819,
-        "take_profit_price": 0.1904,
-        "opened_at": 1788634860.4133708
-      }
-    }
+    "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -30,20 +23,13 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 500.2269993091,
+    "current_balance": 501.9805307265256,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      0.2269993091000015
+      0.2269993091000015,
+      1.7535314174256036
     ],
-    "open_positions": {
-      "XLM-USDT": {
-        "entry_price": 0.18477,
-        "quantity": 270.60670022,
-        "stop_loss_price": 0.1819,
-        "take_profit_price": 0.1904,
-        "opened_at": 1788634862.9620218
-      }
-    }
+    "open_positions": {}
   }
 }
