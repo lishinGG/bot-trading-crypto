@@ -60,10 +60,11 @@ def print_report():
         sign = "+" if evolution_usd >= 0 else ""
         print(f"  Évolution         : {sign}{evolution_usd:.2f}$ ({sign}{evolution_pct:.2f}%)")
         print(f"  Statut            : {status}")
-        print(f"  Positions ouvertes: {len(open_positions)}")
-        for symbol, pos in open_positions.items():
-            entry = pos["entry_price"] if isinstance(pos, dict) else pos.entry_price
-            print(f"    - {symbol} @ {entry}")
+        print(f"  Positions ouvertes: {sum(len(v) for v in open_positions.values())}")
+        for symbol, positions in open_positions.items():
+            for pos in positions:
+                entry = pos["entry_price"] if isinstance(pos, dict) else pos.entry_price
+                print(f"    - {symbol} @ {entry}")
 
         if pnl_history:
             wins = sum(1 for p in pnl_history if p > 0)
