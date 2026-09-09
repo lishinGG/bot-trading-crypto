@@ -8,7 +8,18 @@
       0.2269993091000015,
       1.7535314174256036
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "7f9c4191",
+          "entry_price": 79902.4,
+          "quantity": 0.00037695,
+          "stop_loss_price": 79434.3196,
+          "take_profit_price": 81150.6143,
+          "opened_at": 1788951685.2412415
+        }
+      ]
+    }
   },
   "mean_reversion": {
     "starting_capital": 500.0,
