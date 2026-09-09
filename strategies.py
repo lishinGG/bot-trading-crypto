@@ -25,7 +25,7 @@ from signal import Signal, no_signal
 
 # Seuil de conviction minimum pour qu'un signal soit jugé assez fiable
 # pour être transmis au risk manager (et, plus tard, à la couche IA).
-MIN_CONVICTION_TO_ACT = 55
+MIN_CONVICTION_TO_ACT = 50
 
 
 class TrendFollowingStrategy:
