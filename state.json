@@ -1,25 +1,15 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 501.9805307265256,
+    "current_balance": 501.73065057152564,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       0.2269993091000015,
-      1.7535314174256036
+      1.7535314174256036,
+      -0.2498801549999978
     ],
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "7f9c4191",
-          "entry_price": 79902.4,
-          "quantity": 0.00037695,
-          "stop_loss_price": 79434.3196,
-          "take_profit_price": 81150.6143,
-          "opened_at": 1788951685.2412415
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
