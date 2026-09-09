@@ -59,6 +59,14 @@ def evaluate(symbol: str, strategy_name: str, signal: Signal, current_price: flo
         # sans jamais dépasser 100.
         ai_confidence = float(ai_opinion.get("confidence", 50))
         signal.conviction_score = min(100, (signal.conviction_score + ai_confidence) / 2 + 10)
+
+        # Transmet les ajustements bruts proposés par l'IA -- le clampage
+        # de SÉCURITÉ final (bornes infranchissables) est fait dans
+        # risk_manager.py, jamais ici.
+        signal.ai_size_factor = float(ai_opinion.get("size_factor", 1.0))
+        signal.ai_sl_tightness = float(ai_opinion.get("sl_tightness", 1.0))
+        signal.ai_tp_extension = float(ai_opinion.get("tp_extension", 1.0))
+
         signal.reasons.append(f"[IA a approuvé, confiance {ai_confidence:.0f} : {ai_opinion.get('reason', '')}]")
 
     return signal
