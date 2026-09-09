@@ -4,15 +4,17 @@ main.py
 Le chef d'orchestre. Ce script tourne toutes les heures via GitHub
 Actions. À chaque exécution :
 
-  1. Recharge l'état sauvegardé (soldes, positions, historique de perf)
+  1. Recharge l'état sauvegardé (soldes, positions -- désormais des
+     LISTES par crypto puisqu'on autorise jusqu'à 2 positions simultanées
+     sur une même crypto -- historique de perf)
   2. Pour chaque stratégie x chaque crypto :
        - calcule le signal technique (Niveau 1, avec score de conviction)
-       - le fait passer par le decision_engine (qui ajoute l'avis de
-         l'IA si le Niveau 2 est activé -- sinon Niveau 1 seul)
+       - le fait passer par le decision_engine (IA optionnelle, qui peut
+         aussi proposer de réduire la taille ou resserrer le SL)
        - applique les règles de risque et exécute si tout est au vert
-  3. Vérifie les positions déjà ouvertes : SL/TP (géré par OKX via l'ordre
-     OCO), invalidation du signal, ou stagnation temporelle
-  4. Met à jour le suivi de performance (pause automatique si dégradation)
+  3. Vérifie CHAQUE position ouverte individuellement (SL/TP, invalidation,
+     stagnation)
+  4. Met à jour le suivi de performance
   5. Sauvegarde l'état + écrit dans le log
 """
 
@@ -20,6 +22,7 @@ import json
 import os
 import csv
 import time
+import uuid
 from datetime import datetime, timezone
 
 from okx_client import OKXDemoClient
@@ -40,7 +43,7 @@ def load_state() -> dict:
             "trading_halted": False,
             "strategy_paused": False,
             "pnl_history": [],
-            "open_positions": {},
+            "open_positions": {},   # symbol -> LISTE de positions
         }
         for strat in ALL_STRATEGIES
     }
@@ -64,13 +67,40 @@ def log_event(strategy_name: str, symbol: str, action: str, price: float,
         ])
 
 
+def _position_to_dict(pos) -> dict:
+    """Convertit un objet PositionSizing (ou un dict déjà chargé) en dict JSON-sérialisable."""
+    if isinstance(pos, dict):
+        return pos
+    return {
+        "position_id": pos.position_id,
+        "entry_price": pos.entry_price,
+        "quantity": pos.quantity,
+        "stop_loss_price": pos.stop_loss_price,
+        "take_profit_price": pos.take_profit_price,
+        "opened_at": pos.opened_at,
+    }
+
+
 def build_risk_manager(strategy_name: str, saved: dict) -> RiskManager:
     rm = RiskManager(strategy_name, saved["starting_capital"])
     rm.current_balance = saved["current_balance"]
     rm.trading_halted = saved["trading_halted"]
     rm.strategy_paused = saved.get("strategy_paused", False)
     rm.pnl_history = saved.get("pnl_history", [])
-    rm.open_positions = saved["open_positions"]
+
+    # Compatibilité ascendante : d'anciens fichiers state.json pouvaient
+    # stocker UNE position (dict) par symbole plutôt qu'une liste, et sans
+    # les champs position_id / opened_at (ajoutés plus tard). On complète
+    # ces champs manquants ICI, une fois pour toutes, pour que le reste du
+    # code puisse toujours compter sur leur présence sans jamais planter.
+    raw_positions = saved.get("open_positions", {})
+    rm.open_positions = {}
+    for symbol, value in raw_positions.items():
+        position_list = value if isinstance(value, list) else [value]
+        for pos in position_list:
+            pos.setdefault("position_id", str(uuid.uuid4())[:8])
+            pos.setdefault("opened_at", time.time())
+        rm.open_positions[symbol] = position_list
     return rm
 
 
@@ -82,50 +112,41 @@ def dump_risk_manager(rm: RiskManager) -> dict:
         "strategy_paused": rm.strategy_paused,
         "pnl_history": rm.pnl_history,
         "open_positions": {
-            sym: {
-                "entry_price": pos.entry_price if hasattr(pos, "entry_price") else pos["entry_price"],
-                "quantity": pos.quantity if hasattr(pos, "quantity") else pos["quantity"],
-                "stop_loss_price": pos.stop_loss_price if hasattr(pos, "stop_loss_price") else pos["stop_loss_price"],
-                "take_profit_price": pos.take_profit_price if hasattr(pos, "take_profit_price") else pos["take_profit_price"],
-                "opened_at": getattr(pos, "opened_at", None) if hasattr(pos, "opened_at")
-                             else (pos.get("opened_at", time.time()) if isinstance(pos, dict) else time.time()),
-            }
-            for sym, pos in rm.open_positions.items()
+            symbol: [_position_to_dict(p) for p in positions]
+            for symbol, positions in rm.open_positions.items()
         },
     }
 
 
 def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, strategy_name: str):
-    """
-    Vérifie chaque position ouverte pour trois raisons de sortie possibles :
-    SL/TP (déjà géré par l'ordre OCO côté OKX, on vérifie juste si le prix
-    les a dépassés pour garder notre état à jour), invalidation du signal,
-    ou stagnation temporelle.
-    """
+    """Vérifie CHAQUE position ouverte (il peut y en avoir jusqu'à 2 par crypto)."""
     for symbol in list(rm.open_positions.keys()):
-        pos = rm.open_positions[symbol]
-        entry_price = pos["entry_price"] if isinstance(pos, dict) else pos.entry_price
-        sl = pos["stop_loss_price"] if isinstance(pos, dict) else pos.stop_loss_price
-        tp = pos["take_profit_price"] if isinstance(pos, dict) else pos.take_profit_price
-        quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
-
-        current_price = client.get_current_price(symbol)
-
-        if current_price <= sl or current_price >= tp:
-            reason = "stop_loss" if current_price <= sl else "take_profit"
-            pnl = rm.close_position(symbol, current_price)
-            log_event(strategy_name, symbol, "close", current_price, quantity, pnl, reason)
+        positions = list(rm.open_positions.get(symbol, []))  # copie, car on modifie la liste pendant l'itération
+        if not positions:
             continue
 
-        # Vérifie si le signal d'origine s'est inversé (sortie sur invalidation)
+        current_price = client.get_current_price(symbol)
         candles = client.get_candles(symbol, config.CANDLE_INTERVAL, config.CANDLES_HISTORY_LENGTH)
         current_signal = strategy.get_signal(candles)
 
-        exit_reason = rm.check_exit_conditions(symbol, current_price, current_signal.direction)
-        if exit_reason:
-            client.place_market_sell(symbol, quantity)
-            pnl = rm.close_position(symbol, current_price)
-            log_event(strategy_name, symbol, "close", current_price, quantity, pnl, exit_reason)
+        for pos in positions:
+            position_id = pos["position_id"] if isinstance(pos, dict) else pos.position_id
+            entry_price = pos["entry_price"] if isinstance(pos, dict) else pos.entry_price
+            sl = pos["stop_loss_price"] if isinstance(pos, dict) else pos.stop_loss_price
+            tp = pos["take_profit_price"] if isinstance(pos, dict) else pos.take_profit_price
+            quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
+
+            if current_price <= sl or current_price >= tp:
+                reason = "stop_loss" if current_price <= sl else "take_profit"
+                pnl = rm.close_position(symbol, current_price, position_id=position_id)
+                log_event(strategy_name, symbol, "close", current_price, quantity, pnl, f"{reason} [{position_id}]")
+                continue
+
+            exit_reason = rm.check_exit_conditions_for_position(pos, current_price, current_signal.direction)
+            if exit_reason:
+                client.place_market_sell(symbol, quantity)
+                pnl = rm.close_position(symbol, current_price, position_id=position_id)
+                log_event(strategy_name, symbol, "close", current_price, quantity, pnl, f"{exit_reason} [{position_id}]")
 
 
 def run():
@@ -135,10 +156,8 @@ def run():
     for strategy in ALL_STRATEGIES:
         rm = build_risk_manager(strategy.name, state[strategy.name])
 
-        # 1. Vérifier les positions déjà ouvertes
         check_and_close_positions(client, rm, strategy, strategy.name)
 
-        # 2. Chercher de nouveaux signaux
         for symbol in config.SYMBOLS:
             candles = client.get_candles(symbol, config.CANDLE_INTERVAL, config.CANDLES_HISTORY_LENGTH)
             signal = strategy.get_signal(candles)
@@ -147,9 +166,6 @@ def run():
                 continue
 
             current_price = client.get_current_price(symbol)
-
-            # Passe par le moteur de décision : ajoute l'avis IA si activé,
-            # sinon garde le score du Niveau 1 tel quel.
             signal = evaluate(symbol, strategy.name, signal, current_price)
 
             if not signal.is_actionable:
@@ -164,7 +180,12 @@ def run():
                     continue
 
                 atr = calculate_atr(candles["high"], candles["low"], candles["close"])
-                sizing = rm.calculate_position(symbol, current_price, atr, entry_reasons=signal.reasons)
+                sizing = rm.calculate_position(
+                    symbol, current_price, atr, entry_reasons=signal.reasons,
+                    ai_size_factor=signal.ai_size_factor,
+                    ai_sl_tightness=signal.ai_sl_tightness,
+                    ai_tp_extension=signal.ai_tp_extension,
+                )
                 if sizing is None:
                     continue
 
@@ -173,19 +194,20 @@ def run():
                     symbol, sizing.quantity, sizing.stop_loss_price, sizing.take_profit_price
                 )
                 rm.register_open_position(sizing)
-                note = f"score={signal.conviction_score:.0f} | SL={sizing.stop_loss_price} TP={sizing.take_profit_price}"
+                note = f"score={signal.conviction_score:.0f} | SL={sizing.stop_loss_price} TP={sizing.take_profit_price} [{sizing.position_id}]"
                 if signal.ai_reviewed:
-                    note += f" | IA: {signal.ai_notes}"
+                    note += f" | IA: {signal.ai_notes} (taille x{signal.ai_size_factor:.2f})"
                 log_event(strategy.name, symbol, "buy", current_price, sizing.quantity, note=note)
 
             elif signal.direction == "sell" and symbol in rm.open_positions:
-                pos = rm.open_positions[symbol]
-                quantity = pos.quantity if hasattr(pos, "quantity") else pos["quantity"]
-                client.place_market_sell(symbol, quantity)
-                pnl = rm.close_position(symbol, current_price)
-                log_event(strategy.name, symbol, "sell_signal_close", current_price, quantity, pnl)
+                # Un signal de vente ferme TOUTES les positions ouvertes sur cette crypto
+                for pos in list(rm.open_positions.get(symbol, [])):
+                    position_id = pos["position_id"] if isinstance(pos, dict) else pos.position_id
+                    quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
+                    client.place_market_sell(symbol, quantity)
+                    pnl = rm.close_position(symbol, current_price, position_id=position_id)
+                    log_event(strategy.name, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
 
-        # 3. Sauvegarder l'état mis à jour de cette stratégie
         state[strategy.name] = dump_risk_manager(rm)
 
     save_state(state)
