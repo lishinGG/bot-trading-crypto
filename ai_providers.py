@@ -51,21 +51,35 @@ Voici un signal technique déjà détecté par des règles quantitatives :
 {context}
 
 Réponds UNIQUEMENT avec un JSON de cette forme, sans aucun texte autour :
-{{"decision": "APPROVE" ou "REJECT", "confidence": nombre de 0 à 100, "reason": "explication en une phrase"}}
+{{
+  "decision": "APPROVE" ou "REJECT",
+  "confidence": nombre de 0 à 100,
+  "reason": "explication en une phrase",
+  "size_factor": nombre de 0.3 à 1.0 (optionnel, 1.0 par défaut -- réduis-le si le contexte te semble incertain, jamais au-dessus de 1.0),
+  "sl_tightness": nombre de 0.6 à 1.0 (optionnel, 1.0 par défaut -- réduis-le pour un stop-loss plus serré si tu vois un risque particulier),
+  "tp_extension": nombre de 1.0 à 1.3 (optionnel, 1.0 par défaut -- augmente-le si le contexte te semble très favorable pour viser plus loin)
+}}
 """
 
 
 def _parse_ai_json_response(text: str) -> dict:
-    """Extrait le JSON de la réponse, même si l'IA a ajouté du texte autour."""
+    """Extrait le JSON de la réponse, même si l'IA a ajouté du texte autour.
+    Les champs optionnels absents reçoivent leur valeur neutre par défaut."""
     text = text.strip()
     start = text.find("{")
     end = text.rfind("}")
     if start == -1 or end == -1:
         raise ValueError("Pas de JSON trouvé dans la réponse de l'IA")
     parsed = json.loads(text[start:end + 1])
-    # Validation minimale de la structure attendue
     assert parsed["decision"] in ("APPROVE", "REJECT")
     assert 0 <= float(parsed["confidence"]) <= 100
+
+    # Valeurs neutres par défaut si l'IA ne les fournit pas -- le
+    # clampage de SÉCURITÉ final est fait dans risk_manager.py, ici on
+    # se contente de valeurs par défaut sûres en cas d'absence.
+    parsed.setdefault("size_factor", 1.0)
+    parsed.setdefault("sl_tightness", 1.0)
+    parsed.setdefault("tp_extension", 1.0)
     return parsed
 
 
