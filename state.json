@@ -56,6 +56,16 @@
           "take_profit_price": 80022.3143,
           "opened_at": 1789149689.164694
         }
+      ],
+      "BNB-USDT": [
+        {
+          "position_id": "23bb7223",
+          "entry_price": 722.4,
+          "quantity": 0.04161302,
+          "stop_loss_price": 714.3964,
+          "take_profit_price": 743.7429,
+          "opened_at": 1789164100.8313036
+        }
       ]
     }
   }
