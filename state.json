@@ -9,7 +9,18 @@
       1.7535314174256036,
       -0.2498801549999978
     ],
-    "open_positions": {}
+    "open_positions": {
+      "ETH-USDT": [
+        {
+          "position_id": "cad7d033",
+          "entry_price": 2629.48,
+          "quantity": 0.01144859,
+          "stop_loss_price": 2599.4538,
+          "take_profit_price": 2715.2693,
+          "opened_at": 1789135296.7951055
+        }
+      ]
+    }
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -33,6 +44,17 @@
       1.7535314174256036,
       -0.5874671519999953
     ],
-    "open_positions": {}
+    "open_positions": {
+      "ETH-USDT": [
+        {
+          "position_id": "042f72ea",
+          "entry_price": 2635.62,
+          "quantity": 0.01141423,
+          "stop_loss_price": 2605.575,
+          "take_profit_price": 2721.4629,
+          "opened_at": 1789135302.4785843
+        }
+      ]
+    }
   }
 }
