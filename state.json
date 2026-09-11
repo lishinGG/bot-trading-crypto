@@ -1,26 +1,16 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 501.73065057152564,
+    "current_balance": 501.08895710202563,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       0.2269993091000015,
       1.7535314174256036,
-      -0.2498801549999978
+      -0.2498801549999978,
+      -0.6416934695000021
     ],
-    "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "cad7d033",
-          "entry_price": 2629.48,
-          "quantity": 0.01144859,
-          "stop_loss_price": 2599.4538,
-          "take_profit_price": 2715.2693,
-          "opened_at": 1789135296.7951055
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
