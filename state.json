@@ -10,7 +10,18 @@
       -0.2498801549999978,
       -0.6416934695000021
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "4a26bb83",
+          "entry_price": 78683.2,
+          "quantity": 0.00038211,
+          "stop_loss_price": 78214.51,
+          "take_profit_price": 80022.3143,
+          "opened_at": 1789149684.9528735
+        }
+      ]
+    }
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -35,6 +46,17 @@
       -0.5874671519999953,
       -0.37233218259999873
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "36738188",
+          "entry_price": 78683.2,
+          "quantity": 0.00038205,
+          "stop_loss_price": 78214.51,
+          "take_profit_price": 80022.3143,
+          "opened_at": 1789149689.164694
+        }
+      ]
+    }
   }
 }
