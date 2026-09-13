@@ -39,8 +39,6 @@ def ask_ai_opinion(context_summary: str) -> dict | None:
             print(f"[ai_providers] Fournisseur inconnu : {config.AI_PROVIDER}")
             return None
     except Exception as e:
-        # Toute erreur (limite atteinte, réseau, clé manquante, réponse
-        # malformée...) -> on n'interrompt jamais le bot pour ça.
         print(f"[ai_providers] Appel IA échoué, repli sur le Niveau 1. Détail : {e}")
         return None
 
@@ -57,7 +55,7 @@ Réponds UNIQUEMENT avec un JSON de cette forme, sans aucun texte autour :
   "reason": "explication en une phrase",
   "size_factor": nombre de 0.3 à 1.0 (optionnel, 1.0 par défaut -- réduis-le si le contexte te semble incertain, jamais au-dessus de 1.0),
   "sl_tightness": nombre de 0.6 à 1.0 (optionnel, 1.0 par défaut -- réduis-le pour un stop-loss plus serré si tu vois un risque particulier),
-  "tp_extension": nombre de 1.0 à 1.3 (optionnel, 1.0 par défaut -- augmente-le si le contexte te semble très favorable pour viser plus loin)
+  "tp_extension": nombre de 1.0 à 2.0 (optionnel, 1.0 par défaut -- augmente-le si le contexte te semble très favorable pour viser plus loin)
 }}
 """
 
@@ -74,9 +72,6 @@ def _parse_ai_json_response(text: str) -> dict:
     assert parsed["decision"] in ("APPROVE", "REJECT")
     assert 0 <= float(parsed["confidence"]) <= 100
 
-    # Valeurs neutres par défaut si l'IA ne les fournit pas -- le
-    # clampage de SÉCURITÉ final est fait dans risk_manager.py, ici on
-    # se contente de valeurs par défaut sûres en cas d'absence.
     parsed.setdefault("size_factor", 1.0)
     parsed.setdefault("sl_tightness", 1.0)
     parsed.setdefault("tp_extension", 1.0)
@@ -86,9 +81,7 @@ def _parse_ai_json_response(text: str) -> dict:
 def _ask_openrouter(context_summary: str) -> dict:
     """
     Appelle l'API OpenRouter (gratuite, modèle Ling 3.0 Flash Fin par
-    défaut -- spécialisé finance). OpenRouter est compatible avec le
-    format OpenAI, donc on utilise le paquet `openai` pour l'appeler
-    (pas besoin d'un SDK spécifique).
+    défaut -- spécialisé finance).
     """
     from openai import OpenAI
 
@@ -108,8 +101,7 @@ def _ask_openrouter(context_summary: str) -> dict:
 def _ask_anthropic(context_summary: str) -> dict:
     """
     Appelle l'API Claude (Anthropic). À activer le jour où le budget est
-    prêt -- il suffit de changer AI_PROVIDER = "anthropic" dans config.py
-    et d'ajouter la clé ANTHROPIC_API_KEY dans les secrets GitHub.
+    prêt.
     """
     import anthropic
 
