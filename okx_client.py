@@ -18,9 +18,6 @@ from okx import MarketData, Account, Trade
 
 class OKXDemoClient:
     def __init__(self):
-        # Les clés API sont lues depuis les variables d'environnement,
-        # JAMAIS écrites en dur dans le code (sécurité + bonne pratique
-        # pour GitHub Actions, où elles seront stockées en "secrets").
         api_key = os.environ["OKX_API_KEY"]
         api_secret = os.environ["OKX_API_SECRET"]
         passphrase = os.environ["OKX_PASSPHRASE"]
@@ -36,14 +33,28 @@ class OKXDemoClient:
     # ------------------------------------------------------------------
     def get_candles(self, symbol: str, bar: str = "1H", limit: int = 100):
         """
-        Récupère les X dernières bougies (chandeliers) pour une crypto.
-        symbol ex: 'BTC-USDT'. bar ex: '1H' (1 heure), '4H', '1D'.
+        Récupère les X dernières bougies COMPLÈTES (chandeliers) pour une
+        crypto. symbol ex: 'BTC-USDT'. bar ex: '1H' (1 heure), '4H', '1D'.
         Retourne les tableaux (open, high, low, close, volume) du plus
         ancien au plus récent.
+
+        IMPORTANT : OKX renvoie toujours la bougie EN COURS DE FORMATION
+        comme dernier élément (champ "confirm"="0"). Cette bougie a un
+        volume artificiellement quasi nul puisqu'elle vient de commencer
+        -- l'utiliser fausse tous les indicateurs basés sur le volume
+        (et peut aussi légèrement fausser l'ADX/RSI en fin de période).
+        On la retire systématiquement pour ne garder que des bougies
+        pleinement closes ("confirm"="1").
         """
-        result = self.market_api.get_candlesticks(instId=symbol, bar=bar, limit=str(limit))
+        result = self.market_api.get_candlesticks(instId=symbol, bar=bar, limit=str(limit + 1))
         raw = result["data"]
         raw.reverse()  # l'API renvoie du plus récent au plus ancien -> on inverse
+
+        # Le champ "confirm" est en dernière position de chaque bougie.
+        # "1" = bougie close, "0" = en cours de formation.
+        if raw and raw[-1][-1] == "0":
+            raw = raw[:-1]
+        raw = raw[-limit:]
 
         opens = np.array([float(c[1]) for c in raw])
         highs = np.array([float(c[2]) for c in raw])
@@ -76,7 +87,7 @@ class OKXDemoClient:
         """Achat immédiat au prix du marché (mode spot)."""
         return self.trade_api.place_order(
             instId=symbol,
-            tdMode="cash",       # "cash" = spot, sans levier
+            tdMode="cash",
             side="buy",
             ordType="market",
             sz=str(quantity),
@@ -97,8 +108,7 @@ class OKXDemoClient:
         """
         Place un ordre algo "OCO" (One-Cancels-the-Other) : dès que le prix
         touche le SL ou le TP, l'ordre correspondant s'exécute et l'autre
-        est automatiquement annulé. C'est ce qui permet au bot de ne pas
-        avoir à surveiller le marché en continu entre deux exécutions.
+        est automatiquement annulé.
         """
         return self.trade_api.place_algo_order(
             instId=symbol,
@@ -107,7 +117,7 @@ class OKXDemoClient:
             ordType="oco",
             sz=str(quantity),
             tpTriggerPx=str(take_profit_price),
-            tpOrdPx="-1",     # -1 = exécution au marché une fois déclenché
+            tpOrdPx="-1",
             slTriggerPx=str(stop_loss_price),
             slOrdPx="-1",
         )
