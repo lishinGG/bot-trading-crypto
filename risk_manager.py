@@ -43,7 +43,7 @@ ATR_TAKE_PROFIT_MULTIPLIER = 3.0
 # dépassables, quoi que l'IA suggère dans sa réponse.
 MIN_AI_SIZE_FACTOR = 0.3     # l'IA peut réduire la taille jusqu'à 30% du max, jamais l'augmenter (plafond = 1.0)
 MIN_AI_SL_TIGHTNESS = 0.6    # l'IA peut resserrer le SL jusqu'à 60% de la distance normale, jamais l'élargir (plafond = 1.0)
-MAX_AI_TP_EXTENSION = 1.3    # l'IA peut élargir le TP jusqu'à 130% de la distance normale, jamais plus
+MAX_AI_TP_EXTENSION = 2.0    # l'IA peut élargir le TP jusqu'à 200% de la distance normale, jamais plus
 
 MAX_POSITION_AGE_HOURS = 72
 STAGNANT_MOVE_THRESHOLD = 0.01
@@ -131,7 +131,6 @@ class RiskManager:
         if not allowed:
             return None
 
-        # --- Clampage de sécurité des facteurs IA : fait ICI, pas ailleurs ---
         safe_size_factor = _clamp(ai_size_factor, MIN_AI_SIZE_FACTOR, 1.0)
         safe_sl_tightness = _clamp(ai_sl_tightness, MIN_AI_SL_TIGHTNESS, 1.0)
         safe_tp_extension = _clamp(ai_tp_extension, 1.0, MAX_AI_TP_EXTENSION)
@@ -180,7 +179,7 @@ class RiskManager:
         if position_id:
             match = next((p for p in positions if (p["position_id"] if isinstance(p, dict) else p.position_id) == position_id), None)
         else:
-            match = positions[0]   # la plus ancienne (FIFO)
+            match = positions[0]
 
         if match is None:
             return 0.0
