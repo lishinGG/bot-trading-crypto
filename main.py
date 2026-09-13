@@ -9,6 +9,7 @@ Actions. À chaque exécution :
      sur une même crypto -- historique de perf)
   2. Pour chaque stratégie x chaque crypto :
        - calcule le signal technique (Niveau 1, avec score de conviction)
+       - construit un contexte multi-timeframe (4h, 1 jour)
        - le fait passer par le decision_engine (IA optionnelle, qui peut
          aussi proposer de réduire la taille ou resserrer le SL)
        - applique les règles de risque et exécute si tout est au vert
@@ -29,7 +30,38 @@ from okx_client import OKXDemoClient
 from risk_manager import RiskManager, calculate_atr
 from strategies import ALL_STRATEGIES
 from decision_engine import evaluate
+from indicators import moving_average
 import config
+
+
+def build_higher_timeframe_context(client: OKXDemoClient, symbol: str) -> str:
+    """
+    Construit un résumé texte de la tendance sur des échéances plus
+    longues (4h et 1 jour), pour donner à l'IA un contexte au-delà du
+    signal horaire isolé. Si la récupération échoue pour une raison
+    quelconque (panne API, etc.), retourne une chaîne vide -- l'appel IA
+    continue alors sans ce contexte plutôt que de faire planter le bot.
+    """
+    try:
+        summary_lines = []
+        for label, bar in [("4h", "4H"), ("1 jour", "1D")]:
+            candles = client.get_candles(symbol, bar, limit=60)
+            closes = candles["close"]
+            if len(closes) < 21:
+                continue
+            long_ma = moving_average(closes, min(50, len(closes)))
+            current = closes[-1]
+            position = "au-dessus" if current > long_ma else "en dessous"
+            change_pct = ((closes[-1] - closes[-20]) / closes[-20]) * 100
+            summary_lines.append(
+                f"  - Échéance {label} : prix {position} de sa moyenne longue "
+                f"(tendance {'haussière' if current > long_ma else 'baissière'} de fond), "
+                f"variation sur les 20 dernières bougies : {change_pct:+.1f}%"
+            )
+        return "\n".join(summary_lines)
+    except Exception as e:
+        print(f"[main] Contexte multi-timeframe indisponible pour {symbol} : {e}")
+        return ""
 
 
 def load_state() -> dict:
@@ -43,7 +75,7 @@ def load_state() -> dict:
             "trading_halted": False,
             "strategy_paused": False,
             "pnl_history": [],
-            "open_positions": {},   # symbol -> LISTE de positions
+            "open_positions": {},
         }
         for strat in ALL_STRATEGIES
     }
@@ -68,7 +100,6 @@ def log_event(strategy_name: str, symbol: str, action: str, price: float,
 
 
 def _position_to_dict(pos) -> dict:
-    """Convertit un objet PositionSizing (ou un dict déjà chargé) en dict JSON-sérialisable."""
     if isinstance(pos, dict):
         return pos
     return {
@@ -88,11 +119,6 @@ def build_risk_manager(strategy_name: str, saved: dict) -> RiskManager:
     rm.strategy_paused = saved.get("strategy_paused", False)
     rm.pnl_history = saved.get("pnl_history", [])
 
-    # Compatibilité ascendante : d'anciens fichiers state.json pouvaient
-    # stocker UNE position (dict) par symbole plutôt qu'une liste, et sans
-    # les champs position_id / opened_at (ajoutés plus tard). On complète
-    # ces champs manquants ICI, une fois pour toutes, pour que le reste du
-    # code puisse toujours compter sur leur présence sans jamais planter.
     raw_positions = saved.get("open_positions", {})
     rm.open_positions = {}
     for symbol, value in raw_positions.items():
@@ -119,9 +145,8 @@ def dump_risk_manager(rm: RiskManager) -> dict:
 
 
 def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, strategy_name: str):
-    """Vérifie CHAQUE position ouverte (il peut y en avoir jusqu'à 2 par crypto)."""
     for symbol in list(rm.open_positions.keys()):
-        positions = list(rm.open_positions.get(symbol, []))  # copie, car on modifie la liste pendant l'itération
+        positions = list(rm.open_positions.get(symbol, []))
         if not positions:
             continue
 
@@ -166,7 +191,8 @@ def run():
                 continue
 
             current_price = client.get_current_price(symbol)
-            signal = evaluate(symbol, strategy.name, signal, current_price)
+            higher_tf_context = build_higher_timeframe_context(client, symbol)
+            signal = evaluate(symbol, strategy.name, signal, current_price, market_context=higher_tf_context)
 
             if not signal.is_actionable:
                 log_event(strategy.name, symbol, "signal_rejected", current_price,
@@ -200,7 +226,6 @@ def run():
                 log_event(strategy.name, symbol, "buy", current_price, sizing.quantity, note=note)
 
             elif signal.direction == "sell" and symbol in rm.open_positions:
-                # Un signal de vente ferme TOUTES les positions ouvertes sur cette crypto
                 for pos in list(rm.open_positions.get(symbol, [])):
                     position_id = pos["position_id"] if isinstance(pos, dict) else pos.position_id
                     quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
