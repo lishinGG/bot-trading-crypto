@@ -2,33 +2,25 @@
 ai_providers.py
 ===============
 Couche d'abstraction pour appeler UNE IA de validation, quel que soit le
-fournisseur. C'est LE fichier à modifier le jour où tu bascules de
-l'API gratuite (OpenRouter) vers Claude (Anthropic) -- une seule ligne
-dans config.py à changer, ce fichier gère le reste.
-
-Principe de robustesse fondamental : SI L'APPEL ÉCHOUE POUR N'IMPORTE
-QUELLE RAISON (limite atteinte, panne, erreur réseau, clé manquante),
-la fonction renvoie None plutôt que de lever une exception. Le code
-appelant (decision_engine.py) sait alors qu'il doit se rabattre sur le
-Niveau 1. Le bot ne doit JAMAIS planter à cause d'un souci côté IA.
+fournisseur.
 """
 
 import os
 import json
 import config
+import ai_usage_tracker
 
 
 def ask_ai_opinion(context_summary: str) -> dict | None:
     """
     Envoie un résumé de la situation à l'IA configurée et récupère son
     avis structuré. Retourne None si l'appel échoue pour quelque raison
-    que ce soit (le bot doit continuer à fonctionner sans IA).
-
-    Retourne un dict du type :
-        {"decision": "APPROVE"|"REJECT", "confidence": 0-100, "reason": "..."}
+    que ce soit.
     """
     if not config.USE_AI_LAYER:
         return None
+
+    ai_usage_tracker.record_ai_call()   # compte la tentative, succès ou non
 
     try:
         if config.AI_PROVIDER == "openrouter":
@@ -61,8 +53,6 @@ Réponds UNIQUEMENT avec un JSON de cette forme, sans aucun texte autour :
 
 
 def _parse_ai_json_response(text: str) -> dict:
-    """Extrait le JSON de la réponse, même si l'IA a ajouté du texte autour.
-    Les champs optionnels absents reçoivent leur valeur neutre par défaut."""
     text = text.strip()
     start = text.find("{")
     end = text.rfind("}")
@@ -79,10 +69,6 @@ def _parse_ai_json_response(text: str) -> dict:
 
 
 def _ask_openrouter(context_summary: str) -> dict:
-    """
-    Appelle l'API OpenRouter (gratuite, modèle Ling 3.0 Flash Fin par
-    défaut -- spécialisé finance).
-    """
     from openai import OpenAI
 
     api_key = os.environ["OPENROUTER_API_KEY"]
@@ -99,10 +85,6 @@ def _ask_openrouter(context_summary: str) -> dict:
 
 
 def _ask_anthropic(context_summary: str) -> dict:
-    """
-    Appelle l'API Claude (Anthropic). À activer le jour où le budget est
-    prêt.
-    """
     import anthropic
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
