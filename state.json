@@ -22,6 +22,16 @@
           "take_profit_price": 79931.4786,
           "opened_at": 1789398231.7299395
         }
+      ],
+      "ETH-USDT": [
+        {
+          "position_id": "f6ca1b93",
+          "entry_price": 2537.83,
+          "quantity": 0.01186315,
+          "stop_loss_price": 2515.8737,
+          "take_profit_price": 2600.5621,
+          "opened_at": 1789412584.0363333
+        }
       ]
     }
   },
