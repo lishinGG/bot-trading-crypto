@@ -35,15 +35,14 @@ import performance_tracker
 MAX_POSITION_PCT = 0.10          # 10% max du solde actuel par position
 CIRCUIT_BREAKER_LOSS_PCT = 0.20  # arrêt de sécurité si -20% du capital de départ
 MAX_OPEN_POSITIONS_PER_SYMBOL = 2   # jusqu'à 2 positions simultanées sur la même crypto
+MAX_TOTAL_OPEN_POSITIONS = 3        # jamais plus de 3 positions ouvertes en même temps, toutes cryptos confondues (diversification)
 
 ATR_STOP_LOSS_MULTIPLIER = 1.5
 ATR_TAKE_PROFIT_MULTIPLIER = 3.0
 
-# Bornes de sécurité pour les ajustements proposés par l'IA -- jamais
-# dépassables, quoi que l'IA suggère dans sa réponse.
-MIN_AI_SIZE_FACTOR = 0.3     # l'IA peut réduire la taille jusqu'à 30% du max, jamais l'augmenter (plafond = 1.0)
-MIN_AI_SL_TIGHTNESS = 0.6    # l'IA peut resserrer le SL jusqu'à 60% de la distance normale, jamais l'élargir (plafond = 1.0)
-MAX_AI_TP_EXTENSION = 2.0    # l'IA peut élargir le TP jusqu'à 200% de la distance normale, jamais plus
+MIN_AI_SIZE_FACTOR = 0.3
+MIN_AI_SL_TIGHTNESS = 0.6
+MAX_AI_TP_EXTENSION = 2.0
 
 MAX_POSITION_AGE_HOURS = 72
 STAGNANT_MOVE_THRESHOLD = 0.01
@@ -75,14 +74,11 @@ class RiskManager:
         self.strategy_name = strategy_name
         self.starting_capital = starting_capital
         self.current_balance = starting_capital
-        self.open_positions: dict[str, list] = {}   # symbol -> LISTE de positions
+        self.open_positions: dict[str, list] = {}
         self.trading_halted = False
         self.strategy_paused = False
         self.pnl_history = []
 
-    # ------------------------------------------------------------------
-    # 1. CIRCUIT BREAKER
-    # ------------------------------------------------------------------
     def check_circuit_breaker(self) -> bool:
         loss_pct = (self.starting_capital - self.current_balance) / self.starting_capital
         if loss_pct >= CIRCUIT_BREAKER_LOSS_PCT:
@@ -93,35 +89,31 @@ class RiskManager:
         self.current_balance = new_balance
         self.check_circuit_breaker()
 
-    # ------------------------------------------------------------------
-    # 2. SUIVI DE PERFORMANCE
-    # ------------------------------------------------------------------
     def record_trade_result(self, pnl: float):
         self.pnl_history = performance_tracker.update_pnl_history(self.pnl_history, pnl)
         stats = performance_tracker.compute_rolling_stats(self.pnl_history)
         self.strategy_paused = stats["should_pause"]
         return stats
 
-    # ------------------------------------------------------------------
-    # 3. VÉRIFICATIONS AVANT D'OUVRIR UNE POSITION
-    # ------------------------------------------------------------------
     def _position_count(self, symbol: str) -> int:
         return len(self.open_positions.get(symbol, []))
+
+    def _total_position_count(self) -> int:
+        return sum(len(v) for v in self.open_positions.values())
 
     def can_open_position(self, symbol: str) -> tuple[bool, str]:
         if self.trading_halted:
             return False, "Circuit breaker actif : perte cumulée >= seuil"
         if self.strategy_paused:
             return False, "Stratégie en pause : performance récente dégradée"
+        if self._total_position_count() >= MAX_TOTAL_OPEN_POSITIONS:
+            return False, f"Limite d'exposition globale atteinte ({MAX_TOTAL_OPEN_POSITIONS} positions max, toutes cryptos confondues)"
         if self._position_count(symbol) >= MAX_OPEN_POSITIONS_PER_SYMBOL:
             return False, f"Déjà {MAX_OPEN_POSITIONS_PER_SYMBOL} position(s) ouverte(s) sur {symbol} (maximum)"
         if self.current_balance <= 0:
             return False, "Solde épuisé"
         return True, "OK"
 
-    # ------------------------------------------------------------------
-    # 4. CALCUL DE LA TAILLE DE POSITION + SL/TP (avec ajustements IA encadrés)
-    # ------------------------------------------------------------------
     def calculate_position(self, symbol: str, entry_price: float, atr: float,
                             entry_reasons: list = None,
                             ai_size_factor: float = 1.0,
@@ -161,17 +153,10 @@ class RiskManager:
             entry_reasons=entry_reasons or [],
         )
 
-    # ------------------------------------------------------------------
-    # 5. ENREGISTRER / FERMER UNE POSITION (gère plusieurs positions/crypto)
-    # ------------------------------------------------------------------
     def register_open_position(self, sizing: PositionSizing):
         self.open_positions.setdefault(sizing.symbol, []).append(sizing)
 
     def close_position(self, symbol: str, exit_price: float, position_id: str = None) -> float:
-        """
-        Ferme une position précise (via position_id) ou, si non précisé,
-        la plus ancienne position ouverte sur ce symbole (FIFO).
-        """
         positions = self.open_positions.get(symbol, [])
         if not positions:
             return 0.0
@@ -195,13 +180,8 @@ class RiskManager:
         self.record_trade_result(pnl)
         return round(pnl, 2)
 
-    # ------------------------------------------------------------------
-    # 6. SORTIES INTELLIGENTES -- vérifie UNE position donnée
-    # ------------------------------------------------------------------
     def check_exit_conditions_for_position(self, position, current_price: float,
                                             current_signal_direction: str = None) -> Optional[str]:
-        """Prend une position précise (pas juste un symbole) et vérifie si
-        elle doit être fermée pour invalidation ou stagnation."""
         if current_signal_direction == "sell":
             return "invalidation"
 
