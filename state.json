@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 501.4857719015352,
+    "current_balance": 501.1100651015352,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -11,20 +11,10 @@
       -0.6416934695000021,
       -0.1936533480000011,
       0.8825389005096018,
-      -0.2920707529999987
+      -0.2920707529999987,
+      -0.3757068
     ],
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "24d49801",
-          "entry_price": 78530.8,
-          "quantity": 0.00044727,
-          "stop_loss_price": 78005.5455,
-          "take_profit_price": 79931.4786,
-          "opened_at": 1789398231.7299395
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -36,11 +26,22 @@
       0.2637468404999978,
       -0.5842995689999954
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "b6961c80",
+          "entry_price": 714.7,
+          "quantity": 0.04884325,
+          "stop_loss_price": 710.4571,
+          "take_profit_price": 726.0143,
+          "opened_at": 1789459332.465741
+        }
+      ]
+    }
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.8485592286792,
+    "current_balance": 501.43946346067924,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -50,17 +51,18 @@
       -0.37233218259999873,
       -0.1936229400000011,
       1.058902494753602,
-      -0.03745171799999905
+      -0.03745171799999905,
+      -0.4090957680000012
     ],
     "open_positions": {
-      "BTC-USDT": [
+      "BNB-USDT": [
         {
-          "position_id": "894e8cd1",
-          "entry_price": 78530.8,
-          "quantity": 0.00041541,
-          "stop_loss_price": 78040.5625,
-          "take_profit_price": 79931.4786,
-          "opened_at": 1789398238.4772913
+          "position_id": "cadd17f6",
+          "entry_price": 714.7,
+          "quantity": 0.0420965,
+          "stop_loss_price": 710.4571,
+          "take_profit_price": 728.2771,
+          "opened_at": 1789459338.9410317
         }
       ]
     }
