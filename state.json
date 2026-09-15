@@ -51,7 +51,7 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.43946346067924,
+    "current_balance": 501.11237073547926,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -62,7 +62,8 @@
       -0.1936229400000011,
       1.058902494753602,
       -0.03745171799999905,
-      -0.4090957680000012
+      -0.4090957680000012,
+      -0.3270927251999992
     ],
     "open_positions": {
       "BNB-USDT": [
@@ -73,16 +74,6 @@
           "stop_loss_price": 710.4571,
           "take_profit_price": 728.2771,
           "opened_at": 1789459338.9410317
-        }
-      ],
-      "ETH-USDT": [
-        {
-          "position_id": "3cd576f5",
-          "entry_price": 2474.6,
-          "quantity": 0.01418442,
-          "stop_loss_price": 2448.9476,
-          "take_profit_price": 2543.0064,
-          "opened_at": 1789463032.6196167
         }
       ]
     }
