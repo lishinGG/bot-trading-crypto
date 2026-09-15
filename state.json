@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 501.7778426545352,
+    "current_balance": 501.4857719015352,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -10,7 +10,8 @@
       -0.2498801549999978,
       -0.6416934695000021,
       -0.1936533480000011,
-      0.8825389005096018
+      0.8825389005096018,
+      -0.2920707529999987
     ],
     "open_positions": {
       "BTC-USDT": [
@@ -21,16 +22,6 @@
           "stop_loss_price": 78005.5455,
           "take_profit_price": 79931.4786,
           "opened_at": 1789398231.7299395
-        }
-      ],
-      "ETH-USDT": [
-        {
-          "position_id": "f6ca1b93",
-          "entry_price": 2537.83,
-          "quantity": 0.01186315,
-          "stop_loss_price": 2515.8737,
-          "take_profit_price": 2600.5621,
-          "opened_at": 1789412584.0363333
         }
       ]
     }
