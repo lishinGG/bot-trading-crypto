@@ -18,13 +18,14 @@
   },
   "mean_reversion": {
     "starting_capital": 500.0,
-    "current_balance": 498.6896189875518,
+    "current_balance": 497.7047639012518,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       -0.9898282839481958,
       0.2637468404999978,
-      -0.5842995689999954
+      -0.5842995689999954,
+      -0.9848550862999991
     ],
     "open_positions": {
       "BNB-USDT": [
@@ -35,16 +36,6 @@
           "stop_loss_price": 710.4571,
           "take_profit_price": 726.0143,
           "opened_at": 1789459332.465741
-        }
-      ],
-      "ETH-USDT": [
-        {
-          "position_id": "df6e7cfa",
-          "entry_price": 2475.13,
-          "quantity": 0.01410361,
-          "stop_loss_price": 2451.1878,
-          "take_profit_price": 2543.5364,
-          "opened_at": 1789463028.2276275
         }
       ]
     }
