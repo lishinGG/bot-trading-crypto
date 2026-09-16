@@ -29,13 +29,10 @@ import numpy as np
 import performance_tracker
 
 
-# ----------------------------------------------------------------------
-# PARAMÈTRES DE RISQUE
-# ----------------------------------------------------------------------
-MAX_POSITION_PCT = 0.10          # 10% max du solde actuel par position
-CIRCUIT_BREAKER_LOSS_PCT = 0.20  # arrêt de sécurité si -20% du capital de départ
-MAX_OPEN_POSITIONS_PER_SYMBOL = 2   # jusqu'à 2 positions simultanées sur la même crypto
-MAX_TOTAL_OPEN_POSITIONS = 3        # jamais plus de 3 positions ouvertes en même temps, toutes cryptos confondues (diversification)
+MAX_POSITION_PCT = 0.10
+CIRCUIT_BREAKER_LOSS_PCT = 0.20
+MAX_OPEN_POSITIONS_PER_SYMBOL = 2
+MAX_TOTAL_OPEN_POSITIONS = 3
 
 ATR_STOP_LOSS_MULTIPLIER = 1.5
 ATR_TAKE_PROFIT_MULTIPLIER = 3.0
@@ -46,6 +43,8 @@ MAX_AI_TP_EXTENSION = 2.0
 
 MAX_POSITION_AGE_HOURS = 72
 STAGNANT_MOVE_THRESHOLD = 0.01
+
+TRAILING_STOP_MIN_PROGRESS_PCT = 0.005
 
 
 @dataclass
@@ -63,6 +62,8 @@ class PositionSizing:
     position_id: str = field(default_factory=lambda: str(uuid.uuid4())[:8])
     opened_at: float = field(default_factory=time.time)
     entry_reasons: list = field(default_factory=list)
+    algo_id: str = ""
+    highest_price_seen: float = 0.0
 
 
 def _clamp(value: float, low: float, high: float) -> float:
@@ -151,6 +152,7 @@ class RiskManager:
             reward_amount_usd=round(reward_amount_usd, 2),
             risk_reward_ratio=round(risk_reward_ratio, 2),
             entry_reasons=entry_reasons or [],
+            highest_price_seen=entry_price,
         )
 
     def register_open_position(self, sizing: PositionSizing):
@@ -194,6 +196,32 @@ class RiskManager:
             if price_move_pct < STAGNANT_MOVE_THRESHOLD:
                 return "stagnation_temporelle"
 
+        return None
+
+    def compute_trailing_stop_update(self, position, current_price: float) -> Optional[float]:
+        """
+        Calcule si le stop-loss d'une position doit remonter, selon le
+        plus haut prix atteint depuis l'ouverture. Ne renvoie une nouvelle
+        valeur QUE si elle est supérieure au stop-loss actuel.
+        """
+        entry_price = position["entry_price"] if isinstance(position, dict) else position.entry_price
+        current_sl = position["stop_loss_price"] if isinstance(position, dict) else position.stop_loss_price
+        highest_seen = position.get("highest_price_seen", entry_price) if isinstance(position, dict) \
+            else getattr(position, "highest_price_seen", entry_price)
+
+        original_sl_distance = entry_price - current_sl if current_sl < entry_price else 0
+        if original_sl_distance <= 0:
+            return None
+
+        new_highest = max(highest_seen, current_price)
+
+        if new_highest <= highest_seen * (1 + TRAILING_STOP_MIN_PROGRESS_PCT):
+            return None
+
+        candidate_new_sl = new_highest - original_sl_distance
+
+        if candidate_new_sl > current_sl:
+            return round(candidate_new_sl, 4)
         return None
 
 
