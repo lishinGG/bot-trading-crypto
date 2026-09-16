@@ -5,16 +5,14 @@ Le chef d'orchestre. Ce script tourne toutes les heures via GitHub
 Actions. À chaque exécution :
 
   1. Recharge l'état sauvegardé (soldes, positions -- désormais des
-     LISTES par crypto puisqu'on autorise jusqu'à 2 positions simultanées
-     sur une même crypto -- historique de perf)
+     LISTES par crypto -- historique de perf, comptes fantômes)
   2. Pour chaque stratégie x chaque crypto :
        - calcule le signal technique (Niveau 1, avec score de conviction)
-       - construit un contexte multi-timeframe (4h, 1 jour)
-       - le fait passer par le decision_engine (IA optionnelle, qui peut
-         aussi proposer de réduire la taille ou resserrer le SL)
+       - alimente le compte fantôme (simulation Niveau 1 pur, sans IA)
+       - le fait passer par le decision_engine (IA optionnelle)
        - applique les règles de risque et exécute si tout est au vert
-  3. Vérifie CHAQUE position ouverte individuellement (SL/TP, invalidation,
-     stagnation)
+  3. Vérifie CHAQUE position ouverte : SL/TP, trailing stop, invalidation,
+     stagnation
   4. Met à jour le suivi de performance
   5. Sauvegarde l'état + écrit dans le log
 """
@@ -35,13 +33,7 @@ import config
 
 
 def build_higher_timeframe_context(client: OKXDemoClient, symbol: str) -> str:
-    """
-    Construit un résumé texte de la tendance sur des échéances plus
-    longues (4h et 1 jour), pour donner à l'IA un contexte au-delà du
-    signal horaire isolé. Si la récupération échoue pour une raison
-    quelconque (panne API, etc.), retourne une chaîne vide -- l'appel IA
-    continue alors sans ce contexte plutôt que de faire planter le bot.
-    """
+    """Construit un résumé texte de la tendance sur 4h et 1 jour."""
     try:
         summary_lines = []
         for label, bar in [("4h", "4H"), ("1 jour", "1D")]:
@@ -64,21 +56,30 @@ def build_higher_timeframe_context(client: OKXDemoClient, symbol: str) -> str:
         return ""
 
 
+def _new_strategy_state() -> dict:
+    return {
+        "starting_capital": config.STARTING_CAPITAL_PER_STRATEGY,
+        "current_balance": config.STARTING_CAPITAL_PER_STRATEGY,
+        "trading_halted": False,
+        "strategy_paused": False,
+        "pnl_history": [],
+        "open_positions": {},
+    }
+
+
 def load_state() -> dict:
     if os.path.exists(config.STATE_FILE):
         with open(config.STATE_FILE, "r") as f:
-            return json.load(f)
-    return {
-        strat.name: {
-            "starting_capital": config.STARTING_CAPITAL_PER_STRATEGY,
-            "current_balance": config.STARTING_CAPITAL_PER_STRATEGY,
-            "trading_halted": False,
-            "strategy_paused": False,
-            "pnl_history": [],
-            "open_positions": {},
-        }
-        for strat in ALL_STRATEGIES
-    }
+            state = json.load(f)
+        for strat in ALL_STRATEGIES:
+            state.setdefault(f"{strat.name}__shadow", _new_strategy_state())
+        return state
+
+    state = {}
+    for strat in ALL_STRATEGIES:
+        state[strat.name] = _new_strategy_state()
+        state[f"{strat.name}__shadow"] = _new_strategy_state()
+    return state
 
 
 def save_state(state: dict):
@@ -109,6 +110,8 @@ def _position_to_dict(pos) -> dict:
         "stop_loss_price": pos.stop_loss_price,
         "take_profit_price": pos.take_profit_price,
         "opened_at": pos.opened_at,
+        "algo_id": pos.algo_id,
+        "highest_price_seen": pos.highest_price_seen,
     }
 
 
@@ -126,6 +129,8 @@ def build_risk_manager(strategy_name: str, saved: dict) -> RiskManager:
         for pos in position_list:
             pos.setdefault("position_id", str(uuid.uuid4())[:8])
             pos.setdefault("opened_at", time.time())
+            pos.setdefault("algo_id", "")
+            pos.setdefault("highest_price_seen", pos["entry_price"])
         rm.open_positions[symbol] = position_list
     return rm
 
@@ -144,7 +149,9 @@ def dump_risk_manager(rm: RiskManager) -> dict:
     }
 
 
-def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, strategy_name: str):
+def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, strategy_name: str,
+                               apply_trailing_stop: bool = True):
+    """Vérifie CHAQUE position ouverte (il peut y en avoir jusqu'à 2 par crypto)."""
     for symbol in list(rm.open_positions.keys()):
         positions = list(rm.open_positions.get(symbol, []))
         if not positions:
@@ -160,12 +167,29 @@ def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, 
             sl = pos["stop_loss_price"] if isinstance(pos, dict) else pos.stop_loss_price
             tp = pos["take_profit_price"] if isinstance(pos, dict) else pos.take_profit_price
             quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
+            algo_id = pos.get("algo_id", "") if isinstance(pos, dict) else getattr(pos, "algo_id", "")
 
             if current_price <= sl or current_price >= tp:
                 reason = "stop_loss" if current_price <= sl else "take_profit"
                 pnl = rm.close_position(symbol, current_price, position_id=position_id)
                 log_event(strategy_name, symbol, "close", current_price, quantity, pnl, f"{reason} [{position_id}]")
                 continue
+
+            if apply_trailing_stop:
+                new_sl = rm.compute_trailing_stop_update(pos, current_price)
+                if new_sl is not None:
+                    try:
+                        client.update_stop_loss(symbol, algo_id, new_sl)
+                        if isinstance(pos, dict):
+                            pos["stop_loss_price"] = new_sl
+                            pos["highest_price_seen"] = max(pos.get("highest_price_seen", entry_price), current_price)
+                        else:
+                            pos.stop_loss_price = new_sl
+                            pos.highest_price_seen = max(pos.highest_price_seen, current_price)
+                        log_event(strategy_name, symbol, "trailing_stop_update", current_price, quantity,
+                                  note=f"Nouveau SL={new_sl} [{position_id}]")
+                    except Exception as e:
+                        print(f"[main] Échec mise à jour trailing stop pour {symbol} : {e}")
 
             exit_reason = rm.check_exit_conditions_for_position(pos, current_price, current_signal.direction)
             if exit_reason:
@@ -180,8 +204,11 @@ def run():
 
     for strategy in ALL_STRATEGIES:
         rm = build_risk_manager(strategy.name, state[strategy.name])
+        shadow_key = f"{strategy.name}__shadow"
+        rm_shadow = build_risk_manager(shadow_key, state[shadow_key])
 
-        check_and_close_positions(client, rm, strategy, strategy.name)
+        check_and_close_positions(client, rm, strategy, strategy.name, apply_trailing_stop=True)
+        check_and_close_positions(client, rm_shadow, strategy, shadow_key, apply_trailing_stop=False)
 
         for symbol in config.SYMBOLS:
             candles = client.get_candles(symbol, config.CANDLE_INTERVAL, config.CANDLES_HISTORY_LENGTH)
@@ -191,6 +218,25 @@ def run():
                 continue
 
             current_price = client.get_current_price(symbol)
+
+            shadow_direction = signal.direction
+            shadow_score = signal.conviction_score
+            if shadow_direction == "buy":
+                allowed_shadow, _ = rm_shadow.can_open_position(symbol)
+                if allowed_shadow:
+                    atr_shadow = calculate_atr(candles["high"], candles["low"], candles["close"])
+                    shadow_sizing = rm_shadow.calculate_position(symbol, current_price, atr_shadow)
+                    if shadow_sizing:
+                        rm_shadow.register_open_position(shadow_sizing)
+                        log_event(shadow_key, symbol, "buy", current_price, shadow_sizing.quantity,
+                                  note=f"score={shadow_score:.0f} (Niveau 1 seul, sans IA) [{shadow_sizing.position_id}]")
+            elif shadow_direction == "sell" and symbol in rm_shadow.open_positions:
+                for pos in list(rm_shadow.open_positions.get(symbol, [])):
+                    position_id = pos.position_id if hasattr(pos, "position_id") else pos["position_id"]
+                    quantity = pos.quantity if hasattr(pos, "quantity") else pos["quantity"]
+                    pnl = rm_shadow.close_position(symbol, current_price, position_id=position_id)
+                    log_event(shadow_key, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
+
             higher_tf_context = build_higher_timeframe_context(client, symbol)
             signal = evaluate(symbol, strategy.name, signal, current_price, market_context=higher_tf_context)
 
@@ -216,9 +262,10 @@ def run():
                     continue
 
                 client.place_market_buy(symbol, sizing.quantity)
-                client.place_stop_loss_take_profit(
+                algo_id = client.place_stop_loss_take_profit(
                     symbol, sizing.quantity, sizing.stop_loss_price, sizing.take_profit_price
                 )
+                sizing.algo_id = algo_id
                 rm.register_open_position(sizing)
                 note = f"score={signal.conviction_score:.0f} | SL={sizing.stop_loss_price} TP={sizing.take_profit_price} [{sizing.position_id}]"
                 if signal.ai_reviewed:
@@ -234,6 +281,7 @@ def run():
                     log_event(strategy.name, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
 
         state[strategy.name] = dump_risk_manager(rm)
+        state[shadow_key] = dump_risk_manager(rm_shadow)
 
     save_state(state)
     print("Exécution terminée :", datetime.now(timezone.utc).isoformat())
