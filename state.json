@@ -18,31 +18,21 @@
   },
   "mean_reversion": {
     "starting_capital": 500.0,
-    "current_balance": 497.7047639012518,
+    "current_balance": 497.4410103512518,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       -0.9898282839481958,
       0.2637468404999978,
       -0.5842995689999954,
-      -0.9848550862999991
+      -0.9848550862999991,
+      -0.26375355000000444
     ],
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "b6961c80",
-          "entry_price": 714.7,
-          "quantity": 0.04884325,
-          "stop_loss_price": 710.4571,
-          "take_profit_price": 726.0143,
-          "opened_at": 1789459332.465741
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.11237073547926,
+    "current_balance": 500.8850496354793,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -54,19 +44,9 @@
       1.058902494753602,
       -0.03745171799999905,
       -0.4090957680000012,
-      -0.3270927251999992
+      -0.3270927251999992,
+      -0.22732110000000383
     ],
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "cadd17f6",
-          "entry_price": 714.7,
-          "quantity": 0.0420965,
-          "stop_loss_price": 710.4571,
-          "take_profit_price": 728.2771,
-          "opened_at": 1789459338.9410317
-        }
-      ]
-    }
+    "open_positions": {}
   }
 }
