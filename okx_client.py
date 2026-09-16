@@ -28,30 +28,15 @@ class OKXDemoClient:
         self.account_api = Account.AccountAPI(api_key, api_secret, passphrase, False, flag)
         self.trade_api = Trade.TradeAPI(api_key, api_secret, passphrase, False, flag)
 
-    # ------------------------------------------------------------------
-    # DONNÉES DE MARCHÉ
-    # ------------------------------------------------------------------
     def get_candles(self, symbol: str, bar: str = "1H", limit: int = 100):
         """
-        Récupère les X dernières bougies COMPLÈTES (chandeliers) pour une
-        crypto. symbol ex: 'BTC-USDT'. bar ex: '1H' (1 heure), '4H', '1D'.
-        Retourne les tableaux (open, high, low, close, volume) du plus
-        ancien au plus récent.
-
-        IMPORTANT : OKX renvoie toujours la bougie EN COURS DE FORMATION
-        comme dernier élément (champ "confirm"="0"). Cette bougie a un
-        volume artificiellement quasi nul puisqu'elle vient de commencer
-        -- l'utiliser fausse tous les indicateurs basés sur le volume
-        (et peut aussi légèrement fausser l'ADX/RSI en fin de période).
-        On la retire systématiquement pour ne garder que des bougies
-        pleinement closes ("confirm"="1").
+        Récupère les X dernières bougies COMPLÈTES pour une crypto.
+        Retire systématiquement la bougie en cours de formation.
         """
         result = self.market_api.get_candlesticks(instId=symbol, bar=bar, limit=str(limit + 1))
         raw = result["data"]
-        raw.reverse()  # l'API renvoie du plus récent au plus ancien -> on inverse
+        raw.reverse()
 
-        # Le champ "confirm" est en dernière position de chaque bougie.
-        # "1" = bougie close, "0" = en cours de formation.
         if raw and raw[-1][-1] == "0":
             raw = raw[:-1]
         raw = raw[-limit:]
@@ -68,9 +53,6 @@ class OKXDemoClient:
         result = self.market_api.get_ticker(instId=symbol)
         return float(result["data"][0]["last"])
 
-    # ------------------------------------------------------------------
-    # COMPTE
-    # ------------------------------------------------------------------
     def get_balance_usdt(self) -> float:
         """Solde disponible en USDT sur le compte démo."""
         result = self.account_api.get_account_balance(ccy="USDT")
@@ -80,9 +62,6 @@ class OKXDemoClient:
                 return float(d["availBal"])
         return 0.0
 
-    # ------------------------------------------------------------------
-    # ORDRES
-    # ------------------------------------------------------------------
     def place_market_buy(self, symbol: str, quantity: float):
         """Achat immédiat au prix du marché (mode spot)."""
         return self.trade_api.place_order(
@@ -104,13 +83,13 @@ class OKXDemoClient:
         )
 
     def place_stop_loss_take_profit(self, symbol: str, quantity: float,
-                                     stop_loss_price: float, take_profit_price: float):
+                                     stop_loss_price: float, take_profit_price: float) -> str:
         """
-        Place un ordre algo "OCO" (One-Cancels-the-Other) : dès que le prix
-        touche le SL ou le TP, l'ordre correspondant s'exécute et l'autre
-        est automatiquement annulé.
+        Place un ordre algo "OCO". Retourne l'algoId de l'ordre créé
+        (nécessaire pour le stop-loss suiveur, qui modifie ce même ordre
+        plutôt que d'en créer un nouveau).
         """
-        return self.trade_api.place_algo_order(
+        result = self.trade_api.place_algo_order(
             instId=symbol,
             tdMode="cash",
             side="sell",
@@ -120,4 +99,23 @@ class OKXDemoClient:
             tpOrdPx="-1",
             slTriggerPx=str(stop_loss_price),
             slOrdPx="-1",
+        )
+        try:
+            return result["data"][0]["algoId"]
+        except (KeyError, IndexError):
+            return ""
+
+    def update_stop_loss(self, symbol: str, algo_id: str, new_stop_loss_price: float):
+        """
+        Modifie le prix de déclenchement du stop-loss d'un ordre OCO déjà
+        existant, SANS l'annuler ni en recréer un nouveau -- utilisé par
+        le stop-loss suiveur (trailing stop).
+        """
+        if not algo_id:
+            return None
+        return self.trade_api.amend_algo_order(
+            instId=symbol,
+            algoId=algo_id,
+            newSlTriggerPx=str(new_stop_loss_price),
+            newSlOrdPx="-1",
         )
