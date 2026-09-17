@@ -91,3 +91,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-17T12:01:52.479089+00:00,adaptive_hybrid,BTC-USDT,signal_rejected,76566.4,0.0,0.0,"[Mode tendance choisi via ADX=33]; Croisement de moyennes mobiles (+40); ADX confirme une tendance (33) (+30); Volume faible (0.6x la moyenne), signal suspect (-15); [IA a rejeté ce trade : Le signal BUY présente un score technique médiocre (55), un volume faible (0.6x la moyenne) qui invalide la fiabilité du croisement, et une tendance baissière dominante sur l'échéance 4h avec une dynamique négative même sur le daily (-3.2%), rendant ce contre-tendance trop risqué.]"
 2026-09-17T13:03:02.510716+00:00,trend_following,BNB-USDT,trailing_stop_update,729.4,0.04145974,0.0,Nouveau SL=724.4275 [d68d2813]
 2026-09-17T13:03:04.882377+00:00,adaptive_hybrid,BNB-USDT,trailing_stop_update,729.4,0.03453427,0.0,Nouveau SL=724.4275 [ed6ced6c]
+2026-09-17T21:01:12.726606+00:00,trend_following,BNB-USDT,trailing_stop_update,735.1,0.04145974,0.0,Nouveau SL=734.3275 [d68d2813]
+2026-09-17T21:01:16.371872+00:00,adaptive_hybrid,BNB-USDT,trailing_stop_update,735.1,0.03453427,0.0,Nouveau SL=734.3275 [ed6ced6c]
