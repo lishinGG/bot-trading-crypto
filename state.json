@@ -14,7 +14,20 @@
       -0.2920707529999987,
       -0.3757068
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "d68d2813",
+          "entry_price": 725.2,
+          "quantity": 0.04145974,
+          "stop_loss_price": 720.2275,
+          "take_profit_price": 739.4071,
+          "opened_at": 1789617722.0876613,
+          "algo_id": "",
+          "highest_price_seen": 725.2
+        }
+      ]
+    }
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -72,6 +85,18 @@
           "algo_id": "",
           "highest_price_seen": 76444.7
         }
+      ],
+      "BNB-USDT": [
+        {
+          "position_id": "ed6ced6c",
+          "entry_price": 725.2,
+          "quantity": 0.03453427,
+          "stop_loss_price": 720.2275,
+          "take_profit_price": 739.4071,
+          "opened_at": 1789617729.4349165,
+          "algo_id": "",
+          "highest_price_seen": 725.2
+        }
       ]
     }
   },
@@ -81,7 +106,20 @@
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "5fe35776",
+          "entry_price": 725.2,
+          "quantity": 0.0689465,
+          "stop_loss_price": 718.0964,
+          "take_profit_price": 739.4071,
+          "opened_at": 1789617717.01057,
+          "algo_id": "",
+          "highest_price_seen": 725.2
+        }
+      ]
+    }
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -97,6 +135,19 @@
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "0cb44a46",
+          "entry_price": 725.2,
+          "quantity": 0.0689465,
+          "stop_loss_price": 718.0964,
+          "take_profit_price": 739.4071,
+          "opened_at": 1789617725.6780477,
+          "algo_id": "",
+          "highest_price_seen": 725.2
+        }
+      ]
+    }
   }
 }
