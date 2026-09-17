@@ -4,16 +4,11 @@ main.py
 Le chef d'orchestre. Ce script tourne toutes les heures via GitHub
 Actions. À chaque exécution :
 
-  1. Recharge l'état sauvegardé (soldes, positions -- désormais des
-     LISTES par crypto -- historique de perf, comptes fantômes)
-  2. Pour chaque stratégie x chaque crypto :
-       - calcule le signal technique (Niveau 1, avec score de conviction)
-       - alimente le compte fantôme (simulation Niveau 1 pur, sans IA)
-       - le fait passer par le decision_engine (IA optionnelle)
-       - applique les règles de risque et exécute si tout est au vert
-  3. Vérifie CHAQUE position ouverte : SL/TP, trailing stop, invalidation,
-     stagnation
-  4. Met à jour le suivi de performance
+  1. Recharge l'état sauvegardé
+  2. Pour chaque stratégie x chaque crypto : calcule le signal, alimente
+     le compte fantôme, passe par l'IA optionnelle, exécute si validé
+  3. Vérifie chaque position : SL/TP, trailing stop, invalidation, stagnation
+  4. Envoie les notifications Telegram si activées
   5. Sauvegarde l'état + écrit dans le log
 """
 
@@ -29,11 +24,11 @@ from risk_manager import RiskManager, calculate_atr
 from strategies import ALL_STRATEGIES
 from decision_engine import evaluate
 from indicators import moving_average
+import notifications
 import config
 
 
 def build_higher_timeframe_context(client: OKXDemoClient, symbol: str) -> str:
-    """Construit un résumé texte de la tendance sur 4h et 1 jour."""
     try:
         summary_lines = []
         for label, bar in [("4h", "4H"), ("1 jour", "1D")]:
@@ -173,6 +168,12 @@ def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, 
                 reason = "stop_loss" if current_price <= sl else "take_profit"
                 pnl = rm.close_position(symbol, current_price, position_id=position_id)
                 log_event(strategy_name, symbol, "close", current_price, quantity, pnl, f"{reason} [{position_id}]")
+                if apply_trailing_stop:
+                    notifications.notify_trade_closed(strategy_name, symbol, current_price, pnl, reason)
+                    if rm.trading_halted:
+                        notifications.notify_circuit_breaker(strategy_name)
+                    elif rm.strategy_paused:
+                        notifications.notify_strategy_paused(strategy_name)
                 continue
 
             if apply_trailing_stop:
@@ -196,6 +197,8 @@ def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, 
                 client.place_market_sell(symbol, quantity)
                 pnl = rm.close_position(symbol, current_price, position_id=position_id)
                 log_event(strategy_name, symbol, "close", current_price, quantity, pnl, f"{exit_reason} [{position_id}]")
+                if apply_trailing_stop:
+                    notifications.notify_trade_closed(strategy_name, symbol, current_price, pnl, exit_reason)
 
 
 def run():
@@ -271,6 +274,11 @@ def run():
                 if signal.ai_reviewed:
                     note += f" | IA: {signal.ai_notes} (taille x{signal.ai_size_factor:.2f})"
                 log_event(strategy.name, symbol, "buy", current_price, sizing.quantity, note=note)
+                notifications.notify_trade_opened(
+                    strategy.name, symbol, current_price, sizing.position_size_usd,
+                    sizing.stop_loss_price, sizing.take_profit_price,
+                    ai_note=signal.ai_notes if signal.ai_reviewed else "",
+                )
 
             elif signal.direction == "sell" and symbol in rm.open_positions:
                 for pos in list(rm.open_positions.get(symbol, [])):
@@ -279,6 +287,7 @@ def run():
                     client.place_market_sell(symbol, quantity)
                     pnl = rm.close_position(symbol, current_price, position_id=position_id)
                     log_event(strategy.name, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
+                    notifications.notify_trade_closed(strategy.name, symbol, current_price, pnl, "signal_vente")
 
         state[strategy.name] = dump_risk_manager(rm)
         state[shadow_key] = dump_risk_manager(rm_shadow)
