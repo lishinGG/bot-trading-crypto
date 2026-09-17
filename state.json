@@ -95,6 +95,18 @@
           "algo_id": "",
           "highest_price_seen": 725.2
         }
+      ],
+      "ETH-USDT": [
+        {
+          "position_id": "51ca966e",
+          "entry_price": 2438.19,
+          "quantity": 0.02050702,
+          "stop_loss_price": 2410.3521,
+          "take_profit_price": 2493.8657,
+          "opened_at": 1789642898.1503508,
+          "algo_id": "",
+          "highest_price_seen": 2438.19
+        }
       ]
     }
   },
@@ -123,6 +135,18 @@
           "opened_at": 1789617725.6780477,
           "algo_id": "",
           "highest_price_seen": 725.2
+        }
+      ],
+      "ETH-USDT": [
+        {
+          "position_id": "dc941621",
+          "entry_price": 2437.9,
+          "quantity": 0.02050945,
+          "stop_loss_price": 2410.0621,
+          "take_profit_price": 2493.5757,
+          "opened_at": 1789642906.2774193,
+          "algo_id": "",
+          "highest_price_seen": 2437.9
         }
       ]
     }
