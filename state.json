@@ -31,7 +31,7 @@
   },
   "mean_reversion": {
     "starting_capital": 500.0,
-    "current_balance": 497.4410103512518,
+    "current_balance": 497.4152924282518,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -39,28 +39,16 @@
       0.2637468404999978,
       -0.5842995689999954,
       -0.9848550862999991,
-      -0.26375355000000444
+      -0.26375355000000444,
+      -0.025717923000002668
     ],
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "0db207ad",
-          "entry_price": 75957.3,
-          "quantity": 0.00045843,
-          "stop_loss_price": 75955.2366,
-          "take_profit_price": 77262.5357,
-          "opened_at": 1789527680.7615433,
-          "algo_id": "",
-          "highest_price_seen": 76444.7
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 500.8850496354793,
+    "current_balance": 500.86285310947926,
     "trading_halted": false,
-    "strategy_paused": false,
+    "strategy_paused": true,
     "pnl_history": [
       0.2269993091000015,
       1.7535314174256036,
@@ -71,21 +59,10 @@
       -0.03745171799999905,
       -0.4090957680000012,
       -0.3270927251999992,
-      -0.22732110000000383
+      -0.22732110000000383,
+      -0.0221965260000023
     ],
     "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "60b99fbc",
-          "entry_price": 75957.3,
-          "quantity": 0.00039566,
-          "stop_loss_price": 75987.8675,
-          "take_profit_price": 77262.5357,
-          "opened_at": 1789527685.8185353,
-          "algo_id": "",
-          "highest_price_seen": 76444.7
-        }
-      ],
       "BNB-USDT": [
         {
           "position_id": "ed6ced6c",

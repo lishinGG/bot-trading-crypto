@@ -79,3 +79,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-17T04:02:02.631932+00:00,trend_following,BNB-USDT,buy,725.2,0.04145974,0.0,"score=65 | SL=720.2275 TP=739.4071 [d68d2813] | IA: L'ADX à 47 confirme une tendance solide et l'alignement haussier sur 4H et 1J soutient le signal BUY, mais le volume quasi nul rend la confirmation fragile et justifie une exposition réduite. (taille x0.60)"
 2026-09-17T04:02:05.678135+00:00,adaptive_hybrid__shadow,BNB-USDT,buy,725.2,0.0689465,0.0,"score=55 (Niveau 1 seul, sans IA) [0cb44a46]"
 2026-09-17T04:02:09.821268+00:00,adaptive_hybrid,BNB-USDT,buy,725.2,0.03453427,0.0,"score=60 | SL=720.2275 TP=739.4071 [ed6ced6c] | IA: L'alignement haussier sur 4H et 1J et un ADX fort à 47 valident la tendance, mais un volume quasi nul (0.0x la moyenne) rend le signal peu fiable et justifie une prudence maximale. (taille x0.50)"
+2026-09-17T08:01:22.441387+00:00,mean_reversion,BTC-USDT,close,75901.2,0.00045843,-0.03,stop_loss [0db207ad]
+2026-09-17T08:01:23.911397+00:00,adaptive_hybrid,BTC-USDT,close,75901.2,0.00039566,-0.02,stop_loss [60b99fbc]
