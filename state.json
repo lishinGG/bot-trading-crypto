@@ -107,6 +107,18 @@
           "algo_id": "",
           "highest_price_seen": 2438.19
         }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "301aa232",
+          "entry_price": 76566.4,
+          "quantity": 0.00065303,
+          "stop_loss_price": 75754.5893,
+          "take_profit_price": 78190.0214,
+          "opened_at": 1789646498.2981424,
+          "algo_id": "",
+          "highest_price_seen": 76566.4
+        }
       ]
     }
   },
@@ -147,6 +159,18 @@
           "opened_at": 1789642906.2774193,
           "algo_id": "",
           "highest_price_seen": 2437.9
+        }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "6f03eef3",
+          "entry_price": 76566.4,
+          "quantity": 0.00065303,
+          "stop_loss_price": 75754.5893,
+          "take_profit_price": 78190.0214,
+          "opened_at": 1789646507.4454978,
+          "algo_id": "",
+          "highest_price_seen": 76566.4
         }
       ]
     }
