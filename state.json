@@ -36,7 +36,9 @@
           "quantity": 0.00045843,
           "stop_loss_price": 75467.8366,
           "take_profit_price": 77262.5357,
-          "opened_at": 1789527680.7615433
+          "opened_at": 1789527680.7615433,
+          "algo_id": "",
+          "highest_price_seen": 75957.3
         }
       ]
     }
@@ -66,9 +68,35 @@
           "quantity": 0.00039566,
           "stop_loss_price": 75500.4675,
           "take_profit_price": 77262.5357,
-          "opened_at": 1789527685.8185353
+          "opened_at": 1789527685.8185353,
+          "algo_id": "",
+          "highest_price_seen": 75957.3
         }
       ]
     }
+  },
+  "trend_following__shadow": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "open_positions": {}
+  },
+  "mean_reversion__shadow": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "open_positions": {}
+  },
+  "adaptive_hybrid__shadow": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "open_positions": {}
   }
 }
