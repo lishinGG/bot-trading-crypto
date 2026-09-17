@@ -2,3 +2,4 @@ python-okx
 numpy
 openai
 anthropic
+'requests'
