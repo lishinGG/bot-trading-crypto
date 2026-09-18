@@ -97,3 +97,7 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-17T22:01:34.631053+00:00,adaptive_hybrid,BNB-USDT,close,734.1,0.03453427,0.31,stop_loss [ed6ced6c]
 2026-09-18T02:01:31.120577+00:00,trend_following__shadow,BNB-USDT,close,744.2,0.0689465,1.31,take_profit [5fe35776]
 2026-09-18T02:01:33.093540+00:00,adaptive_hybrid__shadow,BNB-USDT,close,744.2,0.0689465,1.31,take_profit [0cb44a46]
+2026-09-18T09:01:47.796456+00:00,trend_following__shadow,ETH-USDT,close,2505.98,0.02050702,1.39,take_profit [51ca966e]
+2026-09-18T09:01:48.033384+00:00,trend_following__shadow,BTC-USDT,close,78311.7,0.00065303,1.14,take_profit [301aa232]
+2026-09-18T09:01:49.539455+00:00,adaptive_hybrid__shadow,ETH-USDT,close,2505.83,0.02050945,1.39,take_profit [dc941621]
+2026-09-18T09:01:49.788681+00:00,adaptive_hybrid__shadow,BTC-USDT,close,78311.7,0.00065303,1.14,take_profit [6f03eef3]

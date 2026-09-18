@@ -55,38 +55,15 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 501.3099835,
+    "current_balance": 503.8398876448,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.3099835
+      1.3099835,
+      1.3901708857999993,
+      1.1397332590000018
     ],
-    "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "51ca966e",
-          "entry_price": 2438.19,
-          "quantity": 0.02050702,
-          "stop_loss_price": 2410.3521,
-          "take_profit_price": 2493.8657,
-          "opened_at": 1789642898.1503508,
-          "algo_id": "",
-          "highest_price_seen": 2438.19
-        }
-      ],
-      "BTC-USDT": [
-        {
-          "position_id": "301aa232",
-          "entry_price": 76566.4,
-          "quantity": 0.00065303,
-          "stop_loss_price": 75754.5893,
-          "take_profit_price": 78190.0214,
-          "opened_at": 1789646498.2981424,
-          "algo_id": "",
-          "highest_price_seen": 76566.4
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -98,37 +75,14 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 501.3099835,
+    "current_balance": 503.8429236975,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.3099835
+      1.3099835,
+      1.3932069384999966,
+      1.1397332590000018
     ],
-    "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "dc941621",
-          "entry_price": 2437.9,
-          "quantity": 0.02050945,
-          "stop_loss_price": 2410.0621,
-          "take_profit_price": 2493.5757,
-          "opened_at": 1789642906.2774193,
-          "algo_id": "",
-          "highest_price_seen": 2437.9
-        }
-      ],
-      "BTC-USDT": [
-        {
-          "position_id": "6f03eef3",
-          "entry_price": 76566.4,
-          "quantity": 0.00065303,
-          "stop_loss_price": 75754.5893,
-          "take_profit_price": 78190.0214,
-          "opened_at": 1789646507.4454978,
-          "algo_id": "",
-          "highest_price_seen": 76566.4
-        }
-      ]
-    }
+    "open_positions": {}
   }
 }
