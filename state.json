@@ -55,23 +55,13 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 501.3099835,
     "trading_halted": false,
     "strategy_paused": false,
-    "pnl_history": [],
+    "pnl_history": [
+      1.3099835
+    ],
     "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "5fe35776",
-          "entry_price": 725.2,
-          "quantity": 0.0689465,
-          "stop_loss_price": 718.0964,
-          "take_profit_price": 739.4071,
-          "opened_at": 1789617717.01057,
-          "algo_id": "",
-          "highest_price_seen": 725.2
-        }
-      ],
       "ETH-USDT": [
         {
           "position_id": "51ca966e",
@@ -108,23 +98,13 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 501.3099835,
     "trading_halted": false,
     "strategy_paused": false,
-    "pnl_history": [],
+    "pnl_history": [
+      1.3099835
+    ],
     "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "0cb44a46",
-          "entry_price": 725.2,
-          "quantity": 0.0689465,
-          "stop_loss_price": 718.0964,
-          "take_profit_price": 739.4071,
-          "opened_at": 1789617725.6780477,
-          "algo_id": "",
-          "highest_price_seen": 725.2
-        }
-      ],
       "ETH-USDT": [
         {
           "position_id": "dc941621",
