@@ -162,3 +162,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-21T16:01:14.018203+00:00,trend_following__shadow,ETH-USDT,close,2756.3,0.01889305,1.69,take_profit [f5b34598]
 2026-09-21T16:01:17.105547+00:00,adaptive_hybrid,BNB-USDT,close,802.5,0.05480441,1.38,take_profit [aef81a99]
 2026-09-21T16:01:17.576325+00:00,adaptive_hybrid__shadow,ETH-USDT,close,2756.34,0.01889316,1.69,take_profit [c2cbdb42]
+2026-09-21T20:01:19.802488+00:00,trend_following,ETH-USDT,close,2766.02,0.01692407,1.68,take_profit [201caaa1]

@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 505.6595989666632,
+    "current_balance": 507.3388051920632,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -16,22 +16,10 @@
       0.3689916859999991,
       1.8941894383280005,
       0.9044306048000025,
-      1.3819221360000025
+      1.3819221360000025,
+      1.6792062253999966
     ],
-    "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "201caaa1",
-          "entry_price": 2666.8,
-          "quantity": 0.01692407,
-          "stop_loss_price": 2667.3814,
-          "take_profit_price": 2758.3557,
-          "opened_at": 1789970507.7706861,
-          "algo_id": "",
-          "highest_price_seen": 2697.9
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
