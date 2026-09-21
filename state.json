@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 503.3732462258632,
+    "current_balance": 504.2776768306632,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -14,7 +14,8 @@
       -0.2920707529999987,
       -0.3757068,
       0.3689916859999991,
-      1.8941894383280005
+      1.8941894383280005,
+      0.9044306048000025
     ],
     "open_positions": {
       "BNB-USDT": [
@@ -39,18 +40,6 @@
           "opened_at": 1789970507.7706861,
           "algo_id": "",
           "highest_price_seen": 2697.9
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "734e3cb8",
-          "entry_price": 115.32,
-          "quantity": 0.30555088,
-          "stop_loss_price": 118.4559,
-          "take_profit_price": 119.9443,
-          "opened_at": 1789981301.088039,
-          "algo_id": "",
-          "highest_price_seen": 118.5
         }
       ]
     }
@@ -108,28 +97,17 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 506.078836799616,
+    "current_balance": 507.478932167616,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       1.3099835,
       1.3901708857999993,
       1.1397332590000018,
-      2.2389491548160008
+      2.2389491548160008,
+      1.4000953680000017
     ],
     "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "6b9eaa75",
-          "entry_price": 777.3,
-          "quantity": 0.06481923,
-          "stop_loss_price": 767.0786,
-          "take_profit_price": 797.7429,
-          "opened_at": 1789963302.0049913,
-          "algo_id": "",
-          "highest_price_seen": 777.3
-        }
-      ],
       "ETH-USDT": [
         {
           "position_id": "f5b34598",
@@ -166,28 +144,17 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 506.08188634386,
+    "current_balance": 507.46254424986,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       1.3099835,
       1.3932069384999966,
       1.1397332590000018,
-      2.2389626463600005
+      2.2389626463600005,
+      1.3806579060000044
     ],
     "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "10a6e13a",
-          "entry_price": 777.3,
-          "quantity": 0.06481962,
-          "stop_loss_price": 767.0786,
-          "take_profit_price": 797.7429,
-          "opened_at": 1789963307.973393,
-          "algo_id": "",
-          "highest_price_seen": 777.3
-        }
-      ],
       "ETH-USDT": [
         {
           "position_id": "c2cbdb42",
