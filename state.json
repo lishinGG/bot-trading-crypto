@@ -15,7 +15,20 @@
       -0.3757068,
       0.3689916859999991
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "cffcdfeb",
+          "entry_price": 777.3,
+          "quantity": 0.05483818,
+          "stop_loss_price": 769.1229,
+          "take_profit_price": 801.8314,
+          "opened_at": 1789963305.3773959,
+          "algo_id": "",
+          "highest_price_seen": 777.3
+        }
+      ]
+    }
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -51,7 +64,20 @@
       -0.0221965260000023,
       0.3073550029999992
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "aef81a99",
+          "entry_price": 777.3,
+          "quantity": 0.05480441,
+          "stop_loss_price": 768.6118,
+          "take_profit_price": 800.8093,
+          "opened_at": 1789963311.1336336,
+          "algo_id": "",
+          "highest_price_seen": 777.3
+        }
+      ]
+    }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
@@ -63,7 +89,20 @@
       1.3901708857999993,
       1.1397332590000018
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "6b9eaa75",
+          "entry_price": 777.3,
+          "quantity": 0.06481923,
+          "stop_loss_price": 767.0786,
+          "take_profit_price": 797.7429,
+          "opened_at": 1789963302.0049913,
+          "algo_id": "",
+          "highest_price_seen": 777.3
+        }
+      ]
+    }
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -83,6 +122,19 @@
       1.3932069384999966,
       1.1397332590000018
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "10a6e13a",
+          "entry_price": 777.3,
+          "quantity": 0.06481962,
+          "stop_loss_price": 767.0786,
+          "take_profit_price": 797.7429,
+          "opened_at": 1789963307.973393,
+          "algo_id": "",
+          "highest_price_seen": 777.3
+        }
+      ]
+    }
   }
 }
