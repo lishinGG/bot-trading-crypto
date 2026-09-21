@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 501.4790567875352,
+    "current_balance": 503.3732462258632,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -13,7 +13,8 @@
       0.8825389005096018,
       -0.2920707529999987,
       -0.3757068,
-      0.3689916859999991
+      0.3689916859999991,
+      1.8941894383280005
     ],
     "open_positions": {
       "BNB-USDT": [
@@ -33,23 +34,23 @@
           "position_id": "201caaa1",
           "entry_price": 2666.8,
           "quantity": 0.01692407,
-          "stop_loss_price": 2636.2814,
+          "stop_loss_price": 2667.3814,
           "take_profit_price": 2758.3557,
           "opened_at": 1789970507.7706861,
           "algo_id": "",
-          "highest_price_seen": 2666.8
+          "highest_price_seen": 2697.9
         }
       ],
-      "XLM-USDT": [
+      "SOL-USDT": [
         {
-          "position_id": "98cf078f",
-          "entry_price": 0.19803,
-          "quantity": 215.24879981,
-          "stop_loss_price": 0.197,
-          "take_profit_price": 0.206,
-          "opened_at": 1789974209.3704686,
+          "position_id": "734e3cb8",
+          "entry_price": 115.32,
+          "quantity": 0.30555088,
+          "stop_loss_price": 113.5859,
+          "take_profit_price": 119.9443,
+          "opened_at": 1789981301.088039,
           "algo_id": "",
-          "highest_price_seen": 0.20009
+          "highest_price_seen": 115.32
         }
       ]
     }
@@ -106,11 +107,11 @@
           "position_id": "e682a8ca",
           "entry_price": 2666.8,
           "quantity": 0.01691365,
-          "stop_loss_price": 2632.4666,
+          "stop_loss_price": 2663.3066,
           "take_profit_price": 2758.3557,
           "opened_at": 1789970513.9964828,
           "algo_id": "",
-          "highest_price_seen": 2666.8
+          "highest_price_seen": 2697.64
         }
       ],
       "XLM-USDT": [
@@ -118,24 +119,25 @@
           "position_id": "e10fd979",
           "entry_price": 0.19803,
           "quantity": 202.46233727,
-          "stop_loss_price": 0.1974,
+          "stop_loss_price": 0.2062,
           "take_profit_price": 0.207,
           "opened_at": 1789974214.5214996,
           "algo_id": "",
-          "highest_price_seen": 0.20009
+          "highest_price_seen": 0.20683
         }
       ]
     }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 503.8398876448,
+    "current_balance": 506.078836799616,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       1.3099835,
       1.3901708857999993,
-      1.1397332590000018
+      1.1397332590000018,
+      2.2389491548160008
     ],
     "open_positions": {
       "BNB-USDT": [
@@ -162,16 +164,16 @@
           "highest_price_seen": 2666.8
         }
       ],
-      "XLM-USDT": [
+      "SOL-USDT": [
         {
-          "position_id": "8b17ab03",
-          "entry_price": 0.19803,
-          "quantity": 254.42604032,
-          "stop_loss_price": 0.1946,
-          "take_profit_price": 0.205,
-          "opened_at": 1789974205.6153212,
+          "position_id": "0dde5973",
+          "entry_price": 115.32,
+          "quantity": 0.43884741,
+          "stop_loss_price": 113.0079,
+          "take_profit_price": 119.9443,
+          "opened_at": 1789981296.977487,
           "algo_id": "",
-          "highest_price_seen": 0.19803
+          "highest_price_seen": 115.32
         }
       ]
     }
@@ -186,13 +188,14 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 503.8429236975,
+    "current_balance": 506.08188634386,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       1.3099835,
       1.3932069384999966,
-      1.1397332590000018
+      1.1397332590000018,
+      2.2389626463600005
     ],
     "open_positions": {
       "BNB-USDT": [
@@ -219,16 +222,16 @@
           "highest_price_seen": 2666.8
         }
       ],
-      "XLM-USDT": [
+      "SOL-USDT": [
         {
-          "position_id": "a5017f5c",
-          "entry_price": 0.19803,
-          "quantity": 254.42757345,
-          "stop_loss_price": 0.1946,
-          "take_profit_price": 0.205,
-          "opened_at": 1789974211.9293654,
+          "position_id": "4a154ba5",
+          "entry_price": 115.3,
+          "quantity": 0.43892618,
+          "stop_loss_price": 112.9879,
+          "take_profit_price": 119.9243,
+          "opened_at": 1789981304.6898444,
           "algo_id": "",
-          "highest_price_seen": 0.19803
+          "highest_price_seen": 115.3
         }
       ]
     }

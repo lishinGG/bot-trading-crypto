@@ -134,3 +134,13 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-21T07:03:34.767492+00:00,adaptive_hybrid,XLM-USDT,buy,0.19803,202.46233727,0.0,"score=98 | SL=0.1953 TP=0.207 [e10fd979] | IA: Signal fort avec confirmation multi-timeframes (4h et 1D en tendance haussière), ADX à 50 indiquant une tendance puissante et volume à 2.5x la moyenne, mais le prix a déjà grimpé de ~8% sur les 20 dernières bougies ce qui introduit un risque de pullback. (taille x0.80)"
 2026-09-21T08:01:45.580046+00:00,trend_following,XLM-USDT,trailing_stop_update,0.20009,215.24879981,0.0,Nouveau SL=0.197 [98cf078f]
 2026-09-21T08:01:48.355823+00:00,adaptive_hybrid,XLM-USDT,trailing_stop_update,0.20009,202.46233727,0.0,Nouveau SL=0.1974 [e10fd979]
+2026-09-21T09:01:35.308269+00:00,trend_following,ETH-USDT,trailing_stop_update,2697.9,0.01692407,0.0,Nouveau SL=2667.3814 [201caaa1]
+2026-09-21T09:01:35.618494+00:00,trend_following,XLM-USDT,close,0.20683,215.24879981,1.89,take_profit [98cf078f]
+2026-09-21T09:01:36.434749+00:00,trend_following__shadow,XLM-USDT,close,0.20683,254.42604032,2.24,take_profit [8b17ab03]
+2026-09-21T09:01:36.977541+00:00,trend_following__shadow,SOL-USDT,buy,115.32,0.43884741,0.0,"score=55 (Niveau 1 seul, sans IA) [0dde5973]"
+2026-09-21T09:01:41.574540+00:00,trend_following,SOL-USDT,buy,115.32,0.30555088,0.0,"score=66 | SL=113.5859 TP=119.9443 [734e3cb8] | IA: La tendance haussière est confirmée sur 4h et 1j avec un ADX très fort à 77, mais le volume anormalement faible (0.2x la moyenne) affaiblit la fiabilité du signal et justifie une approche prudente. (taille x0.70)"
+2026-09-21T09:01:43.072531+00:00,adaptive_hybrid,ETH-USDT,trailing_stop_update,2697.64,0.01691365,0.0,Nouveau SL=2663.3066 [e682a8ca]
+2026-09-21T09:01:43.329055+00:00,adaptive_hybrid,XLM-USDT,trailing_stop_update,0.20683,202.46233727,0.0,Nouveau SL=0.2062 [e10fd979]
+2026-09-21T09:01:44.122540+00:00,adaptive_hybrid__shadow,XLM-USDT,close,0.20683,254.42757345,2.24,take_profit [a5017f5c]
+2026-09-21T09:01:44.689953+00:00,adaptive_hybrid__shadow,SOL-USDT,buy,115.3,0.43892618,0.0,"score=55 (Niveau 1 seul, sans IA) [4a154ba5]"
+2026-09-21T09:01:48.466123+00:00,adaptive_hybrid,SOL-USDT,skip_buy,115.3,0.0,0.0,"Limite d'exposition globale atteinte (3 positions max, toutes cryptos confondues)"
