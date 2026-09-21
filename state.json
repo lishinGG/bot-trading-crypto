@@ -72,7 +72,7 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.17020811247926,
+    "current_balance": 504.92974079200314,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -87,7 +87,9 @@
       -0.3270927251999992,
       -0.22732110000000383,
       -0.0221965260000023,
-      0.3073550029999992
+      0.3073550029999992,
+      0.8096564254999981,
+      2.9498762540239
     ],
     "open_positions": {
       "BNB-USDT": [
@@ -100,30 +102,6 @@
           "opened_at": 1789963311.1336336,
           "algo_id": "",
           "highest_price_seen": 784.4
-        }
-      ],
-      "ETH-USDT": [
-        {
-          "position_id": "e682a8ca",
-          "entry_price": 2666.8,
-          "quantity": 0.01691365,
-          "stop_loss_price": 2718.6066,
-          "take_profit_price": 2758.3557,
-          "opened_at": 1789970513.9964828,
-          "algo_id": "",
-          "highest_price_seen": 2722.1
-        }
-      ],
-      "XLM-USDT": [
-        {
-          "position_id": "e10fd979",
-          "entry_price": 0.19803,
-          "quantity": 202.46233727,
-          "stop_loss_price": 0.2062,
-          "take_profit_price": 0.207,
-          "opened_at": 1789974214.5214996,
-          "algo_id": "",
-          "highest_price_seen": 0.20683
         }
       ]
     }
