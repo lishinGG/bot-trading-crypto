@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 504.2776768306632,
+    "current_balance": 505.6595989666632,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -15,21 +15,10 @@
       -0.3757068,
       0.3689916859999991,
       1.8941894383280005,
-      0.9044306048000025
+      0.9044306048000025,
+      1.3819221360000025
     ],
     "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "cffcdfeb",
-          "entry_price": 777.3,
-          "quantity": 0.05483818,
-          "stop_loss_price": 788.5229,
-          "take_profit_price": 801.8314,
-          "opened_at": 1789963305.3773959,
-          "algo_id": "",
-          "highest_price_seen": 789.6
-        }
-      ],
       "ETH-USDT": [
         {
           "position_id": "201caaa1",
@@ -61,7 +50,7 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 504.92974079200314,
+    "current_balance": 506.31081192400313,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -78,26 +67,14 @@
       -0.0221965260000023,
       0.3073550029999992,
       0.8096564254999981,
-      2.9498762540239
+      2.9498762540239,
+      1.3810711320000024
     ],
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "aef81a99",
-          "entry_price": 777.3,
-          "quantity": 0.05480441,
-          "stop_loss_price": 788.0118,
-          "take_profit_price": 800.8093,
-          "opened_at": 1789963311.1336336,
-          "algo_id": "",
-          "highest_price_seen": 789.6
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 507.478932167616,
+    "current_balance": 509.169860142616,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -105,21 +82,10 @@
       1.3901708857999993,
       1.1397332590000018,
       2.2389491548160008,
-      1.4000953680000017
+      1.4000953680000017,
+      1.6909279750000001
     ],
     "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "f5b34598",
-          "entry_price": 2666.8,
-          "quantity": 0.01889305,
-          "stop_loss_price": 2628.6518,
-          "take_profit_price": 2743.0964,
-          "opened_at": 1789970504.6709776,
-          "algo_id": "",
-          "highest_price_seen": 2666.8
-        }
-      ],
       "SOL-USDT": [
         {
           "position_id": "0dde5973",
@@ -144,7 +110,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 507.46254424986,
+    "current_balance": 509.15423779626,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -152,21 +118,10 @@
       1.3932069384999966,
       1.1397332590000018,
       2.2389626463600005,
-      1.3806579060000044
+      1.3806579060000044,
+      1.6916935463999991
     ],
     "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "c2cbdb42",
-          "entry_price": 2666.8,
-          "quantity": 0.01889316,
-          "stop_loss_price": 2628.6518,
-          "take_profit_price": 2743.0964,
-          "opened_at": 1789970510.8548434,
-          "algo_id": "",
-          "highest_price_seen": 2666.8
-        }
-      ],
       "SOL-USDT": [
         {
           "position_id": "4a154ba5",
