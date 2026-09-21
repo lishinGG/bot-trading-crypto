@@ -151,3 +151,6 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-21T10:01:36.925248+00:00,adaptive_hybrid,BTC-USDT,skip_buy,86199.7,0.0,0.0,"Limite d'exposition globale atteinte (3 positions max, toutes cryptos confondues)"
 2026-09-21T11:01:15.472710+00:00,adaptive_hybrid,ETH-USDT,close,2714.67,0.01691365,0.81,stop_loss [e682a8ca]
 2026-09-21T11:01:15.862847+00:00,adaptive_hybrid,XLM-USDT,close,0.2126,202.46233727,2.95,take_profit [e10fd979]
+2026-09-21T12:01:51.053606+00:00,trend_following,BNB-USDT,trailing_stop_update,789.6,0.05483818,0.0,Nouveau SL=788.5229 [cffcdfeb]
+2026-09-21T12:01:51.784196+00:00,trend_following,SOL-USDT,trailing_stop_update,117.01,0.30555088,0.0,Nouveau SL=115.2759 [734e3cb8]
+2026-09-21T12:01:55.236164+00:00,adaptive_hybrid,BNB-USDT,trailing_stop_update,789.6,0.05480441,0.0,Nouveau SL=788.0118 [aef81a99]
