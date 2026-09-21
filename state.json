@@ -22,11 +22,11 @@
           "position_id": "cffcdfeb",
           "entry_price": 777.3,
           "quantity": 0.05483818,
-          "stop_loss_price": 769.1229,
+          "stop_loss_price": 776.2229,
           "take_profit_price": 801.8314,
           "opened_at": 1789963305.3773959,
           "algo_id": "",
-          "highest_price_seen": 777.3
+          "highest_price_seen": 784.4
         }
       ],
       "ETH-USDT": [
@@ -95,11 +95,11 @@
           "position_id": "aef81a99",
           "entry_price": 777.3,
           "quantity": 0.05480441,
-          "stop_loss_price": 768.6118,
+          "stop_loss_price": 775.7118,
           "take_profit_price": 800.8093,
           "opened_at": 1789963311.1336336,
           "algo_id": "",
-          "highest_price_seen": 777.3
+          "highest_price_seen": 784.4
         }
       ],
       "ETH-USDT": [
@@ -107,11 +107,11 @@
           "position_id": "e682a8ca",
           "entry_price": 2666.8,
           "quantity": 0.01691365,
-          "stop_loss_price": 2663.3066,
+          "stop_loss_price": 2718.6066,
           "take_profit_price": 2758.3557,
           "opened_at": 1789970513.9964828,
           "algo_id": "",
-          "highest_price_seen": 2697.64
+          "highest_price_seen": 2722.1
         }
       ],
       "XLM-USDT": [
