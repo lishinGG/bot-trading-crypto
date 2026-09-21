@@ -154,3 +154,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-21T12:01:51.053606+00:00,trend_following,BNB-USDT,trailing_stop_update,789.6,0.05483818,0.0,Nouveau SL=788.5229 [cffcdfeb]
 2026-09-21T12:01:51.784196+00:00,trend_following,SOL-USDT,trailing_stop_update,117.01,0.30555088,0.0,Nouveau SL=115.2759 [734e3cb8]
 2026-09-21T12:01:55.236164+00:00,adaptive_hybrid,BNB-USDT,trailing_stop_update,789.6,0.05480441,0.0,Nouveau SL=788.0118 [aef81a99]
+2026-09-21T14:01:32.398087+00:00,trend_following,SOL-USDT,trailing_stop_update,118.5,0.30555088,0.0,Nouveau SL=118.4559 [734e3cb8]

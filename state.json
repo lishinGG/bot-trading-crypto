@@ -46,11 +46,11 @@
           "position_id": "734e3cb8",
           "entry_price": 115.32,
           "quantity": 0.30555088,
-          "stop_loss_price": 115.2759,
+          "stop_loss_price": 118.4559,
           "take_profit_price": 119.9443,
           "opened_at": 1789981301.088039,
           "algo_id": "",
-          "highest_price_seen": 117.01
+          "highest_price_seen": 118.5
         }
       ]
     }
