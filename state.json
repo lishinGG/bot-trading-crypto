@@ -39,6 +39,18 @@
           "algo_id": "",
           "highest_price_seen": 2666.8
         }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "98cf078f",
+          "entry_price": 0.19803,
+          "quantity": 215.24879981,
+          "stop_loss_price": 0.1949,
+          "take_profit_price": 0.206,
+          "opened_at": 1789974209.3704686,
+          "algo_id": "",
+          "highest_price_seen": 0.19803
+        }
       ]
     }
   },
@@ -100,6 +112,18 @@
           "algo_id": "",
           "highest_price_seen": 2666.8
         }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "e10fd979",
+          "entry_price": 0.19803,
+          "quantity": 202.46233727,
+          "stop_loss_price": 0.1953,
+          "take_profit_price": 0.207,
+          "opened_at": 1789974214.5214996,
+          "algo_id": "",
+          "highest_price_seen": 0.19803
+        }
       ]
     }
   },
@@ -136,6 +160,18 @@
           "opened_at": 1789970504.6709776,
           "algo_id": "",
           "highest_price_seen": 2666.8
+        }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "8b17ab03",
+          "entry_price": 0.19803,
+          "quantity": 254.42604032,
+          "stop_loss_price": 0.1946,
+          "take_profit_price": 0.205,
+          "opened_at": 1789974205.6153212,
+          "algo_id": "",
+          "highest_price_seen": 0.19803
         }
       ]
     }
@@ -181,6 +217,18 @@
           "opened_at": 1789970510.8548434,
           "algo_id": "",
           "highest_price_seen": 2666.8
+        }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "a5017f5c",
+          "entry_price": 0.19803,
+          "quantity": 254.42757345,
+          "stop_loss_price": 0.1946,
+          "take_profit_price": 0.205,
+          "opened_at": 1789974211.9293654,
+          "algo_id": "",
+          "highest_price_seen": 0.19803
         }
       ]
     }
