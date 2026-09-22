@@ -83,7 +83,9 @@
           "take_profit_price": 119.9443,
           "opened_at": 1789981296.977487,
           "algo_id": "",
-          "highest_price_seen": 115.32
+          "highest_price_seen": 115.32,
+          "leverage": 1.0,
+          "margin_usd": 0.0
         }
       ]
     }
@@ -119,9 +121,35 @@
           "take_profit_price": 119.9243,
           "opened_at": 1789981304.6898444,
           "algo_id": "",
-          "highest_price_seen": 115.3
+          "highest_price_seen": 115.3,
+          "leverage": 1.0,
+          "margin_usd": 0.0
         }
       ]
     }
+  },
+  "trend_following__futures": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "open_positions": {}
+  },
+  "mean_reversion__futures": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "open_positions": {}
+  },
+  "adaptive_hybrid__futures": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "open_positions": {}
   }
 }
