@@ -62,7 +62,7 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 509.169860142616,
+    "current_balance": 508.78367442181604,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -71,24 +71,10 @@
       1.1397332590000018,
       2.2389491548160008,
       1.4000953680000017,
-      1.6909279750000001
+      1.6909279750000001,
+      -0.386185720799998
     ],
-    "open_positions": {
-      "SOL-USDT": [
-        {
-          "position_id": "0dde5973",
-          "entry_price": 115.32,
-          "quantity": 0.43884741,
-          "stop_loss_price": 113.0079,
-          "take_profit_price": 119.9443,
-          "opened_at": 1789981296.977487,
-          "algo_id": "",
-          "highest_price_seen": 115.32,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -100,7 +86,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 509.15423779626,
+    "current_balance": 508.80748611406,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -109,24 +95,10 @@
       1.1397332590000018,
       2.2389626463600005,
       1.3806579060000044,
-      1.6916935463999991
+      1.6916935463999991,
+      -0.3467516821999965
     ],
-    "open_positions": {
-      "SOL-USDT": [
-        {
-          "position_id": "4a154ba5",
-          "entry_price": 115.3,
-          "quantity": 0.43892618,
-          "stop_loss_price": 112.9879,
-          "take_profit_price": 119.9243,
-          "opened_at": 1789981304.6898444,
-          "algo_id": "",
-          "highest_price_seen": 115.3,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
