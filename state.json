@@ -19,7 +19,22 @@
       1.3819221360000025,
       1.6792062253999966
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "2b9b5a47",
+          "entry_price": 781.7,
+          "quantity": 0.03894119,
+          "stop_loss_price": 778.6314,
+          "take_profit_price": 789.3714,
+          "opened_at": 1790517675.9052408,
+          "algo_id": "",
+          "highest_price_seen": 781.7,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ]
+    }
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -74,7 +89,22 @@
       1.6909279750000001,
       -0.386185720799998
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "724d38a1",
+          "entry_price": 781.7,
+          "quantity": 0.06508682,
+          "stop_loss_price": 777.8643,
+          "take_profit_price": 789.3714,
+          "opened_at": 1790517667.3140736,
+          "algo_id": "",
+          "highest_price_seen": 781.7,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ]
+    }
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -98,7 +128,22 @@
       1.6916935463999991,
       -0.3467516821999965
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "41089f0e",
+          "entry_price": 781.7,
+          "quantity": 0.06508987,
+          "stop_loss_price": 777.8643,
+          "take_profit_price": 789.3714,
+          "opened_at": 1790517679.780656,
+          "algo_id": "",
+          "highest_price_seen": 781.7,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ]
+    }
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
