@@ -86,7 +86,22 @@
       2.9498762540239,
       1.3810711320000024
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "ce6bc2b7",
+          "entry_price": 82998.7,
+          "quantity": 0.00042702,
+          "stop_loss_price": 82373.1357,
+          "take_profit_price": 84666.8714,
+          "opened_at": 1790593359.3154414,
+          "algo_id": "",
+          "highest_price_seen": 82998.7,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ]
+    }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
@@ -200,7 +215,22 @@
     "pnl_history": [
       -0.15304196000000087
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "b3ae1b47",
+          "entry_price": 83008.1,
+          "quantity": 0.00033119,
+          "stop_loss_price": 82465.9443,
+          "take_profit_price": 84676.2714,
+          "opened_at": 1790593345.045996,
+          "algo_id": "",
+          "highest_price_seen": 83008.1,
+          "leverage": 5,
+          "margin_usd": 5.5
+        }
+      ]
+    }
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
@@ -208,6 +238,21 @@
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "a90f3a83",
+          "entry_price": 82998.7,
+          "quantity": 0.00036145,
+          "stop_loss_price": 82414.84,
+          "take_profit_price": 84666.8714,
+          "opened_at": 1790593355.2505643,
+          "algo_id": "",
+          "highest_price_seen": 82998.7,
+          "leverage": 5,
+          "margin_usd": 6.0
+        }
+      ]
+    }
   }
 }
