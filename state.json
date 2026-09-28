@@ -40,11 +40,11 @@
           "position_id": "7161ad28",
           "entry_price": 15.184,
           "quantity": 3.34004141,
-          "stop_loss_price": 14.573,
+          "stop_loss_price": 14.763,
           "take_profit_price": 16.4061,
           "opened_at": 1790622223.3606215,
           "algo_id": "",
-          "highest_price_seen": 15.184,
+          "highest_price_seen": 15.374,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -312,11 +312,11 @@
           "position_id": "bddaeb62",
           "entry_price": 15.184,
           "quantity": 3.29293994,
-          "stop_loss_price": 14.573,
+          "stop_loss_price": 14.771,
           "take_profit_price": 16.4061,
           "opened_at": 1790622222.1926885,
           "algo_id": "",
-          "highest_price_seen": 15.184,
+          "highest_price_seen": 15.382,
           "leverage": 5,
           "margin_usd": 10.0
         }
@@ -400,11 +400,11 @@
           "position_id": "bbba2c12",
           "entry_price": 15.184,
           "quantity": 3.29293994,
-          "stop_loss_price": 14.573,
+          "stop_loss_price": 14.771,
           "take_profit_price": 16.4061,
           "opened_at": 1790622230.2987225,
           "algo_id": "",
-          "highest_price_seen": 15.184,
+          "highest_price_seen": 15.382,
           "leverage": 5,
           "margin_usd": 10.0
         }
