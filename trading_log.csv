@@ -227,3 +227,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-28T19:03:48.888401+00:00,adaptive_hybrid,XLM-USDT,buy,0.23265,217.62768619,0.0,score=55 | SL=0.2236 TP=0.2508 [72647477]
 2026-09-28T19:03:50.677048+00:00,adaptive_hybrid__futures,LINK-USDT,buy,15.184,3.29293994,0.0,score=55 | levier=5x | marge=10.0$ | SL=14.573 TP=16.4061 [bbba2c12]
 2026-09-28T19:03:51.299899+00:00,adaptive_hybrid,LINK-USDT,skip_buy,15.184,0.0,0.0,Limite d'exposition globale atteinte (3 positions max)
+2026-09-28T20:01:27.798973+00:00,adaptive_hybrid,BTC-USDT,close,83406.8,0.00042702,0.17,stop_loss [ce6bc2b7]

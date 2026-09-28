@@ -95,7 +95,7 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 506.31081192400313,
+    "current_balance": 506.48507878600316,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -113,22 +113,11 @@
       0.3073550029999992,
       0.8096564254999981,
       2.9498762540239,
-      1.3810711320000024
+      1.3810711320000024,
+      0.1742668620000025
     ],
     "open_positions": {
       "BTC-USDT": [
-        {
-          "position_id": "ce6bc2b7",
-          "entry_price": 82998.7,
-          "quantity": 0.00042702,
-          "stop_loss_price": 83697.7357,
-          "take_profit_price": 84666.8714,
-          "opened_at": 1790593359.3154414,
-          "algo_id": "",
-          "highest_price_seen": 83907.1,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        },
         {
           "position_id": "9d31a45a",
           "entry_price": 83070.7,
