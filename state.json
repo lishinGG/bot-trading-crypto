@@ -194,26 +194,13 @@
   },
   "mean_reversion__futures": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 499.84695804,
     "trading_halted": false,
     "strategy_paused": false,
-    "pnl_history": [],
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "df95b056",
-          "entry_price": 83278.0,
-          "quantity": 0.0003002,
-          "stop_loss_price": 82815.8275,
-          "take_profit_price": 84598.4929,
-          "opened_at": 1790568166.453175,
-          "algo_id": "",
-          "highest_price_seen": 83278.0,
-          "leverage": 5,
-          "margin_usd": 5.0
-        }
-      ]
-    }
+    "pnl_history": [
+      -0.15304196000000087
+    ],
+    "open_positions": {}
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
