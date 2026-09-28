@@ -92,11 +92,11 @@
           "position_id": "ce6bc2b7",
           "entry_price": 82998.7,
           "quantity": 0.00042702,
-          "stop_loss_price": 82789.3357,
+          "stop_loss_price": 83697.7357,
           "take_profit_price": 84666.8714,
           "opened_at": 1790593359.3154414,
           "algo_id": "",
-          "highest_price_seen": 83414.9,
+          "highest_price_seen": 83907.1,
           "leverage": 1.0,
           "margin_usd": 0.0
         },

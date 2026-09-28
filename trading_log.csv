@@ -215,3 +215,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-28T17:02:47.646439+00:00,mean_reversion__futures,BTC-USDT,trailing_stop_update,83683.4,0.00042123,0.0,Nouveau SL=83066.3696 [96c69721]
 2026-09-28T17:02:49.421063+00:00,adaptive_hybrid,BTC-USDT,trailing_stop_update,83721.5,0.00042665,0.0,Nouveau SL=83104.4696 [9d31a45a]
 2026-09-28T17:02:50.201357+00:00,adaptive_hybrid__futures,BTC-USDT,trailing_stop_update,83686.27,0.00036145,0.0,Nouveau SL=83102.41 [a90f3a83]
+2026-09-28T18:02:10.125804+00:00,adaptive_hybrid,BTC-USDT,trailing_stop_update,83907.1,0.00042702,0.0,Nouveau SL=83697.7357 [ce6bc2b7]
