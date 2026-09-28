@@ -48,6 +48,18 @@
           "highest_price_seen": 83278.0,
           "leverage": 1.0,
           "margin_usd": 0.0
+        },
+        {
+          "position_id": "1c75cc50",
+          "entry_price": 83153.2,
+          "quantity": 0.00041873,
+          "stop_loss_price": 82551.4771,
+          "take_profit_price": 84807.9379,
+          "opened_at": 1790575315.3711936,
+          "algo_id": "",
+          "highest_price_seen": 83153.2,
+          "leverage": 1.0,
+          "margin_usd": 0.0
         }
       ]
     }
@@ -112,6 +124,18 @@
           "highest_price_seen": 83278.0,
           "leverage": 1.0,
           "margin_usd": 0.0
+        },
+        {
+          "position_id": "d728bc8f",
+          "entry_price": 83153.2,
+          "quantity": 0.0006013,
+          "stop_loss_price": 82401.0464,
+          "take_profit_price": 84657.5071,
+          "opened_at": 1790575306.7975218,
+          "algo_id": "",
+          "highest_price_seen": 83153.2,
+          "leverage": 1.0,
+          "margin_usd": 0.0
         }
       ]
     }
@@ -142,6 +166,18 @@
           "opened_at": 1790568173.037167,
           "algo_id": "",
           "highest_price_seen": 83284.3,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        },
+        {
+          "position_id": "419fcc2e",
+          "entry_price": 83150.3,
+          "quantity": 0.00061154,
+          "stop_loss_price": 82398.1464,
+          "take_profit_price": 84654.6071,
+          "opened_at": 1790575317.6928284,
+          "algo_id": "",
+          "highest_price_seen": 83150.3,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
