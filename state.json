@@ -35,7 +35,22 @@
       -0.26375355000000444,
       -0.025717923000002668
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "480b115c",
+          "entry_price": 83278.0,
+          "quantity": 0.00041811,
+          "stop_loss_price": 82782.8152,
+          "take_profit_price": 84598.4929,
+          "opened_at": 1790568170.6046345,
+          "algo_id": "",
+          "highest_price_seen": 83278.0,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ]
+    }
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
@@ -84,7 +99,22 @@
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "4fc6814b",
+          "entry_price": 83278.0,
+          "quantity": 0.0006004,
+          "stop_loss_price": 82617.7536,
+          "take_profit_price": 84598.4929,
+          "opened_at": 1790568161.9656303,
+          "algo_id": "",
+          "highest_price_seen": 83278.0,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ]
+    }
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
@@ -101,7 +131,22 @@
       -0.3467516821999965,
       -0.3124313760000044
     ],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "e6963ea8",
+          "entry_price": 83284.3,
+          "quantity": 0.00061055,
+          "stop_loss_price": 82624.0536,
+          "take_profit_price": 84604.7929,
+          "opened_at": 1790568173.037167,
+          "algo_id": "",
+          "highest_price_seen": 83284.3,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ]
+    }
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
@@ -117,7 +162,22 @@
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [],
-    "open_positions": {}
+    "open_positions": {
+      "BTC-USDT": [
+        {
+          "position_id": "df95b056",
+          "entry_price": 83278.0,
+          "quantity": 0.0003002,
+          "stop_loss_price": 82815.8275,
+          "take_profit_price": 84598.4929,
+          "opened_at": 1790568166.453175,
+          "algo_id": "",
+          "highest_price_seen": 83278.0,
+          "leverage": 5,
+          "margin_usd": 5.0
+        }
+      ]
+    }
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
