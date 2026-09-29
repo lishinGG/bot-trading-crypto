@@ -263,3 +263,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-29T17:02:45.953726+00:00,adaptive_hybrid__shadow,BTC-USDT,buy,84000.0,0.00060496,0.0,"score=55 (Niveau 1 seul, sans IA) [01ac6898]"
 2026-09-29T17:02:46.743864+00:00,adaptive_hybrid__futures,BTC-USDT,buy,84000.0,0.00059217,0.0,score=55 | levier=5x | marge=9.95$ | SL=83237.2607 TP=85525.4786 [d8717998]
 2026-09-29T17:02:47.584162+00:00,adaptive_hybrid,BTC-USDT,buy,84000.0,0.00060036,0.0,score=55 | SL=83237.2607 TP=85525.4786 [d1a70215]
+2026-09-29T18:03:50.942651+00:00,trend_following__futures,BTC-USDT,close,83197.0,0.0005922,-0.48,stop_loss [b54c80f2]
+2026-09-29T18:03:54.302801+00:00,adaptive_hybrid__futures,BTC-USDT,close,83203.9,0.00059217,-0.47,stop_loss [d8717998]
