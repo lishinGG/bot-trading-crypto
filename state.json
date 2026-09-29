@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 507.1518874800632,
+    "current_balance": 506.7110020139432,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -18,7 +18,8 @@
       0.9044306048000025,
       1.3819221360000025,
       1.6792062253999966,
-      -0.18691771200000265
+      -0.18691771200000265,
+      -0.4408854661199989
     ],
     "open_positions": {
       "XLM-USDT": [
@@ -31,20 +32,6 @@
           "opened_at": 1790622220.6614866,
           "algo_id": "",
           "highest_price_seen": 0.23265,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "LINK-USDT": [
-        {
-          "position_id": "7161ad28",
-          "entry_price": 15.184,
-          "quantity": 3.34004141,
-          "stop_loss_price": 15.07,
-          "take_profit_price": 16.4061,
-          "opened_at": 1790622223.3606215,
-          "algo_id": "",
-          "highest_price_seen": 15.491,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -250,10 +237,12 @@
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 499.54886722822,
     "trading_halted": false,
     "strategy_paused": false,
-    "pnl_history": [],
+    "pnl_history": [
+      -0.45113277177999567
+    ],
     "open_positions": {
       "XLM-USDT": [
         {
@@ -265,20 +254,6 @@
           "opened_at": 1790622219.2759714,
           "algo_id": "",
           "highest_price_seen": 0.23265,
-          "leverage": 5,
-          "margin_usd": 10.0
-        }
-      ],
-      "LINK-USDT": [
-        {
-          "position_id": "bddaeb62",
-          "entry_price": 15.184,
-          "quantity": 3.29293994,
-          "stop_loss_price": 15.064,
-          "take_profit_price": 16.4061,
-          "opened_at": 1790622222.1926885,
-          "algo_id": "",
-          "highest_price_seen": 15.477,
           "leverage": 5,
           "margin_usd": 10.0
         }
@@ -299,11 +274,12 @@
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
-    "current_balance": 499.993313175,
+    "current_balance": 499.54218040322,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.0066868249999999995
+      -0.0066868249999999995,
+      -0.45113277177999567
     ],
     "open_positions": {
       "XLM-USDT": [
@@ -316,20 +292,6 @@
           "opened_at": 1790622227.651622,
           "algo_id": "",
           "highest_price_seen": 0.23265,
-          "leverage": 5,
-          "margin_usd": 10.0
-        }
-      ],
-      "LINK-USDT": [
-        {
-          "position_id": "bbba2c12",
-          "entry_price": 15.184,
-          "quantity": 3.29293994,
-          "stop_loss_price": 15.06,
-          "take_profit_price": 16.4061,
-          "opened_at": 1790622230.2987225,
-          "algo_id": "",
-          "highest_price_seen": 15.473,
           "leverage": 5,
           "margin_usd": 10.0
         }
