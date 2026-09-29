@@ -247,3 +247,7 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-29T12:02:48.701937+00:00,trend_following__futures,XLM-USDT,trailing_stop_update,0.23385,214.91510853,0.0,Nouveau SL=0.2248 [e0987a9b]
 2026-09-29T12:02:52.163130+00:00,adaptive_hybrid,XLM-USDT,trailing_stop_update,0.23383,217.62768619,0.0,Nouveau SL=0.2248 [72647477]
 2026-09-29T12:02:53.366364+00:00,adaptive_hybrid__futures,XLM-USDT,trailing_stop_update,0.23385,214.91510853,0.0,Nouveau SL=0.2248 [e3b37a59]
+2026-09-29T15:05:21.926132+00:00,mean_reversion__shadow,BTC-USDT,close,84728.1,0.0006004,0.87,take_profit [4fc6814b]
+2026-09-29T15:05:21.926255+00:00,mean_reversion__shadow,BTC-USDT,close,84728.1,0.0006013,0.95,take_profit [d728bc8f]
+2026-09-29T15:05:23.340952+00:00,adaptive_hybrid__shadow,BTC-USDT,close,84728.1,0.00061055,0.88,take_profit [e6963ea8]
+2026-09-29T15:05:23.341053+00:00,adaptive_hybrid__shadow,BTC-USDT,close,84728.1,0.00061154,0.96,take_profit [419fcc2e]

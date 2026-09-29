@@ -144,42 +144,18 @@
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 500.0,
+    "current_balance": 501.81762741,
     "trading_halted": false,
     "strategy_paused": false,
-    "pnl_history": [],
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "4fc6814b",
-          "entry_price": 83278.0,
-          "quantity": 0.0006004,
-          "stop_loss_price": 82617.7536,
-          "take_profit_price": 84598.4929,
-          "opened_at": 1790568161.9656303,
-          "algo_id": "",
-          "highest_price_seen": 83278.0,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        },
-        {
-          "position_id": "d728bc8f",
-          "entry_price": 83153.2,
-          "quantity": 0.0006013,
-          "stop_loss_price": 82401.0464,
-          "take_profit_price": 84657.5071,
-          "opened_at": 1790575306.7975218,
-          "algo_id": "",
-          "highest_price_seen": 83153.2,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ]
-    }
+    "pnl_history": [
+      0.8706400400000034,
+      0.9469873700000053
+    ],
+    "open_positions": {}
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 508.49505473806,
+    "current_balance": 510.34145464006,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -190,35 +166,11 @@
       1.3806579060000044,
       1.6916935463999991,
       -0.3467516821999965,
-      -0.3124313760000044
+      -0.3124313760000044,
+      0.8815120900000017,
+      0.9648878120000018
     ],
     "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "e6963ea8",
-          "entry_price": 83284.3,
-          "quantity": 0.00061055,
-          "stop_loss_price": 82624.0536,
-          "take_profit_price": 84604.7929,
-          "opened_at": 1790568173.037167,
-          "algo_id": "",
-          "highest_price_seen": 83284.3,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        },
-        {
-          "position_id": "419fcc2e",
-          "entry_price": 83150.3,
-          "quantity": 0.00061154,
-          "stop_loss_price": 82398.1464,
-          "take_profit_price": 84654.6071,
-          "opened_at": 1790575317.6928284,
-          "algo_id": "",
-          "highest_price_seen": 83150.3,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
       "XLM-USDT": [
         {
           "position_id": "95b9c904",
