@@ -243,3 +243,7 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-29T03:02:12.280344+00:00,trend_following,LINK-USDT,close,15.052,3.34004141,-0.44,stop_loss [7161ad28]
 2026-09-29T03:02:14.386473+00:00,trend_following__futures,LINK-USDT,close,15.047,3.29293994,-0.45,stop_loss [bddaeb62]
 2026-09-29T03:02:19.647009+00:00,adaptive_hybrid__futures,LINK-USDT,close,15.047,3.29293994,-0.45,stop_loss [bbba2c12]
+2026-09-29T12:02:47.504562+00:00,trend_following,XLM-USDT,trailing_stop_update,0.23383,217.98920588,0.0,Nouveau SL=0.2248 [352db1fc]
+2026-09-29T12:02:48.701937+00:00,trend_following__futures,XLM-USDT,trailing_stop_update,0.23385,214.91510853,0.0,Nouveau SL=0.2248 [e0987a9b]
+2026-09-29T12:02:52.163130+00:00,adaptive_hybrid,XLM-USDT,trailing_stop_update,0.23383,217.62768619,0.0,Nouveau SL=0.2248 [72647477]
+2026-09-29T12:02:53.366364+00:00,adaptive_hybrid__futures,XLM-USDT,trailing_stop_update,0.23385,214.91510853,0.0,Nouveau SL=0.2248 [e3b37a59]
