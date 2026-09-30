@@ -100,7 +100,7 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 506.29880795387965,
+    "current_balance": 504.23264116133964,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -112,23 +112,10 @@
       1.6909279750000001,
       -0.386185720799998,
       -0.31241673600000447,
-      -2.172449731936401
+      -2.172449731936401,
+      -2.066166792539997
     ],
     "open_positions": {
-      "LINK-USDT": [
-        {
-          "position_id": "5bfe25db",
-          "entry_price": 15.184,
-          "quantity": 3.34873062,
-          "stop_loss_price": 14.573,
-          "take_profit_price": 16.4061,
-          "opened_at": 1790622221.8586042,
-          "algo_id": "",
-          "highest_price_seen": 15.184,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
       "BTC-USDT": [
         {
           "position_id": "a664b0e7",
