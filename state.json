@@ -1,7 +1,7 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 504.54418930749597,
+    "current_balance": 502.22754215397094,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -20,47 +20,22 @@
       1.6792062253999966,
       -0.18691771200000265,
       -0.4408854661199989,
-      -2.166812706447201
+      -2.166812706447201,
+      0.43066604999999997,
+      -1.4522819168000043,
+      -1.2950312867250011
     ],
     "open_positions": {
-      "BTC-USDT": [
+      "BNB-USDT": [
         {
-          "position_id": "df678aaf",
-          "entry_price": 84000.0,
-          "quantity": 0.00060065,
-          "stop_loss_price": 84720.3607,
-          "take_profit_price": 85525.4786,
-          "opened_at": 1790701360.8871984,
+          "position_id": "93e8bde5",
+          "entry_price": 767.4,
+          "quantity": 0.06544534,
+          "stop_loss_price": 758.9571,
+          "take_profit_price": 784.2857,
+          "opened_at": 1790780817.844054,
           "algo_id": "",
-          "highest_price_seen": 85483.1,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "6591f06c",
-          "entry_price": 122.29,
-          "quantity": 0.41258009,
-          "stop_loss_price": 120.5886,
-          "take_profit_price": 125.6929,
-          "opened_at": 1790773612.0237935,
-          "algo_id": "",
-          "highest_price_seen": 122.29,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "94d315f1",
-          "entry_price": 0.0974,
-          "quantity": 518.01251469,
-          "stop_loss_price": 0.0958,
-          "take_profit_price": 0.1005,
-          "opened_at": 1790773614.7424803,
-          "algo_id": "",
-          "highest_price_seen": 0.0974,
+          "highest_price_seen": 767.4,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -86,7 +61,7 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 504.3017643702746,
+    "current_balance": 501.6583490310936,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -107,7 +82,9 @@
       1.3810711320000024,
       0.1742668620000025,
       -0.020095214999996273,
-      -2.163219200728601
+      -2.163219200728601,
+      -1.3742429480999994,
+      -1.2691723910810042
     ],
     "open_positions": {
       "BTC-USDT": [
@@ -124,30 +101,16 @@
           "margin_usd": 0.0
         }
       ],
-      "SOL-USDT": [
+      "BNB-USDT": [
         {
-          "position_id": "3676c96c",
-          "entry_price": 122.2,
-          "quantity": 0.41268557,
-          "stop_loss_price": 120.4986,
-          "take_profit_price": 125.6029,
-          "opened_at": 1790773618.7063563,
+          "position_id": "be429066",
+          "entry_price": 767.4,
+          "quantity": 0.06537117,
+          "stop_loss_price": 758.9571,
+          "take_profit_price": 784.2857,
+          "opened_at": 1790780828.625642,
           "algo_id": "",
-          "highest_price_seen": 122.2,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "0a3c9ea2",
-          "entry_price": 0.09735,
-          "quantity": 518.02954738,
-          "stop_loss_price": 0.0958,
-          "take_profit_price": 0.1005,
-          "opened_at": 1790773621.3826084,
-          "algo_id": "",
-          "highest_price_seen": 0.09735,
+          "highest_price_seen": 767.4,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -156,7 +119,7 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 504.23264116133964,
+    "current_balance": 501.4870243745896,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -169,7 +132,9 @@
       -0.386185720799998,
       -0.31241673600000447,
       -2.172449731936401,
-      -2.066166792539997
+      -2.066166792539997,
+      -1.4513851616000042,
+      -1.2942316251500012
     ],
     "open_positions": {
       "BTC-USDT": [
@@ -186,30 +151,16 @@
           "margin_usd": 0.0
         }
       ],
-      "SOL-USDT": [
+      "BNB-USDT": [
         {
-          "position_id": "7e5cdde0",
-          "entry_price": 122.29,
-          "quantity": 0.41232533,
-          "stop_loss_price": 120.5886,
-          "take_profit_price": 125.6929,
-          "opened_at": 1790773610.01439,
+          "position_id": "89f2e5e5",
+          "entry_price": 767.4,
+          "quantity": 0.06534884,
+          "stop_loss_price": 758.9571,
+          "take_profit_price": 784.2857,
+          "opened_at": 1790780815.6607175,
           "algo_id": "",
-          "highest_price_seen": 122.29,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "8ff0e570",
-          "entry_price": 0.0974,
-          "quantity": 517.69265006,
-          "stop_loss_price": 0.0958,
-          "take_profit_price": 0.1005,
-          "opened_at": 1790773613.3431625,
-          "algo_id": "",
-          "highest_price_seen": 0.0974,
+          "highest_price_seen": 767.4,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -229,7 +180,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 508.16890323494505,
+    "current_balance": 505.509375880697,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -243,7 +194,9 @@
       -0.3124313760000044,
       0.8815120900000017,
       0.9648878120000018,
-      -2.172551405115001
+      -2.172551405115001,
+      -1.3806225644000032,
+      -1.278904789848004
     ],
     "open_positions": {
       "BTC-USDT": [
@@ -260,30 +213,16 @@
           "margin_usd": 0.0
         }
       ],
-      "SOL-USDT": [
+      "BNB-USDT": [
         {
-          "position_id": "4a2863d4",
-          "entry_price": 122.2,
-          "quantity": 0.41585017,
-          "stop_loss_price": 120.4986,
-          "take_profit_price": 125.6029,
-          "opened_at": 1790773617.4311304,
+          "position_id": "aa1757a2",
+          "entry_price": 767.4,
+          "quantity": 0.065873,
+          "stop_loss_price": 758.9571,
+          "take_profit_price": 784.2857,
+          "opened_at": 1790780826.9227397,
           "algo_id": "",
-          "highest_price_seen": 122.2,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "f0076bbe",
-          "entry_price": 0.09735,
-          "quantity": 522.00195504,
-          "stop_loss_price": 0.0958,
-          "take_profit_price": 0.1005,
-          "opened_at": 1790773619.96502,
-          "algo_id": "",
-          "highest_price_seen": 0.09735,
+          "highest_price_seen": 767.4,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -292,41 +231,29 @@
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
-    "current_balance": 496.9693117157113,
+    "current_balance": 494.25122428337994,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       -0.45113277177999567,
       -2.1040189125086983,
-      -0.4755366
+      -0.4755366,
+      -1.446733804000001,
+      -1.2713536283313487
     ],
     "open_positions": {
-      "SOL-USDT": [
+      "BNB-USDT": [
         {
-          "position_id": "ab6cfd3e",
-          "entry_price": 122.29,
-          "quantity": 0.4063859,
-          "stop_loss_price": 120.5886,
-          "take_profit_price": 125.6929,
-          "opened_at": 1790773610.782587,
+          "position_id": "e7befabf",
+          "entry_price": 767.4,
+          "quantity": 0.06440595,
+          "stop_loss_price": 758.9571,
+          "take_profit_price": 784.2857,
+          "opened_at": 1790780816.6510475,
           "algo_id": "",
-          "highest_price_seen": 122.29,
+          "highest_price_seen": 767.4,
           "leverage": 5,
-          "margin_usd": 9.94
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "557542dc",
-          "entry_price": 0.0974,
-          "quantity": 510.23543297,
-          "stop_loss_price": 0.0958,
-          "take_profit_price": 0.1005,
-          "opened_at": 1790773613.6405823,
-          "algo_id": "",
-          "highest_price_seen": 0.0974,
-          "leverage": 5,
-          "margin_usd": 9.94
+          "margin_usd": 9.89
         }
       ]
     }
@@ -345,42 +272,30 @@
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
-    "current_balance": 496.9495417450289,
+    "current_balance": 494.31601090478716,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       -0.0066868249999999995,
       -0.45113277177999567,
       -2.121212121191098,
-      -0.4714265370000035
+      -0.4714265370000035,
+      -1.3867413581999986,
+      -1.2467894820417098
     ],
     "open_positions": {
-      "SOL-USDT": [
+      "BNB-USDT": [
         {
-          "position_id": "0c5a865c",
-          "entry_price": 122.2,
-          "quantity": 0.40666902,
-          "stop_loss_price": 120.4986,
-          "take_profit_price": 125.6029,
-          "opened_at": 1790773617.718363,
+          "position_id": "be860179",
+          "entry_price": 767.4,
+          "quantity": 0.06441439,
+          "stop_loss_price": 758.9571,
+          "take_profit_price": 784.2857,
+          "opened_at": 1790780827.3926973,
           "algo_id": "",
-          "highest_price_seen": 122.2,
+          "highest_price_seen": 767.4,
           "leverage": 5,
-          "margin_usd": 9.94
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "081133ba",
-          "entry_price": 0.09735,
-          "quantity": 510.47718721,
-          "stop_loss_price": 0.0958,
-          "take_profit_price": 0.1005,
-          "opened_at": 1790773620.2537394,
-          "algo_id": "",
-          "highest_price_seen": 0.09735,
-          "leverage": 5,
-          "margin_usd": 9.94
+          "margin_usd": 9.89
         }
       ]
     }
