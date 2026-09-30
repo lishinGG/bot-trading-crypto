@@ -61,11 +61,10 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.6583490310936,
+    "current_balance": 501.93199311909365,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      0.2269993091000015,
       1.7535314174256036,
       -0.5874671519999953,
       -0.37233218259999873,
@@ -84,23 +83,10 @@
       -0.020095214999996273,
       -2.163219200728601,
       -1.3742429480999994,
-      -1.2691723910810042
+      -1.2691723910810042,
+      0.27364408800000173
     ],
     "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "d1a70215",
-          "entry_price": 84000.0,
-          "quantity": 0.00060036,
-          "stop_loss_price": 84585.9607,
-          "take_profit_price": 85525.4786,
-          "opened_at": 1790701367.3008995,
-          "algo_id": "",
-          "highest_price_seen": 85348.7,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
       "BNB-USDT": [
         {
           "position_id": "be429066",
