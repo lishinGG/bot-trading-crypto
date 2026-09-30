@@ -266,3 +266,17 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-29T18:03:50.942651+00:00,trend_following__futures,BTC-USDT,close,83197.0,0.0005922,-0.48,stop_loss [b54c80f2]
 2026-09-29T18:03:54.302801+00:00,adaptive_hybrid__futures,BTC-USDT,close,83203.9,0.00059217,-0.47,stop_loss [d8717998]
 2026-09-30T00:01:46.914685+00:00,trend_following__shadow,LINK-USDT,close,14.567,3.34873062,-2.07,stop_loss [5bfe25db]
+2026-09-30T13:06:49.300388+00:00,trend_following,BTC-USDT,trailing_stop_update,85483.1,0.00060065,0.0,Nouveau SL=84720.3607 [df678aaf]
+2026-09-30T13:06:50.014465+00:00,trend_following__shadow,SOL-USDT,buy,122.29,0.41232533,0.0,"score=90 (Niveau 1 seul, sans IA) [7e5cdde0]"
+2026-09-30T13:06:51.450341+00:00,trend_following__futures,SOL-USDT,buy,122.29,0.4063859,0.0,score=90 | levier=5x | marge=9.94$ | SL=120.5886 TP=125.6929 [ab6cfd3e]
+2026-09-30T13:06:52.254835+00:00,trend_following,SOL-USDT,buy,122.29,0.41258009,0.0,score=90 | SL=120.5886 TP=125.6929 [6591f06c]
+2026-09-30T13:06:53.343236+00:00,trend_following__shadow,DOGE-USDT,buy,0.0974,517.69265006,0.0,"score=90 (Niveau 1 seul, sans IA) [8ff0e570]"
+2026-09-30T13:06:54.140733+00:00,trend_following__futures,DOGE-USDT,buy,0.0974,510.23543297,0.0,score=90 | levier=5x | marge=9.94$ | SL=0.0958 TP=0.1005 [557542dc]
+2026-09-30T13:06:54.977426+00:00,trend_following,DOGE-USDT,buy,0.0974,518.01251469,0.0,score=90 | SL=0.0958 TP=0.1005 [94d315f1]
+2026-09-30T13:06:56.711719+00:00,adaptive_hybrid,BTC-USDT,trailing_stop_update,85348.7,0.00060036,0.0,Nouveau SL=84585.9607 [d1a70215]
+2026-09-30T13:06:57.431202+00:00,adaptive_hybrid__shadow,SOL-USDT,buy,122.2,0.41585017,0.0,"score=90 (Niveau 1 seul, sans IA) [4a2863d4]"
+2026-09-30T13:06:58.098445+00:00,adaptive_hybrid__futures,SOL-USDT,buy,122.2,0.40666902,0.0,score=90 | levier=5x | marge=9.94$ | SL=120.4986 TP=125.6029 [0c5a865c]
+2026-09-30T13:06:58.944267+00:00,adaptive_hybrid,SOL-USDT,buy,122.2,0.41268557,0.0,score=90 | SL=120.4986 TP=125.6029 [3676c96c]
+2026-09-30T13:06:59.965091+00:00,adaptive_hybrid__shadow,DOGE-USDT,buy,0.09735,522.00195504,0.0,"score=90 (Niveau 1 seul, sans IA) [f0076bbe]"
+2026-09-30T13:07:00.625621+00:00,adaptive_hybrid__futures,DOGE-USDT,buy,0.09735,510.47718721,0.0,score=90 | levier=5x | marge=9.94$ | SL=0.0958 TP=0.1005 [081133ba]
+2026-09-30T13:07:01.618544+00:00,adaptive_hybrid,DOGE-USDT,buy,0.09735,518.02954738,0.0,score=90 | SL=0.0958 TP=0.1005 [0a3c9ea2]
