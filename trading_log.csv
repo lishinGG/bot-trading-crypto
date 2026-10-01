@@ -308,3 +308,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-01T08:03:56.735435+00:00,trend_following,XLM-USDT,close,0.22415,218.91183949,-1.15,stop_loss [193c9b4c]
 2026-10-01T08:03:58.296109+00:00,trend_following__shadow,XLM-USDT,close,0.22415,218.58906127,-1.15,stop_loss [359a0109]
 2026-10-01T08:03:59.091693+00:00,trend_following__futures,XLM-USDT,close,0.22362,215.43510779,-1.25,stop_loss [ba0a6fb0]
+2026-10-01T10:04:37.222102+00:00,trend_following__shadow,BTC-USDT,close,84056.7,0.00060274,0.03,invalidation [a664b0e7]
+2026-10-01T10:04:42.821823+00:00,adaptive_hybrid__shadow,BTC-USDT,close,84056.7,0.00060496,0.03,invalidation [01ac6898]
