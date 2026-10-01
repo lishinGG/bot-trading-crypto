@@ -310,3 +310,9 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-01T08:03:59.091693+00:00,trend_following__futures,XLM-USDT,close,0.22362,215.43510779,-1.25,stop_loss [ba0a6fb0]
 2026-10-01T10:04:37.222102+00:00,trend_following__shadow,BTC-USDT,close,84056.7,0.00060274,0.03,invalidation [a664b0e7]
 2026-10-01T10:04:42.821823+00:00,adaptive_hybrid__shadow,BTC-USDT,close,84056.7,0.00060496,0.03,invalidation [01ac6898]
+2026-10-01T19:02:33.404408+00:00,trend_following__shadow,BTC-USDT,buy,85022.9,0.00058851,0.0,"score=70 (Niveau 1 seul, sans IA) [bef0987e]"
+2026-10-01T19:02:35.059160+00:00,trend_following__futures,BTC-USDT,buy,85022.9,0.00057985,0.0,score=70 | levier=5x | marge=9.86$ | SL=84302.1286 TP=86464.4429 [8193ddc4]
+2026-10-01T19:02:36.001053+00:00,trend_following,BTC-USDT,buy,85022.9,0.00058934,0.0,score=70 | SL=84302.1286 TP=86464.4429 [e7c9a4ee]
+2026-10-01T19:02:39.555796+00:00,adaptive_hybrid__shadow,BTC-USDT,buy,85182.7,0.00059348,0.0,"score=70 (Niveau 1 seul, sans IA) [17bc0d30]"
+2026-10-01T19:02:40.263977+00:00,adaptive_hybrid__futures,BTC-USDT,buy,85182.7,0.0005803,0.0,score=70 | levier=5x | marge=9.89$ | SL=84461.9286 TP=86624.2429 [40a0be9b]
+2026-10-01T19:02:41.224874+00:00,adaptive_hybrid,BTC-USDT,buy,85182.7,0.00058924,0.0,score=70 | SL=84461.9286 TP=86624.2429 [6d791cc8]

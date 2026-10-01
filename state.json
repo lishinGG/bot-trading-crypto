@@ -40,6 +40,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "e7c9a4ee",
+          "entry_price": 85022.9,
+          "quantity": 0.00058934,
+          "stop_loss_price": 84302.1286,
+          "take_profit_price": 86464.4429,
+          "opened_at": 1790881355.768313,
+          "algo_id": "",
+          "highest_price_seen": 85022.9,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -101,6 +115,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "6d791cc8",
+          "entry_price": 85182.7,
+          "quantity": 0.00058924,
+          "stop_loss_price": 84461.9286,
+          "take_profit_price": 86624.2429,
+          "opened_at": 1790881360.9988801,
+          "algo_id": "",
+          "highest_price_seen": 85182.7,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -136,6 +164,20 @@
           "opened_at": 1790780815.6607175,
           "algo_id": "",
           "highest_price_seen": 767.4,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "bef0987e",
+          "entry_price": 85022.9,
+          "quantity": 0.00058851,
+          "stop_loss_price": 84302.1286,
+          "take_profit_price": 86464.4429,
+          "opened_at": 1790881353.404315,
+          "algo_id": "",
+          "highest_price_seen": 85022.9,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -188,6 +230,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "17bc0d30",
+          "entry_price": 85182.7,
+          "quantity": 0.00059348,
+          "stop_loss_price": 84461.9286,
+          "take_profit_price": 86624.2429,
+          "opened_at": 1790881359.5557082,
+          "algo_id": "",
+          "highest_price_seen": 85182.7,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -217,6 +273,20 @@
           "highest_price_seen": 767.4,
           "leverage": 5,
           "margin_usd": 9.89
+        }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "8193ddc4",
+          "entry_price": 85022.9,
+          "quantity": 0.00057985,
+          "stop_loss_price": 84302.1286,
+          "take_profit_price": 86464.4429,
+          "opened_at": 1790881354.3833094,
+          "algo_id": "",
+          "highest_price_seen": 85022.9,
+          "leverage": 5,
+          "margin_usd": 9.86
         }
       ]
     }
@@ -257,6 +327,20 @@
           "opened_at": 1790780827.3926973,
           "algo_id": "",
           "highest_price_seen": 767.4,
+          "leverage": 5,
+          "margin_usd": 9.89
+        }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "40a0be9b",
+          "entry_price": 85182.7,
+          "quantity": 0.0005803,
+          "stop_loss_price": 84461.9286,
+          "take_profit_price": 86624.2429,
+          "opened_at": 1790881359.887281,
+          "algo_id": "",
+          "highest_price_seen": 85182.7,
           "leverage": 5,
           "margin_usd": 9.89
         }
