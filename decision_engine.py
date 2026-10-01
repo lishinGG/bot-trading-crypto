@@ -3,7 +3,7 @@ from ai_providers import ask_ai_opinion
 import config
 
 
-def build_ai_context(symbol, strategy_name, signal, current_price, market_context="", leverage=None):
+def build_ai_context(symbol, strategy_name, signal, current_price, market_context="", leverage=None, memory_context=""):
     reasons_text = "\n".join(f"  - {r}" for r in signal.reasons)
     context = f"""Crypto : {symbol}
 Stratégie : {strategy_name}
@@ -14,6 +14,8 @@ Facteurs :
 {reasons_text}"""
     if market_context:
         context += f"\n\nContexte plus long terme:\n{market_context}"
+    if memory_context:
+        context += f"\n\n{memory_context}"
     if leverage:
         context += (f"\n\nATTENTION : ce trade utilise un LEVIER de {leverage}x (contrat Futures perpétuel, "
                      f"pas du spot). Le risque en dollars est calculé pour rester identique à un trade spot "
@@ -22,12 +24,12 @@ Facteurs :
     return context
 
 
-def evaluate(symbol, strategy_name, signal, current_price, market_context="", leverage=None):
+def evaluate(symbol, strategy_name, signal, current_price, market_context="", leverage=None, memory_context=""):
     if not signal.is_actionable:
         return signal
     if not config.USE_AI_LAYER:
         return signal
-    context = build_ai_context(symbol, strategy_name, signal, current_price, market_context, leverage)
+    context = build_ai_context(symbol, strategy_name, signal, current_price, market_context, leverage, memory_context)
     ai_opinion = ask_ai_opinion(context)
     if ai_opinion is None:
         signal.reasons.append("[IA indisponible -- Niveau 1 uniquement]")
