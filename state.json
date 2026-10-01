@@ -26,6 +26,9 @@
       -1.2950312867250011,
       -1.1536653941123054
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 501.07387675985865,
+    "profit_ceiling_hit": false,
     "open_positions": {
       "BNB-USDT": [
         {
@@ -72,6 +75,9 @@
       -0.04084934699999879,
       -0.054267407999996346
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 497.3201756732518,
+    "profit_ceiling_hit": false,
     "open_positions": {}
   },
   "adaptive_hybrid": {
@@ -101,6 +107,9 @@
       -1.2691723910810042,
       0.27364408800000173
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 501.93199311909365,
+    "profit_ceiling_hit": false,
     "open_positions": {
       "BNB-USDT": [
         {
@@ -153,6 +162,9 @@
       -1.1519643528929053,
       0.03417535799999825
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 500.3692353796967,
+    "profit_ceiling_hit": false,
     "open_positions": {
       "BNB-USDT": [
         {
@@ -193,6 +205,9 @@
       0.8706400400000034,
       0.9469873700000053
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 501.81762741,
+    "profit_ceiling_hit": false,
     "open_positions": {}
   },
   "adaptive_hybrid__shadow": {
@@ -216,6 +231,9 @@
       -1.278904789848004,
       0.03430123199999824
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 505.543677112697,
+    "profit_ceiling_hit": false,
     "open_positions": {
       "BNB-USDT": [
         {
@@ -260,6 +278,9 @@
       -1.2713536283313487,
       -1.2495236251819999
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 493.00170065819793,
+    "profit_ceiling_hit": false,
     "open_positions": {
       "BNB-USDT": [
         {
@@ -301,6 +322,9 @@
       0.043124249899997295,
       -0.03584667300000245
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 499.85423561690004,
+    "profit_ceiling_hit": false,
     "open_positions": {}
   },
   "adaptive_hybrid__futures": {
@@ -316,6 +340,9 @@
       -1.3867413581999986,
       -1.2467894820417098
     ],
+    "month_label": "2026-10",
+    "month_start_balance": 494.31601090478716,
+    "profit_ceiling_hit": false,
     "open_positions": {
       "BNB-USDT": [
         {
