@@ -303,3 +303,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-01T02:02:48.303276+00:00,trend_following__shadow,XLM-USDT,buy,0.22942,218.58906127,0.0,"score=90 (Niveau 1 seul, sans IA) [359a0109]"
 2026-10-01T02:02:50.467203+00:00,trend_following__futures,XLM-USDT,buy,0.22942,215.43510779,0.0,score=90 | levier=5x | marge=9.89$ | SL=0.2244 TP=0.2394 [ba0a6fb0]
 2026-10-01T02:02:51.405336+00:00,trend_following,XLM-USDT,buy,0.22942,218.91183949,0.0,score=90 | SL=0.2244 TP=0.2394 [193c9b4c]
+2026-10-01T06:04:40.999899+00:00,trend_following,BNB-USDT,trailing_stop_update,771.8,0.06544534,0.0,Nouveau SL=763.3571 [93e8bde5]
+2026-10-01T06:04:45.913685+00:00,adaptive_hybrid,BNB-USDT,trailing_stop_update,771.8,0.06537117,0.0,Nouveau SL=763.3571 [be429066]
