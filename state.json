@@ -39,6 +39,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "193c9b4c",
+          "entry_price": 0.22942,
+          "quantity": 218.91183949,
+          "stop_loss_price": 0.2244,
+          "take_profit_price": 0.2394,
+          "opened_at": 1790820171.0657618,
+          "algo_id": "",
+          "highest_price_seen": 0.22942,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -150,6 +164,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "359a0109",
+          "entry_price": 0.22942,
+          "quantity": 218.58906127,
+          "stop_loss_price": 0.2244,
+          "take_profit_price": 0.2394,
+          "opened_at": 1790820168.3031805,
+          "algo_id": "",
+          "highest_price_seen": 0.22942,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -238,6 +266,20 @@
           "opened_at": 1790780816.6510475,
           "algo_id": "",
           "highest_price_seen": 767.4,
+          "leverage": 5,
+          "margin_usd": 9.89
+        }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "ba0a6fb0",
+          "entry_price": 0.22942,
+          "quantity": 215.43510779,
+          "stop_loss_price": 0.2244,
+          "take_profit_price": 0.2394,
+          "opened_at": 1790820169.525239,
+          "algo_id": "",
+          "highest_price_seen": 0.22942,
           "leverage": 5,
           "margin_usd": 9.89
         }

@@ -300,3 +300,6 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-09-30T15:07:08.060805+00:00,adaptive_hybrid__futures,BNB-USDT,buy,767.4,0.06441439,0.0,score=55 | levier=5x | marge=9.89$ | SL=758.9571 TP=784.2857 [be860179]
 2026-09-30T15:07:09.067827+00:00,adaptive_hybrid,BNB-USDT,buy,767.4,0.06537117,0.0,score=55 | SL=758.9571 TP=784.2857 [be429066]
 2026-09-30T16:04:37.048597+00:00,adaptive_hybrid,BTC-USDT,close,84455.8,0.00060036,0.27,stop_loss [d1a70215]
+2026-10-01T02:02:48.303276+00:00,trend_following__shadow,XLM-USDT,buy,0.22942,218.58906127,0.0,"score=90 (Niveau 1 seul, sans IA) [359a0109]"
+2026-10-01T02:02:50.467203+00:00,trend_following__futures,XLM-USDT,buy,0.22942,215.43510779,0.0,score=90 | levier=5x | marge=9.89$ | SL=0.2244 TP=0.2394 [ba0a6fb0]
+2026-10-01T02:02:51.405336+00:00,trend_following,XLM-USDT,buy,0.22942,218.91183949,0.0,score=90 | SL=0.2244 TP=0.2394 [193c9b4c]
