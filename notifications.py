@@ -54,3 +54,9 @@ def notify_strategy_paused(strategy_name: str):
     text = (f"⏸️ STRATÉGIE EN PAUSE\n{strategy_name} vient d'être mise en pause "
             f"suite à une dégradation de sa performance récente.")
     send_telegram_message(text)
+
+
+def notify_profit_ceiling(strategy_name: str):
+    text = (f"🎯 PLAFOND DE PROFIT ATTEINT\n{strategy_name} a atteint son objectif de +15% "
+            f"pour ce mois. Les gains sont verrouillés : plus de nouvelles positions jusqu'au mois prochain.")
+    send_telegram_message(text)
