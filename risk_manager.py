@@ -11,6 +11,7 @@ MAX_POSITION_PCT = 0.10
 CIRCUIT_BREAKER_LOSS_PCT = 0.20
 MAX_OPEN_POSITIONS_PER_SYMBOL = 2
 MAX_TOTAL_OPEN_POSITIONS = 3
+MONTHLY_PROFIT_CEILING_PCT = 0.15   # +15% sur le mois -> arrêt de sécurité (verrouille les gains)
 
 ATR_STOP_LOSS_MULTIPLIER = 1.5
 ATR_TAKE_PROFIT_MULTIPLIER = 3.0
@@ -49,7 +50,7 @@ def _clamp(value, low, high):
 
 
 class RiskManager:
-    def __init__(self, strategy_name, starting_capital):
+    def __init__(self, strategy_name, starting_capital, month_label=None, month_start_balance=None, profit_ceiling_hit=False):
         self.strategy_name = strategy_name
         self.starting_capital = starting_capital
         self.current_balance = starting_capital
@@ -57,6 +58,36 @@ class RiskManager:
         self.trading_halted = False
         self.strategy_paused = False
         self.pnl_history = []
+        # Suivi du plafond de profit MENSUEL -- référence qui se
+        # réinitialise à chaque nouveau mois calendaire (voir
+        # check_monthly_rollover), indépendamment du capital de départ
+        # d'origine du bot.
+        self.month_label = month_label
+        self.month_start_balance = month_start_balance if month_start_balance is not None else starting_capital
+        self.profit_ceiling_hit = profit_ceiling_hit
+
+    def check_monthly_rollover(self, current_month_label: str) -> bool:
+        """
+        Si le mois calendaire (UTC) a changé depuis la dernière exécution,
+        réinitialise la référence de calcul du plafond de profit sur le
+        solde ACTUEL (nouveau départ pour le nouveau mois) et lève le
+        plafond éventuellement déclenché le mois précédent.
+        Retourne True si un changement de mois vient d'être détecté.
+        """
+        if self.month_label != current_month_label:
+            self.month_label = current_month_label
+            self.month_start_balance = self.current_balance
+            self.profit_ceiling_hit = False
+            return True
+        return False
+
+    def check_profit_ceiling(self) -> bool:
+        if self.month_start_balance <= 0:
+            return self.profit_ceiling_hit
+        gain_pct = (self.current_balance - self.month_start_balance) / self.month_start_balance
+        if gain_pct >= MONTHLY_PROFIT_CEILING_PCT:
+            self.profit_ceiling_hit = True
+        return self.profit_ceiling_hit
 
     def check_circuit_breaker(self):
         loss_pct = (self.starting_capital - self.current_balance) / self.starting_capital
@@ -67,6 +98,7 @@ class RiskManager:
     def update_balance(self, new_balance):
         self.current_balance = new_balance
         self.check_circuit_breaker()
+        self.check_profit_ceiling()
 
     def record_trade_result(self, pnl):
         self.pnl_history = performance_tracker.update_pnl_history(self.pnl_history, pnl)
@@ -85,6 +117,8 @@ class RiskManager:
             return False, "Circuit breaker actif : perte cumulée >= seuil"
         if self.strategy_paused:
             return False, "Stratégie en pause : performance récente dégradée"
+        if self.profit_ceiling_hit:
+            return False, f"Plafond de profit mensuel atteint (+{MONTHLY_PROFIT_CEILING_PCT*100:.0f}%) : gains verrouillés jusqu'au mois prochain"
         if self._total_position_count() >= MAX_TOTAL_OPEN_POSITIONS:
             return False, f"Limite d'exposition globale atteinte ({MAX_TOTAL_OPEN_POSITIONS} positions max)"
         if self._position_count(symbol) >= MAX_OPEN_POSITIONS_PER_SYMBOL:
