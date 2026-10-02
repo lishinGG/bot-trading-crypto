@@ -1,11 +1,10 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 501.07387675985865,
+    "current_balance": 502.11694962585864,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      0.2269993091000015,
       1.7535314174256036,
       -0.2498801549999978,
       -0.6416934695000021,
@@ -24,7 +23,8 @@
       0.43066604999999997,
       -1.4522819168000043,
       -1.2950312867250011,
-      -1.1536653941123054
+      -1.1536653941123054,
+      1.0430728660000053
     ],
     "month_label": "2026-10",
     "month_start_balance": 501.07387675985865,
@@ -40,20 +40,6 @@
           "opened_at": 1790780817.844054,
           "algo_id": "",
           "highest_price_seen": 776.5,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "BTC-USDT": [
-        {
-          "position_id": "e7c9a4ee",
-          "entry_price": 85022.9,
-          "quantity": 0.00058934,
-          "stop_loss_price": 84797.6286,
-          "take_profit_price": 86464.4429,
-          "opened_at": 1790881355.768313,
-          "algo_id": "",
-          "highest_price_seen": 85518.4,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -82,11 +68,10 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.93199311909365,
+    "current_balance": 502.78220751509366,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.7535314174256036,
       -0.5874671519999953,
       -0.37233218259999873,
       -0.1936229400000011,
@@ -105,7 +90,8 @@
       -2.163219200728601,
       -1.3742429480999994,
       -1.2691723910810042,
-      0.27364408800000173
+      0.27364408800000173,
+      0.8502143960000051
     ],
     "month_label": "2026-10",
     "month_start_balance": 501.93199311909365,
@@ -124,26 +110,12 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
-      ],
-      "BTC-USDT": [
-        {
-          "position_id": "6d791cc8",
-          "entry_price": 85182.7,
-          "quantity": 0.00058924,
-          "stop_loss_price": 84461.9286,
-          "take_profit_price": 86624.2429,
-          "opened_at": 1790881360.9988801,
-          "algo_id": "",
-          "highest_price_seen": 85182.7,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
       ]
     }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 500.3692353796967,
+    "current_balance": 501.4108392286967,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -160,7 +132,8 @@
       -1.4513851616000042,
       -1.2942316251500012,
       -1.1519643528929053,
-      0.03417535799999825
+      0.03417535799999825,
+      1.041603849000005
     ],
     "month_label": "2026-10",
     "month_start_balance": 500.3692353796967,
@@ -176,20 +149,6 @@
           "opened_at": 1790780815.6607175,
           "algo_id": "",
           "highest_price_seen": 767.4,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "BTC-USDT": [
-        {
-          "position_id": "bef0987e",
-          "entry_price": 85022.9,
-          "quantity": 0.00058851,
-          "stop_loss_price": 84302.1286,
-          "take_profit_price": 86464.4429,
-          "opened_at": 1790881353.404315,
-          "algo_id": "",
-          "highest_price_seen": 85022.9,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -212,7 +171,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 505.543677112697,
+    "current_balance": 506.400009404697,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -229,7 +188,8 @@
       -2.172551405115001,
       -1.3806225644000032,
       -1.278904789848004,
-      0.03430123199999824
+      0.03430123199999824,
+      0.8563322920000052
     ],
     "month_label": "2026-10",
     "month_start_balance": 505.543677112697,
@@ -248,26 +208,12 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
-      ],
-      "BTC-USDT": [
-        {
-          "position_id": "17bc0d30",
-          "entry_price": 85182.7,
-          "quantity": 0.00059348,
-          "stop_loss_price": 84461.9286,
-          "take_profit_price": 86624.2429,
-          "opened_at": 1790881359.5557082,
-          "algo_id": "",
-          "highest_price_seen": 85182.7,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
       ]
     }
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
-    "current_balance": 493.00170065819793,
+    "current_balance": 493.91392067819794,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -276,7 +222,8 @@
       -0.4755366,
       -1.446733804000001,
       -1.2713536283313487,
-      -1.2495236251819999
+      -1.2495236251819999,
+      0.9122200200000068
     ],
     "month_label": "2026-10",
     "month_start_balance": 493.00170065819793,
@@ -294,20 +241,6 @@
           "highest_price_seen": 776.3,
           "leverage": 5,
           "margin_usd": 9.89
-        }
-      ],
-      "BTC-USDT": [
-        {
-          "position_id": "8193ddc4",
-          "entry_price": 85022.9,
-          "quantity": 0.00057985,
-          "stop_loss_price": 84808.6386,
-          "take_profit_price": 86464.4429,
-          "opened_at": 1790881354.3833094,
-          "algo_id": "",
-          "highest_price_seen": 85529.41,
-          "leverage": 5,
-          "margin_usd": 9.86
         }
       ]
     }
@@ -363,11 +296,11 @@
           "position_id": "40a0be9b",
           "entry_price": 85182.7,
           "quantity": 0.0005803,
-          "stop_loss_price": 84461.9286,
+          "stop_loss_price": 85880.4286,
           "take_profit_price": 86624.2429,
           "opened_at": 1790881359.887281,
           "algo_id": "",
-          "highest_price_seen": 85182.7,
+          "highest_price_seen": 86601.2,
           "leverage": 5,
           "margin_usd": 9.89
         }
