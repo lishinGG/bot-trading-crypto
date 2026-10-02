@@ -319,3 +319,8 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-02T02:03:15.807964+00:00,trend_following__futures,BNB-USDT,trailing_stop_update,772.2,0.06440595,0.0,Nouveau SL=763.7571 [e7befabf]
 2026-10-02T02:03:21.466185+00:00,adaptive_hybrid__futures,BNB-USDT,trailing_stop_update,771.9,0.06441439,0.0,Nouveau SL=763.4571 [be860179]
 2026-10-02T03:03:08.470697+00:00,trend_following,BTC-USDT,trailing_stop_update,85518.4,0.00058934,0.0,Nouveau SL=84797.6286 [e7c9a4ee]
+2026-10-02T04:02:43.331137+00:00,trend_following,BNB-USDT,trailing_stop_update,776.5,0.06544534,0.0,Nouveau SL=772.4571 [93e8bde5]
+2026-10-02T04:02:44.988589+00:00,trend_following__futures,BNB-USDT,trailing_stop_update,776.3,0.06440595,0.0,Nouveau SL=772.6571 [e7befabf]
+2026-10-02T04:02:45.372039+00:00,trend_following__futures,BTC-USDT,trailing_stop_update,85529.41,0.00057985,0.0,Nouveau SL=84808.6386 [8193ddc4]
+2026-10-02T04:02:48.555029+00:00,adaptive_hybrid,BNB-USDT,trailing_stop_update,776.4,0.06537117,0.0,Nouveau SL=772.3571 [be429066]
+2026-10-02T04:02:50.112969+00:00,adaptive_hybrid__futures,BNB-USDT,trailing_stop_update,775.9,0.06441439,0.0,Nouveau SL=771.9571 [be860179]
