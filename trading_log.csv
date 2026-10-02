@@ -318,3 +318,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-01T19:02:41.224874+00:00,adaptive_hybrid,BTC-USDT,buy,85182.7,0.00058924,0.0,score=70 | SL=84461.9286 TP=86624.2429 [6d791cc8]
 2026-10-02T02:03:15.807964+00:00,trend_following__futures,BNB-USDT,trailing_stop_update,772.2,0.06440595,0.0,Nouveau SL=763.7571 [e7befabf]
 2026-10-02T02:03:21.466185+00:00,adaptive_hybrid__futures,BNB-USDT,trailing_stop_update,771.9,0.06441439,0.0,Nouveau SL=763.4571 [be860179]
+2026-10-02T03:03:08.470697+00:00,trend_following,BTC-USDT,trailing_stop_update,85518.4,0.00058934,0.0,Nouveau SL=84797.6286 [e7c9a4ee]

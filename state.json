@@ -49,11 +49,11 @@
           "position_id": "e7c9a4ee",
           "entry_price": 85022.9,
           "quantity": 0.00058934,
-          "stop_loss_price": 84302.1286,
+          "stop_loss_price": 84797.6286,
           "take_profit_price": 86464.4429,
           "opened_at": 1790881355.768313,
           "algo_id": "",
-          "highest_price_seen": 85022.9,
+          "highest_price_seen": 85518.4,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
