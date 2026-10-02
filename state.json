@@ -1,11 +1,10 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 500.7346365059557,
+    "current_balance": 500.5513895539557,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.6416934695000021,
       -0.1936533480000011,
       0.8825389005096018,
       -0.2920707529999987,
@@ -24,27 +23,13 @@
       -1.1536653941123054,
       1.0430728660000053,
       -0.5281966592000005,
-      -0.8541164607029993
+      -0.8541164607029993,
+      -0.18324695199999705
     ],
     "month_label": "2026-10",
     "month_start_balance": 501.07387675985865,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "93e8bde5",
-          "entry_price": 767.4,
-          "quantity": 0.06544534,
-          "stop_loss_price": 772.4571,
-          "take_profit_price": 784.2857,
-          "opened_at": 1790780817.844054,
-          "algo_id": "",
-          "highest_price_seen": 776.5,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -68,11 +53,10 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 501.5265789795736,
+    "current_balance": 501.34353970357364,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.1936229400000011,
       1.058902494753602,
       -0.03745171799999905,
       -0.4090957680000012,
@@ -91,27 +75,13 @@
       0.27364408800000173,
       0.8502143960000051,
       -0.4262970592000005,
-      -0.8293314763200021
+      -0.8293314763200021,
+      -0.18303927599999703
     ],
     "month_label": "2026-10",
     "month_start_balance": 501.93199311909365,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "be429066",
-          "entry_price": 767.4,
-          "quantity": 0.06537117,
-          "stop_loss_price": 772.3571,
-          "take_profit_price": 784.2857,
-          "opened_at": 1790780828.625642,
-          "algo_id": "",
-          "highest_price_seen": 776.4,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
@@ -173,7 +143,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 505.56471042010503,
+    "current_balance": 504.289122645105,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -192,7 +162,8 @@
       -1.278904789848004,
       0.03430123199999824,
       0.8563322920000052,
-      -0.8352989845920021
+      -0.8352989845920021,
+      -1.2755877750000009
     ],
     "month_label": "2026-10",
     "month_start_balance": 505.543677112697,
@@ -211,26 +182,12 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "89a21d74",
-          "entry_price": 121.48,
-          "quantity": 0.41685875,
-          "stop_loss_price": 119.6479,
-          "take_profit_price": 125.1443,
-          "opened_at": 1790924706.1139877,
-          "algo_id": "",
-          "highest_price_seen": 121.48,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
       ]
     }
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
-    "current_balance": 492.5501311370304,
+    "current_balance": 492.3311509070304,
     "trading_halted": false,
     "strategy_paused": true,
     "pnl_history": [
@@ -242,27 +199,13 @@
       -1.2495236251819999,
       0.9122200200000068,
       -0.5236266864000025,
-      -0.8401628547674993
+      -0.8401628547674993,
+      -0.21898022999999855
     ],
     "month_label": "2026-10",
     "month_start_balance": 493.00170065819793,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "e7befabf",
-          "entry_price": 767.4,
-          "quantity": 0.06440595,
-          "stop_loss_price": 772.6571,
-          "take_profit_price": 784.2857,
-          "opened_at": 1790780816.6510475,
-          "algo_id": "",
-          "highest_price_seen": 776.3,
-          "leverage": 5,
-          "margin_usd": 9.89
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion__futures": {
     "starting_capital": 500.0,
@@ -281,7 +224,7 @@
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
-    "current_balance": 493.43115680537517,
+    "current_balance": 493.23791363537515,
     "trading_halted": false,
     "strategy_paused": true,
     "pnl_history": [
@@ -293,26 +236,12 @@
       -1.2467894820417098,
       0.39953655,
       -0.4479643630000035,
-      -0.8364262864120013
+      -0.8364262864120013,
+      -0.19324317000000002
     ],
     "month_label": "2026-10",
     "month_start_balance": 494.31601090478716,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "be860179",
-          "entry_price": 767.4,
-          "quantity": 0.06441439,
-          "stop_loss_price": 771.9571,
-          "take_profit_price": 784.2857,
-          "opened_at": 1790780827.3926973,
-          "algo_id": "",
-          "highest_price_seen": 775.9,
-          "leverage": 5,
-          "margin_usd": 9.89
-        }
-      ]
-    }
+    "open_positions": {}
   }
 }

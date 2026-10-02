@@ -358,3 +358,8 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-02T15:04:12.489804+00:00,adaptive_hybrid__futures,SOL-USDT,close,120.38,0.40724033,-0.45,stop_loss [cf9b6dd7]
 2026-10-02T15:04:13.406089+00:00,adaptive_hybrid__futures,DOGE-USDT,close,0.09536,510.0160283,-0.84,stop_loss [57662765]
 2026-10-02T18:02:59.880663+00:00,trend_following__shadow,SOL-USDT,close,119.76,0.41207334,-0.79,stop_loss [efce2938]
+2026-10-02T19:03:45.393165+00:00,trend_following,BNB-USDT,close,764.6,0.06544534,-0.18,stop_loss [93e8bde5]
+2026-10-02T19:03:46.742303+00:00,trend_following__futures,BNB-USDT,close,764.0,0.06440595,-0.22,stop_loss [e7befabf]
+2026-10-02T19:03:50.802056+00:00,adaptive_hybrid,BNB-USDT,close,764.6,0.06537117,-0.18,stop_loss [be429066]
+2026-10-02T19:03:51.844420+00:00,adaptive_hybrid__shadow,SOL-USDT,close,118.42,0.41685875,-1.28,stop_loss [89a21d74]
+2026-10-02T19:03:52.278796+00:00,adaptive_hybrid__futures,BNB-USDT,close,764.4,0.06441439,-0.19,stop_loss [be860179]
