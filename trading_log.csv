@@ -330,3 +330,10 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-02T05:02:29.812585+00:00,adaptive_hybrid,BTC-USDT,close,86625.6,0.00058924,0.85,take_profit [6d791cc8]
 2026-10-02T05:02:30.791755+00:00,adaptive_hybrid__shadow,BTC-USDT,close,86625.6,0.00059348,0.86,take_profit [17bc0d30]
 2026-10-02T05:02:31.326860+00:00,adaptive_hybrid__futures,BTC-USDT,trailing_stop_update,86601.2,0.0005803,0.0,Nouveau SL=85880.4286 [40a0be9b]
+2026-10-02T07:04:58.199468+00:00,trend_following__shadow,SOL-USDT,buy,121.68,0.41207334,0.0,"score=70 (Niveau 1 seul, sans IA) [efce2938]"
+2026-10-02T07:04:59.909764+00:00,trend_following__futures,SOL-USDT,buy,121.68,0.40591216,0.0,score=70 | levier=5x | marge=9.88$ | SL=119.8479 TP=125.3443 [055dd06b]
+2026-10-02T07:05:00.677155+00:00,trend_following,SOL-USDT,buy,121.68,0.41265364,0.0,score=70 | SL=119.8479 TP=125.3443 [3b485d4f]
+2026-10-02T07:05:05.018657+00:00,adaptive_hybrid__futures,BTC-USDT,close,85871.2,0.0005803,0.4,stop_loss [40a0be9b]
+2026-10-02T07:05:06.114080+00:00,adaptive_hybrid__shadow,SOL-USDT,buy,121.48,0.41685875,0.0,"score=70 (Niveau 1 seul, sans IA) [89a21d74]"
+2026-10-02T07:05:07.204997+00:00,adaptive_hybrid__futures,SOL-USDT,buy,121.48,0.40724033,0.0,score=70 | levier=5x | marge=9.89$ | SL=119.6479 TP=125.1443 [cf9b6dd7]
+2026-10-02T07:05:07.978555+00:00,adaptive_hybrid,SOL-USDT,buy,121.48,0.41388064,0.0,score=70 | SL=119.6479 TP=125.1443 [38cfc0cb]

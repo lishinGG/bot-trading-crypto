@@ -43,6 +43,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "3b485d4f",
+          "entry_price": 121.68,
+          "quantity": 0.41265364,
+          "stop_loss_price": 119.8479,
+          "take_profit_price": 125.3443,
+          "opened_at": 1790924700.2992938,
+          "algo_id": "",
+          "highest_price_seen": 121.68,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -110,6 +124,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "38cfc0cb",
+          "entry_price": 121.48,
+          "quantity": 0.41388064,
+          "stop_loss_price": 119.6479,
+          "take_profit_price": 125.1443,
+          "opened_at": 1790924707.6049428,
+          "algo_id": "",
+          "highest_price_seen": 121.48,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -149,6 +177,20 @@
           "opened_at": 1790780815.6607175,
           "algo_id": "",
           "highest_price_seen": 767.4,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "efce2938",
+          "entry_price": 121.68,
+          "quantity": 0.41207334,
+          "stop_loss_price": 119.8479,
+          "take_profit_price": 125.3443,
+          "opened_at": 1790924698.1993823,
+          "algo_id": "",
+          "highest_price_seen": 121.68,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -208,6 +250,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "89a21d74",
+          "entry_price": 121.48,
+          "quantity": 0.41685875,
+          "stop_loss_price": 119.6479,
+          "take_profit_price": 125.1443,
+          "opened_at": 1790924706.1139877,
+          "algo_id": "",
+          "highest_price_seen": 121.48,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -242,6 +298,20 @@
           "leverage": 5,
           "margin_usd": 9.89
         }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "055dd06b",
+          "entry_price": 121.68,
+          "quantity": 0.40591216,
+          "stop_loss_price": 119.8479,
+          "take_profit_price": 125.3443,
+          "opened_at": 1790924699.0322833,
+          "algo_id": "",
+          "highest_price_seen": 121.68,
+          "leverage": 5,
+          "margin_usd": 9.88
+        }
       ]
     }
   },
@@ -262,7 +332,7 @@
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
-    "current_balance": 494.31601090478716,
+    "current_balance": 494.71554745478716,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -271,7 +341,8 @@
       -2.121212121191098,
       -0.4714265370000035,
       -1.3867413581999986,
-      -1.2467894820417098
+      -1.2467894820417098,
+      0.39953655
     ],
     "month_label": "2026-10",
     "month_start_balance": 494.31601090478716,
@@ -291,16 +362,16 @@
           "margin_usd": 9.89
         }
       ],
-      "BTC-USDT": [
+      "SOL-USDT": [
         {
-          "position_id": "40a0be9b",
-          "entry_price": 85182.7,
-          "quantity": 0.0005803,
-          "stop_loss_price": 85880.4286,
-          "take_profit_price": 86624.2429,
-          "opened_at": 1790881359.887281,
+          "position_id": "cf9b6dd7",
+          "entry_price": 121.48,
+          "quantity": 0.40724033,
+          "stop_loss_price": 119.6479,
+          "take_profit_price": 125.1443,
+          "opened_at": 1790924706.579728,
           "algo_id": "",
-          "highest_price_seen": 86601.2,
+          "highest_price_seen": 121.48,
           "leverage": 5,
           "margin_usd": 9.89
         }
