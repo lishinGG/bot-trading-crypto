@@ -1,12 +1,10 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 502.11694962585864,
+    "current_balance": 500.7346365059557,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.7535314174256036,
-      -0.2498801549999978,
       -0.6416934695000021,
       -0.1936533480000011,
       0.8825389005096018,
@@ -24,7 +22,9 @@
       -1.4522819168000043,
       -1.2950312867250011,
       -1.1536653941123054,
-      1.0430728660000053
+      1.0430728660000053,
+      -0.5281966592000005,
+      -0.8541164607029993
     ],
     "month_label": "2026-10",
     "month_start_balance": 501.07387675985865,
@@ -40,34 +40,6 @@
           "opened_at": 1790780817.844054,
           "algo_id": "",
           "highest_price_seen": 776.5,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "3b485d4f",
-          "entry_price": 121.68,
-          "quantity": 0.41265364,
-          "stop_loss_price": 120.8379,
-          "take_profit_price": 125.3443,
-          "opened_at": 1790924700.2992938,
-          "algo_id": "",
-          "highest_price_seen": 122.67,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "a201b558",
-          "entry_price": 0.097,
-          "quantity": 517.64633982,
-          "stop_loss_price": 0.0956,
-          "take_profit_price": 0.0999,
-          "opened_at": 1790935314.847494,
-          "algo_id": "",
-          "highest_price_seen": 0.097,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -96,12 +68,10 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 502.78220751509366,
+    "current_balance": 501.5265789795736,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.5874671519999953,
-      -0.37233218259999873,
       -0.1936229400000011,
       1.058902494753602,
       -0.03745171799999905,
@@ -119,7 +89,9 @@
       -1.3742429480999994,
       -1.2691723910810042,
       0.27364408800000173,
-      0.8502143960000051
+      0.8502143960000051,
+      -0.4262970592000005,
+      -0.8293314763200021
     ],
     "month_label": "2026-10",
     "month_start_balance": 501.93199311909365,
@@ -138,40 +110,12 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "38cfc0cb",
-          "entry_price": 121.48,
-          "quantity": 0.41388064,
-          "stop_loss_price": 120.9079,
-          "take_profit_price": 125.1443,
-          "opened_at": 1790924707.6049428,
-          "algo_id": "",
-          "highest_price_seen": 122.74,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "6bb2620c",
-          "entry_price": 0.097,
-          "quantity": 518.3321727,
-          "stop_loss_price": 0.0956,
-          "take_profit_price": 0.0999,
-          "opened_at": 1790935322.063639,
-          "algo_id": "",
-          "highest_price_seen": 0.097,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
       ]
     }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 501.4108392286967,
+    "current_balance": 500.5579238836127,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -189,7 +133,8 @@
       -1.2942316251500012,
       -1.1519643528929053,
       0.03417535799999825,
-      1.041603849000005
+      1.041603849000005,
+      -0.8529153450839994
     ],
     "month_label": "2026-10",
     "month_start_balance": 500.3692353796967,
@@ -222,20 +167,6 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "94968a1b",
-          "entry_price": 0.097,
-          "quantity": 516.91839096,
-          "stop_loss_price": 0.0956,
-          "take_profit_price": 0.0999,
-          "opened_at": 1790935312.3253493,
-          "algo_id": "",
-          "highest_price_seen": 0.097,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
       ]
     }
   },
@@ -255,7 +186,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 506.400009404697,
+    "current_balance": 505.56471042010503,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -273,7 +204,8 @@
       -1.3806225644000032,
       -1.278904789848004,
       0.03430123199999824,
-      0.8563322920000052
+      0.8563322920000052,
+      -0.8352989845920021
     ],
     "month_label": "2026-10",
     "month_start_balance": 505.543677112697,
@@ -306,28 +238,14 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "591d158c",
-          "entry_price": 0.097,
-          "quantity": 522.06186537,
-          "stop_loss_price": 0.0956,
-          "take_profit_price": 0.0999,
-          "opened_at": 1790935320.2074823,
-          "algo_id": "",
-          "highest_price_seen": 0.097,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
       ]
     }
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
-    "current_balance": 493.91392067819794,
+    "current_balance": 492.5501311370304,
     "trading_halted": false,
-    "strategy_paused": false,
+    "strategy_paused": true,
     "pnl_history": [
       -0.45113277177999567,
       -2.1040189125086983,
@@ -335,7 +253,9 @@
       -1.446733804000001,
       -1.2713536283313487,
       -1.2495236251819999,
-      0.9122200200000068
+      0.9122200200000068,
+      -0.5236266864000025,
+      -0.8401628547674993
     ],
     "month_label": "2026-10",
     "month_start_balance": 493.00170065819793,
@@ -353,34 +273,6 @@
           "highest_price_seen": 776.3,
           "leverage": 5,
           "margin_usd": 9.89
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "055dd06b",
-          "entry_price": 121.68,
-          "quantity": 0.40591216,
-          "stop_loss_price": 120.8879,
-          "take_profit_price": 125.3443,
-          "opened_at": 1790924699.0322833,
-          "algo_id": "",
-          "highest_price_seen": 122.72,
-          "leverage": 5,
-          "margin_usd": 9.88
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "912310bb",
-          "entry_price": 0.097,
-          "quantity": 509.18960895,
-          "stop_loss_price": 0.0956,
-          "take_profit_price": 0.0999,
-          "opened_at": 1790935313.3392096,
-          "algo_id": "",
-          "highest_price_seen": 0.097,
-          "leverage": 5,
-          "margin_usd": 9.88
         }
       ]
     }
@@ -402,9 +294,9 @@
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
-    "current_balance": 494.71554745478716,
+    "current_balance": 493.43115680537517,
     "trading_halted": false,
-    "strategy_paused": false,
+    "strategy_paused": true,
     "pnl_history": [
       -0.0066868249999999995,
       -0.45113277177999567,
@@ -412,7 +304,9 @@
       -0.4714265370000035,
       -1.3867413581999986,
       -1.2467894820417098,
-      0.39953655
+      0.39953655,
+      -0.4479643630000035,
+      -0.8364262864120013
     ],
     "month_label": "2026-10",
     "month_start_balance": 494.31601090478716,
@@ -428,34 +322,6 @@
           "opened_at": 1790780827.3926973,
           "algo_id": "",
           "highest_price_seen": 775.9,
-          "leverage": 5,
-          "margin_usd": 9.89
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "cf9b6dd7",
-          "entry_price": 121.48,
-          "quantity": 0.40724033,
-          "stop_loss_price": 120.9279,
-          "take_profit_price": 125.1443,
-          "opened_at": 1790924706.579728,
-          "algo_id": "",
-          "highest_price_seen": 122.76,
-          "leverage": 5,
-          "margin_usd": 9.89
-        }
-      ],
-      "DOGE-USDT": [
-        {
-          "position_id": "57662765",
-          "entry_price": 0.097,
-          "quantity": 510.0160283,
-          "stop_loss_price": 0.0956,
-          "take_profit_price": 0.0999,
-          "opened_at": 1790935320.7135925,
-          "algo_id": "",
-          "highest_price_seen": 0.097,
           "leverage": 5,
           "margin_usd": 9.89
         }
