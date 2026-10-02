@@ -115,7 +115,7 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 500.5579238836127,
+    "current_balance": 499.7667430708127,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -134,7 +134,8 @@
       -1.1519643528929053,
       0.03417535799999825,
       1.041603849000005,
-      -0.8529153450839994
+      -0.8529153450839994,
+      -0.7911808128000007
     ],
     "month_label": "2026-10",
     "month_start_balance": 500.3692353796967,
@@ -150,20 +151,6 @@
           "opened_at": 1790780815.6607175,
           "algo_id": "",
           "highest_price_seen": 767.4,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "efce2938",
-          "entry_price": 121.68,
-          "quantity": 0.41207334,
-          "stop_loss_price": 119.8479,
-          "take_profit_price": 125.3443,
-          "opened_at": 1790924698.1993823,
-          "algo_id": "",
-          "highest_price_seen": 121.68,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
