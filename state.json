@@ -57,6 +57,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "DOGE-USDT": [
+        {
+          "position_id": "a201b558",
+          "entry_price": 0.097,
+          "quantity": 517.64633982,
+          "stop_loss_price": 0.0956,
+          "take_profit_price": 0.0999,
+          "opened_at": 1790935314.847494,
+          "algo_id": "",
+          "highest_price_seen": 0.097,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -138,6 +152,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "DOGE-USDT": [
+        {
+          "position_id": "6bb2620c",
+          "entry_price": 0.097,
+          "quantity": 518.3321727,
+          "stop_loss_price": 0.0956,
+          "take_profit_price": 0.0999,
+          "opened_at": 1790935322.063639,
+          "algo_id": "",
+          "highest_price_seen": 0.097,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -191,6 +219,20 @@
           "opened_at": 1790924698.1993823,
           "algo_id": "",
           "highest_price_seen": 121.68,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
+      ],
+      "DOGE-USDT": [
+        {
+          "position_id": "94968a1b",
+          "entry_price": 0.097,
+          "quantity": 516.91839096,
+          "stop_loss_price": 0.0956,
+          "take_profit_price": 0.0999,
+          "opened_at": 1790935312.3253493,
+          "algo_id": "",
+          "highest_price_seen": 0.097,
           "leverage": 1.0,
           "margin_usd": 0.0
         }
@@ -264,6 +306,20 @@
           "leverage": 1.0,
           "margin_usd": 0.0
         }
+      ],
+      "DOGE-USDT": [
+        {
+          "position_id": "591d158c",
+          "entry_price": 0.097,
+          "quantity": 522.06186537,
+          "stop_loss_price": 0.0956,
+          "take_profit_price": 0.0999,
+          "opened_at": 1790935320.2074823,
+          "algo_id": "",
+          "highest_price_seen": 0.097,
+          "leverage": 1.0,
+          "margin_usd": 0.0
+        }
       ]
     }
   },
@@ -309,6 +365,20 @@
           "opened_at": 1790924699.0322833,
           "algo_id": "",
           "highest_price_seen": 121.68,
+          "leverage": 5,
+          "margin_usd": 9.88
+        }
+      ],
+      "DOGE-USDT": [
+        {
+          "position_id": "912310bb",
+          "entry_price": 0.097,
+          "quantity": 509.18960895,
+          "stop_loss_price": 0.0956,
+          "take_profit_price": 0.0999,
+          "opened_at": 1790935313.3392096,
+          "algo_id": "",
+          "highest_price_seen": 0.097,
           "leverage": 5,
           "margin_usd": 9.88
         }
@@ -372,6 +442,20 @@
           "opened_at": 1790924706.579728,
           "algo_id": "",
           "highest_price_seen": 121.48,
+          "leverage": 5,
+          "margin_usd": 9.89
+        }
+      ],
+      "DOGE-USDT": [
+        {
+          "position_id": "57662765",
+          "entry_price": 0.097,
+          "quantity": 510.0160283,
+          "stop_loss_price": 0.0956,
+          "take_profit_price": 0.0999,
+          "opened_at": 1790935320.7135925,
+          "algo_id": "",
+          "highest_price_seen": 0.097,
           "leverage": 5,
           "margin_usd": 9.89
         }
