@@ -287,11 +287,11 @@
           "position_id": "e7befabf",
           "entry_price": 767.4,
           "quantity": 0.06440595,
-          "stop_loss_price": 758.9571,
+          "stop_loss_price": 763.7571,
           "take_profit_price": 784.2857,
           "opened_at": 1790780816.6510475,
           "algo_id": "",
-          "highest_price_seen": 767.4,
+          "highest_price_seen": 772.2,
           "leverage": 5,
           "margin_usd": 9.89
         }
@@ -349,11 +349,11 @@
           "position_id": "be860179",
           "entry_price": 767.4,
           "quantity": 0.06441439,
-          "stop_loss_price": 758.9571,
+          "stop_loss_price": 763.4571,
           "take_profit_price": 784.2857,
           "opened_at": 1790780827.3926973,
           "algo_id": "",
-          "highest_price_seen": 767.4,
+          "highest_price_seen": 771.9,
           "leverage": 5,
           "margin_usd": 9.89
         }
