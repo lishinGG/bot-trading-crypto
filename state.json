@@ -85,7 +85,7 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 499.7667430708127,
+    "current_balance": 499.7079291148127,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -105,27 +105,13 @@
       0.03417535799999825,
       1.041603849000005,
       -0.8529153450839994,
-      -0.7911808128000007
+      -0.7911808128000007,
+      -0.058813955999998516
     ],
     "month_label": "2026-10",
     "month_start_balance": 500.3692353796967,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "89f2e5e5",
-          "entry_price": 767.4,
-          "quantity": 0.06534884,
-          "stop_loss_price": 758.9571,
-          "take_profit_price": 784.2857,
-          "opened_at": 1790780815.6607175,
-          "algo_id": "",
-          "highest_price_seen": 767.4,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -143,7 +129,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 504.289122645105,
+    "current_balance": 504.22983694510503,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -163,27 +149,13 @@
       0.03430123199999824,
       0.8563322920000052,
       -0.8352989845920021,
-      -1.2755877750000009
+      -1.2755877750000009,
+      -0.059285699999998505
     ],
     "month_label": "2026-10",
     "month_start_balance": 505.543677112697,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "aa1757a2",
-          "entry_price": 767.4,
-          "quantity": 0.065873,
-          "stop_loss_price": 758.9571,
-          "take_profit_price": 784.2857,
-          "opened_at": 1790780826.9227397,
-          "algo_id": "",
-          "highest_price_seen": 767.4,
-          "leverage": 1.0,
-          "margin_usd": 0.0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
