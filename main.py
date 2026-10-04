@@ -1,18 +1,15 @@
 """
 main.py
 =======
-Le chef d'orchestre. Ce script tourne toutes les heures via GitHub
-Actions. À chaque exécution, pour chaque stratégie, TROIS comptes
-virtuels indépendants sont mis à jour :
+Orchestrateur principal. Gère 3 pistes par stratégie :
+  - spot (avec IA) : toujours LONG (structurellement impossible de shorter en spot)
+  - spot__shadow (sans IA) : toujours LONG, référence pure Niveau 1
+  - futures (avec IA, levier) : LONG et SHORT tous les deux
 
-  1. Compte RÉEL (spot, avec IA)      -- state[strategy.name]
-  2. Compte FANTÔME (spot, sans IA)   -- state[strategy.name + "__shadow"]
-  3. Compte FUTURES (levier, avec IA) -- state[strategy.name + "__futures"]
-
-Les 3 utilisent le MÊME signal technique (Niveau 1) au départ, mais
-divergent ensuite : le fantôme ignore l'IA, le compte Futures utilise de
-vrais contrats perpétuels démo OKX à effet de levier (risque en dollars
-gardé identique au spot, voir risk_manager.calculate_leveraged_position).
+Règle de priorité pour les Futures : un signal qui va dans le sens
+opposé à la position ouverte la ferme EN PRIORITÉ (jamais long ET short
+simultanément sur la même crypto). Un signal dans le même sens peut
+ouvrir une 2e position (pyramidage, jusqu'à la limite autorisée).
 """
 
 import json
@@ -27,13 +24,13 @@ from risk_manager import RiskManager, calculate_atr
 from strategies import ALL_STRATEGIES
 from decision_engine import evaluate
 from indicators import moving_average
+from signal import Signal
 import notifications
 import memory
 import config
 
 
 def build_higher_timeframe_context(client: OKXDemoClient, symbol: str) -> str:
-    """Construit un résumé texte de la tendance sur 4h et 1 jour."""
     try:
         summary_lines = []
         for label, bar in [("4h", "4H"), ("1 jour", "1D")]:
@@ -57,60 +54,50 @@ def build_higher_timeframe_context(client: OKXDemoClient, symbol: str) -> str:
 
 
 def build_market_regime_summary(client: OKXDemoClient) -> str:
-    """
-    Vision globale du PANIER de cryptos suivies (pas du marché crypto
-    entier -- une nuance importante) : quelle proportion est actuellement
-    au-dessus de sa moyenne longue, et quelle est la variation moyenne du
-    panier. Calculé UNE SEULE FOIS par exécution (pas par stratégie) pour
-    éviter de multiplier les appels API inutilement, puis réutilisé pour
-    toutes les décisions de cette exécution.
-    """
+    """Vision globale du PANIER de cryptos suivies (pas le marché crypto
+    entier) -- calculée une seule fois par exécution, partagée partout."""
     try:
-        above_count, total = 0, 0
+        bullish_count = 0
+        total = 0
         changes = []
         for symbol in config.SYMBOLS:
-            candles = client.get_candles(symbol, config.CANDLE_INTERVAL, config.CANDLES_HISTORY_LENGTH)
+            candles = client.get_candles(symbol, "1D", limit=60)
             closes = candles["close"]
-            if len(closes) < 51:
+            if len(closes) < 21:
                 continue
-            long_ma = moving_average(closes, 50)
+            long_ma = moving_average(closes, min(50, len(closes)))
             total += 1
             if closes[-1] > long_ma:
-                above_count += 1
+                bullish_count += 1
             changes.append((closes[-1] - closes[-20]) / closes[-20] * 100)
-
         if total == 0:
             return ""
-
-        pct_above = (above_count / total) * 100
-        avg_change = sum(changes) / len(changes) if changes else 0.0
-        bias = "haussier" if pct_above > 60 else ("baissier" if pct_above < 40 else "neutre/mixte")
-
-        return (
-            f"Vision globale du panier de {total} cryptos suivies par ce bot (pas le marché crypto "
-            f"entier) : {above_count}/{total} ({pct_above:.0f}%) au-dessus de leur moyenne longue "
-            f"-> biais {bias} sur ce panier. Variation moyenne du panier sur 20 bougies : {avg_change:+.1f}%."
-        )
+        pct = (bullish_count / total) * 100
+        if pct >= 60:
+            regime = "biais haussier sur ce panier"
+        elif pct <= 40:
+            regime = "biais baissier sur ce panier"
+        else:
+            regime = "mixte / sans direction claire sur ce panier"
+        avg_change = sum(changes) / len(changes) if changes else 0
+        return (f"Vision globale du panier de {total} cryptos suivies par ce bot (pas le marché crypto entier) : "
+                f"{bullish_count}/{total} ({pct:.0f}%) au-dessus de leur moyenne longue -> {regime}. "
+                f"Variation moyenne du panier sur 20 bougies : {avg_change:+.1f}%.")
     except Exception as e:
-        print(f"[main] Vision de marché globale indisponible : {e}")
+        print(f"[main] Vision marché global indisponible : {e}")
         return ""
 
 
-def _current_month_label() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m")
-
-
-def _new_strategy_state(starting_capital: float = None) -> dict:
-    capital = starting_capital if starting_capital is not None else config.STARTING_CAPITAL_PER_STRATEGY
+def _new_strategy_state() -> dict:
     return {
-        "starting_capital": capital,
-        "current_balance": capital,
+        "starting_capital": config.STARTING_CAPITAL_PER_STRATEGY,
+        "current_balance": config.STARTING_CAPITAL_PER_STRATEGY,
         "trading_halted": False,
         "strategy_paused": False,
         "pnl_history": [],
         "open_positions": {},
-        "month_label": _current_month_label(),
-        "month_start_balance": capital,
+        "current_month": None,
+        "month_start_balance": config.STARTING_CAPITAL_PER_STRATEGY,
         "profit_ceiling_hit": False,
     }
 
@@ -122,7 +109,7 @@ def load_state() -> dict:
         for strat in ALL_STRATEGIES:
             state.setdefault(f"{strat.name}__shadow", _new_strategy_state())
             if config.USE_FUTURES:
-                state.setdefault(f"{strat.name}__futures", _new_strategy_state(config.FUTURES_STARTING_CAPITAL_PER_STRATEGY))
+                state.setdefault(f"{strat.name}__futures", _new_strategy_state())
         return state
 
     state = {}
@@ -130,7 +117,7 @@ def load_state() -> dict:
         state[strat.name] = _new_strategy_state()
         state[f"{strat.name}__shadow"] = _new_strategy_state()
         if config.USE_FUTURES:
-            state[f"{strat.name}__futures"] = _new_strategy_state(config.FUTURES_STARTING_CAPITAL_PER_STRATEGY)
+            state[f"{strat.name}__futures"] = _new_strategy_state()
     return state
 
 
@@ -147,8 +134,7 @@ def log_event(strategy_name: str, symbol: str, action: str, price: float,
         if not file_exists:
             writer.writerow(["timestamp", "strategy", "symbol", "action", "price", "quantity", "pnl", "note"])
         writer.writerow([
-            datetime.now(timezone.utc).isoformat(), strategy_name, symbol,
-            action, price, quantity, pnl, note,
+            datetime.now(timezone.utc).isoformat(), strategy_name, symbol, action, price, quantity, pnl, note,
         ])
 
 
@@ -156,31 +142,22 @@ def _position_to_dict(pos) -> dict:
     if isinstance(pos, dict):
         return pos
     return {
-        "position_id": pos.position_id,
-        "entry_price": pos.entry_price,
-        "quantity": pos.quantity,
-        "stop_loss_price": pos.stop_loss_price,
-        "take_profit_price": pos.take_profit_price,
-        "opened_at": pos.opened_at,
-        "algo_id": pos.algo_id,
-        "highest_price_seen": pos.highest_price_seen,
-        "leverage": pos.leverage,
-        "margin_usd": pos.margin_usd,
+        "position_id": pos.position_id, "entry_price": pos.entry_price, "quantity": pos.quantity,
+        "stop_loss_price": pos.stop_loss_price, "take_profit_price": pos.take_profit_price,
+        "opened_at": pos.opened_at, "algo_id": pos.algo_id, "highest_price_seen": pos.highest_price_seen,
+        "leverage": pos.leverage, "margin_usd": pos.margin_usd, "side": pos.side,
     }
 
 
 def build_risk_manager(strategy_name: str, saved: dict) -> RiskManager:
-    rm = RiskManager(
-        strategy_name, saved["starting_capital"],
-        month_label=saved.get("month_label"),
-        month_start_balance=saved.get("month_start_balance"),
-        profit_ceiling_hit=saved.get("profit_ceiling_hit", False),
-    )
+    rm = RiskManager(strategy_name, saved["starting_capital"])
     rm.current_balance = saved["current_balance"]
     rm.trading_halted = saved["trading_halted"]
     rm.strategy_paused = saved.get("strategy_paused", False)
     rm.pnl_history = saved.get("pnl_history", [])
-    rm.check_monthly_rollover(_current_month_label())   # réinitialise le plafond si nouveau mois
+    rm.current_month = saved.get("current_month")
+    rm.month_start_balance = saved.get("month_start_balance", saved["starting_capital"])
+    rm.profit_ceiling_hit = saved.get("profit_ceiling_hit", False)
 
     raw_positions = saved.get("open_positions", {})
     rm.open_positions = {}
@@ -192,21 +169,18 @@ def build_risk_manager(strategy_name: str, saved: dict) -> RiskManager:
             pos.setdefault("algo_id", "")
             pos.setdefault("highest_price_seen", pos["entry_price"])
             pos.setdefault("leverage", 1.0)
-            pos.setdefault("margin_usd", pos.get("position_size_usd", 0.0))
+            pos.setdefault("margin_usd", 0.0)
+            pos.setdefault("side", "long")
         rm.open_positions[symbol] = position_list
     return rm
 
 
 def dump_risk_manager(rm: RiskManager) -> dict:
     return {
-        "starting_capital": rm.starting_capital,
-        "current_balance": rm.current_balance,
-        "trading_halted": rm.trading_halted,
-        "strategy_paused": rm.strategy_paused,
-        "pnl_history": rm.pnl_history,
-        "month_label": rm.month_label,
-        "month_start_balance": rm.month_start_balance,
-        "profit_ceiling_hit": rm.profit_ceiling_hit,
+        "starting_capital": rm.starting_capital, "current_balance": rm.current_balance,
+        "trading_halted": rm.trading_halted, "strategy_paused": rm.strategy_paused,
+        "pnl_history": rm.pnl_history, "current_month": rm.current_month,
+        "month_start_balance": rm.month_start_balance, "profit_ceiling_hit": rm.profit_ceiling_hit,
         "open_positions": {
             symbol: [_position_to_dict(p) for p in positions]
             for symbol, positions in rm.open_positions.items()
@@ -214,25 +188,30 @@ def dump_risk_manager(rm: RiskManager) -> dict:
     }
 
 
+def _get_field(pos, name, default=None):
+    return pos[name] if isinstance(pos, dict) else getattr(pos, name, default)
+
+
+# ----------------------------------------------------------------------
+# SPOT (et compte fantôme) -- toujours LONG
+# ----------------------------------------------------------------------
 def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, strategy_name: str,
                                apply_trailing_stop: bool = True, notify: bool = False):
-    """Vérifie CHAQUE position ouverte (compte spot, réel ou fantôme)."""
     for symbol in list(rm.open_positions.keys()):
         positions = list(rm.open_positions.get(symbol, []))
         if not positions:
             continue
-
         current_price = client.get_current_price(symbol)
         candles = client.get_candles(symbol, config.CANDLE_INTERVAL, config.CANDLES_HISTORY_LENGTH)
         current_signal = strategy.get_signal(candles)
 
         for pos in positions:
-            position_id = pos["position_id"] if isinstance(pos, dict) else pos.position_id
-            entry_price = pos["entry_price"] if isinstance(pos, dict) else pos.entry_price
-            sl = pos["stop_loss_price"] if isinstance(pos, dict) else pos.stop_loss_price
-            tp = pos["take_profit_price"] if isinstance(pos, dict) else pos.take_profit_price
-            quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
-            algo_id = pos.get("algo_id", "") if isinstance(pos, dict) else getattr(pos, "algo_id", "")
+            position_id = _get_field(pos, "position_id")
+            entry_price = _get_field(pos, "entry_price")
+            sl = _get_field(pos, "stop_loss_price")
+            tp = _get_field(pos, "take_profit_price")
+            quantity = _get_field(pos, "quantity")
+            algo_id = _get_field(pos, "algo_id", "")
 
             if current_price <= sl or current_price >= tp:
                 reason = "stop_loss" if current_price <= sl else "take_profit"
@@ -243,16 +222,17 @@ def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, 
                 continue
 
             if apply_trailing_stop:
-                new_sl = rm.compute_trailing_stop_update(pos, current_price)
-                if new_sl is not None:
+                trail_result = rm.compute_trailing_stop_update(pos, current_price)
+                if trail_result is not None:
+                    new_sl, new_extreme = trail_result
                     try:
                         client.update_stop_loss(symbol, algo_id, new_sl)
                         if isinstance(pos, dict):
                             pos["stop_loss_price"] = new_sl
-                            pos["highest_price_seen"] = max(pos.get("highest_price_seen", entry_price), current_price)
+                            pos["highest_price_seen"] = new_extreme
                         else:
                             pos.stop_loss_price = new_sl
-                            pos.highest_price_seen = max(pos.highest_price_seen, current_price)
+                            pos.highest_price_seen = new_extreme
                         log_event(strategy_name, symbol, "trailing_stop_update", current_price, quantity,
                                   note=f"Nouveau SL={new_sl} [{position_id}]")
                     except Exception as e:
@@ -267,253 +247,275 @@ def check_and_close_positions(client: OKXDemoClient, rm: RiskManager, strategy, 
                     notifications.notify_trade_closed(strategy_name, symbol, current_price, pnl, exit_reason)
 
 
-def check_and_close_futures_positions(client: OKXDemoClient, rm: RiskManager, strategy,
-                                       strategy_name: str, futures_symbol_map: dict, notify: bool = True):
-    """
-    Équivalent de check_and_close_positions() mais pour le compte Futures :
-    utilise les méthodes OKX spécifiques aux contrats perpétuels et
-    convertit la quantité en nombre de contrats avant chaque appel à OKX.
-    """
+# ----------------------------------------------------------------------
+# FUTURES -- long ET short
+# ----------------------------------------------------------------------
+def check_and_close_futures_positions(client: OKXDemoClient, rm: RiskManager, strategy, strategy_name: str):
     for spot_symbol in list(rm.open_positions.keys()):
         positions = list(rm.open_positions.get(spot_symbol, []))
         if not positions:
             continue
-
-        futures_symbol = futures_symbol_map[spot_symbol]
+        futures_symbol = config.FUTURES_SYMBOLS[spot_symbol]
         current_price = client.get_current_price(futures_symbol)
         candles = client.get_candles(spot_symbol, config.CANDLE_INTERVAL, config.CANDLES_HISTORY_LENGTH)
         current_signal = strategy.get_signal(candles)
 
         for pos in positions:
-            position_id = pos["position_id"] if isinstance(pos, dict) else pos.position_id
-            entry_price = pos["entry_price"] if isinstance(pos, dict) else pos.entry_price
-            sl = pos["stop_loss_price"] if isinstance(pos, dict) else pos.stop_loss_price
-            tp = pos["take_profit_price"] if isinstance(pos, dict) else pos.take_profit_price
-            quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
-            algo_id = pos.get("algo_id", "") if isinstance(pos, dict) else getattr(pos, "algo_id", "")
+            position_id = _get_field(pos, "position_id")
+            entry_price = _get_field(pos, "entry_price")
+            sl = _get_field(pos, "stop_loss_price")
+            tp = _get_field(pos, "take_profit_price")
+            quantity = _get_field(pos, "quantity")
+            algo_id = _get_field(pos, "algo_id", "")
+            side = _get_field(pos, "side", "long")
 
-            if current_price <= sl or current_price >= tp:
-                reason = "stop_loss" if current_price <= sl else "take_profit"
+            hit_sl = (current_price <= sl) if side == "long" else (current_price >= sl)
+            hit_tp = (current_price >= tp) if side == "long" else (current_price <= tp)
+
+            if hit_sl or hit_tp:
+                reason = "stop_loss" if hit_sl else "take_profit"
                 real_pnl = None
                 try:
                     real_pnl = client.get_futures_realized_pnl(futures_symbol)
                 except Exception as e:
-                    print(f"[main] PnL réel OKX indisponible pour {futures_symbol}, repli sur calcul interne : {e}")
+                    print(f"[main] PnL réel OKX indisponible pour {futures_symbol} : {e}")
                 pnl = rm.close_position(spot_symbol, current_price, position_id=position_id, pnl_override=real_pnl)
-                log_event(strategy_name, spot_symbol, "close", current_price, quantity, pnl, f"{reason} [{position_id}]")
-                if notify:
-                    notifications.notify_trade_closed(strategy_name, spot_symbol, current_price, pnl, reason)
+                log_event(strategy_name, spot_symbol, "close", current_price, quantity, pnl, f"{reason} [{side}] [{position_id}]")
+                notifications.notify_trade_closed(strategy_name, spot_symbol, current_price, pnl, reason)
                 continue
 
-            new_sl = rm.compute_trailing_stop_update(pos, current_price)
-            if new_sl is not None:
+            trail_result = rm.compute_trailing_stop_update(pos, current_price)
+            if trail_result is not None:
+                new_sl, new_extreme = trail_result
                 try:
                     client.update_futures_stop_loss(futures_symbol, algo_id, new_sl)
                     if isinstance(pos, dict):
                         pos["stop_loss_price"] = new_sl
-                        pos["highest_price_seen"] = max(pos.get("highest_price_seen", entry_price), current_price)
+                        pos["highest_price_seen"] = new_extreme
                     else:
                         pos.stop_loss_price = new_sl
-                        pos.highest_price_seen = max(pos.highest_price_seen, current_price)
+                        pos.highest_price_seen = new_extreme
                     log_event(strategy_name, spot_symbol, "trailing_stop_update", current_price, quantity,
-                              note=f"Nouveau SL={new_sl} [{position_id}]")
+                              note=f"Nouveau SL={new_sl} [{side}] [{position_id}]")
                 except Exception as e:
-                    print(f"[main] Échec mise à jour trailing stop Futures pour {futures_symbol} : {e}")
+                    print(f"[main] Échec trailing stop Futures pour {futures_symbol} : {e}")
 
             exit_reason = rm.check_exit_conditions_for_position(pos, current_price, current_signal.direction)
             if exit_reason:
                 real_pnl = None
                 try:
                     contracts = client.convert_to_contracts(futures_symbol, quantity)
-                    client.place_futures_close_long(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
+                    if side == "long":
+                        client.place_futures_close_long(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
+                    else:
+                        client.place_futures_close_short(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
                     real_pnl = client.get_futures_realized_pnl(futures_symbol)
                 except Exception as e:
-                    print(f"[main] Échec fermeture ou récupération PnL Futures pour {futures_symbol} : {e}")
+                    print(f"[main] Échec fermeture/PnL Futures pour {futures_symbol} : {e}")
                 pnl = rm.close_position(spot_symbol, current_price, position_id=position_id, pnl_override=real_pnl)
-                log_event(strategy_name, spot_symbol, "close", current_price, quantity, pnl, f"{exit_reason} [{position_id}]")
-                if notify:
-                    notifications.notify_trade_closed(strategy_name, spot_symbol, current_price, pnl, exit_reason)
+                log_event(strategy_name, spot_symbol, "close", current_price, quantity, pnl, f"{exit_reason} [{side}] [{position_id}]")
+                notifications.notify_trade_closed(strategy_name, spot_symbol, current_price, pnl, exit_reason)
+
+
+def _open_futures_position(client, rm_futures, strategy_name, futures_key, symbol, futures_symbol,
+                            side, current_price, atr, futures_signal):
+    allowed, reason = rm_futures.can_open_position(symbol, side=side)
+    if not allowed:
+        log_event(futures_key, symbol, "skip_open", current_price, note=reason)
+        return
+
+    sizing = rm_futures.calculate_leveraged_position(
+        symbol, current_price, atr, leverage=config.FUTURES_LEVERAGE, side=side,
+        entry_reasons=futures_signal.reasons,
+        ai_size_factor=futures_signal.ai_size_factor,
+        ai_sl_tightness=futures_signal.ai_sl_tightness,
+        ai_tp_extension=futures_signal.ai_tp_extension,
+    )
+    if sizing is None:
+        return
+
+    client.set_leverage(futures_symbol, config.FUTURES_LEVERAGE, config.FUTURES_MARGIN_MODE)
+    contracts = client.convert_to_contracts(futures_symbol, sizing.quantity)
+    try:
+        if side == "long":
+            client.place_futures_open_long(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
+        else:
+            client.place_futures_open_short(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
+        algo_id = client.place_futures_stop_loss_take_profit(
+            futures_symbol, contracts, sizing.stop_loss_price, sizing.take_profit_price,
+            config.FUTURES_MARGIN_MODE, side=side,
+        )
+        sizing.algo_id = algo_id
+    except Exception as e:
+        print(f"[main] Échec ouverture Futures pour {futures_symbol} : {e}")
+        return
+
+    rm_futures.register_open_position(sizing)
+    note = (f"score={futures_signal.conviction_score:.0f} | side={side} | "
+            f"SL={sizing.stop_loss_price} TP={sizing.take_profit_price} [{sizing.position_id}]")
+    if futures_signal.ai_reviewed:
+        note += f" | IA: {futures_signal.ai_notes} (taille x{futures_signal.ai_size_factor:.2f})"
+    log_event(futures_key, symbol, "buy" if side == "long" else "sell", current_price, sizing.quantity, note=note)
+    notifications.notify_trade_opened(futures_key, symbol, current_price, note=f"{side.upper()} | Score: {futures_signal.conviction_score:.0f}/100")
+
+
+def _close_all_futures_positions(client, rm_futures, strategy_name, futures_key, symbol, futures_symbol, current_price):
+    for pos in list(rm_futures.open_positions.get(symbol, [])):
+        position_id = _get_field(pos, "position_id")
+        quantity = _get_field(pos, "quantity")
+        side = _get_field(pos, "side", "long")
+        real_pnl = None
+        try:
+            contracts = client.convert_to_contracts(futures_symbol, quantity)
+            if side == "long":
+                client.place_futures_close_long(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
+            else:
+                client.place_futures_close_short(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
+            real_pnl = client.get_futures_realized_pnl(futures_symbol)
+        except Exception as e:
+            print(f"[main] Échec fermeture (signal opposé) Futures pour {futures_symbol} : {e}")
+        pnl = rm_futures.close_position(symbol, current_price, position_id=position_id, pnl_override=real_pnl)
+        log_event(futures_key, symbol, "signal_close", current_price, quantity, pnl, f"[{side}] [{position_id}]")
+        notifications.notify_trade_closed(futures_key, symbol, current_price, pnl, "signal_opposé")
 
 
 def run():
     client = OKXDemoClient()
     state = load_state()
-
-    # Calculé UNE SEULE FOIS pour toute l'exécution (pas par stratégie) --
-    # évite de multiplier les appels API, et le régime du panier ne change
-    # de toute façon pas d'une stratégie à l'autre dans la même heure.
+    current_month_str = datetime.now(timezone.utc).strftime("%Y-%m")
     market_regime_summary = build_market_regime_summary(client)
 
     for strategy in ALL_STRATEGIES:
         rm = build_risk_manager(strategy.name, state[strategy.name])
         shadow_key = f"{strategy.name}__shadow"
         rm_shadow = build_risk_manager(shadow_key, state[shadow_key])
-
         futures_key = f"{strategy.name}__futures"
         rm_futures = build_risk_manager(futures_key, state[futures_key]) if config.USE_FUTURES else None
 
-        was_halted = rm.trading_halted
-        was_paused = rm.strategy_paused
-        was_ceiling_hit = rm.profit_ceiling_hit
+        for r in [rm, rm_shadow] + ([rm_futures] if rm_futures else []):
+            r.check_monthly_rollover(current_month_str)
+            r.check_monthly_ceiling()
+
+        was_halted, was_paused, was_ceiling = rm.trading_halted, rm.strategy_paused, rm.profit_ceiling_hit
 
         check_and_close_positions(client, rm, strategy, strategy.name, apply_trailing_stop=True, notify=True)
         check_and_close_positions(client, rm_shadow, strategy, shadow_key, apply_trailing_stop=False, notify=False)
-        if config.USE_FUTURES:
-            check_and_close_futures_positions(client, rm_futures, strategy, futures_key, config.FUTURES_SYMBOLS, notify=True)
+        if rm_futures:
+            check_and_close_futures_positions(client, rm_futures, strategy, futures_key)
 
         for symbol in config.SYMBOLS:
             candles = client.get_candles(symbol, config.CANDLE_INTERVAL, config.CANDLES_HISTORY_LENGTH)
             signal = strategy.get_signal(candles)
-
             if not signal.is_actionable:
                 continue
 
             current_price = client.get_current_price(symbol)
+            higher_tf_context = build_higher_timeframe_context(client, symbol)
+            combined_market_context = "\n\n".join(filter(None, [higher_tf_context, market_regime_summary]))
 
-            # --- Compte fantôme (Niveau 1 seul, sans IA) ---
-            shadow_direction = signal.direction
-            shadow_score = signal.conviction_score
-            if shadow_direction == "buy":
-                allowed_shadow, _ = rm_shadow.can_open_position(symbol)
+            # --- Compte fantôme (Niveau 1 pur, toujours LONG, jamais touché par la mémoire/IA) ---
+            if signal.direction == "buy":
+                allowed_shadow, _ = rm_shadow.can_open_position(symbol, side="long")
                 if allowed_shadow:
                     atr_shadow = calculate_atr(candles["high"], candles["low"], candles["close"])
                     shadow_sizing = rm_shadow.calculate_position(symbol, current_price, atr_shadow)
                     if shadow_sizing:
                         rm_shadow.register_open_position(shadow_sizing)
                         log_event(shadow_key, symbol, "buy", current_price, shadow_sizing.quantity,
-                                  note=f"score={shadow_score:.0f} (Niveau 1 seul, sans IA) [{shadow_sizing.position_id}]")
-            elif shadow_direction == "sell" and symbol in rm_shadow.open_positions:
+                                  note=f"score={signal.conviction_score:.0f} (Niveau 1 seul) [{shadow_sizing.position_id}]")
+            elif signal.direction == "sell" and symbol in rm_shadow.open_positions:
                 for pos in list(rm_shadow.open_positions.get(symbol, [])):
-                    position_id = pos.position_id if hasattr(pos, "position_id") else pos["position_id"]
-                    quantity = pos.quantity if hasattr(pos, "quantity") else pos["quantity"]
+                    position_id = _get_field(pos, "position_id")
+                    quantity = _get_field(pos, "quantity")
                     pnl = rm_shadow.close_position(symbol, current_price, position_id=position_id)
                     log_event(shadow_key, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
 
-            higher_tf_context = build_higher_timeframe_context(client, symbol)
-            combined_market_context = "\n\n".join(filter(None, [higher_tf_context, market_regime_summary]))
-
-            # --- Compte Futures (levier, avec IA -- évaluation séparée du spot) ---
-            if config.USE_FUTURES and signal.direction == "buy":
-                futures_symbol = config.FUTURES_SYMBOLS[symbol]
-                futures_signal = strategy.get_signal(candles)   # copie indépendante, pas mutée par l'éval du spot
-                futures_memory_context = memory.get_memory_context(futures_key, symbol)
-                futures_signal = evaluate(
-                    futures_symbol, strategy.name, futures_signal, current_price,
-                    market_context=combined_market_context, leverage=config.FUTURES_LEVERAGE,
-                    memory_context=futures_memory_context,
-                )
-                if futures_signal.is_actionable and futures_signal.direction == "buy":
-                    allowed_f, reason_f = rm_futures.can_open_position(symbol)
-                    if not allowed_f:
-                        log_event(futures_key, symbol, "skip_buy", current_price, note=reason_f)
-                    else:
-                        atr_f = calculate_atr(candles["high"], candles["low"], candles["close"])
-                        sizing_f = rm_futures.calculate_leveraged_position(
-                            symbol, current_price, atr_f, leverage=config.FUTURES_LEVERAGE,
-                            entry_reasons=futures_signal.reasons,
-                            ai_size_factor=futures_signal.ai_size_factor,
-                            ai_sl_tightness=futures_signal.ai_sl_tightness,
-                            ai_tp_extension=futures_signal.ai_tp_extension,
-                        )
-                        if sizing_f is not None:
-                            try:
-                                client.set_leverage(futures_symbol, config.FUTURES_LEVERAGE, config.FUTURES_MARGIN_MODE)
-                                contracts = client.convert_to_contracts(futures_symbol, sizing_f.quantity)
-                                client.place_futures_open_long(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
-                                algo_id_f = client.place_futures_stop_loss_take_profit(
-                                    futures_symbol, contracts, sizing_f.stop_loss_price,
-                                    sizing_f.take_profit_price, config.FUTURES_MARGIN_MODE,
-                                )
-                                sizing_f.algo_id = algo_id_f
-                                rm_futures.register_open_position(sizing_f)
-                                note = (f"score={futures_signal.conviction_score:.0f} | levier={config.FUTURES_LEVERAGE}x "
-                                        f"| marge={sizing_f.margin_usd}$ | SL={sizing_f.stop_loss_price} TP={sizing_f.take_profit_price} "
-                                        f"[{sizing_f.position_id}]")
-                                if futures_signal.ai_reviewed:
-                                    note += f" | IA: {futures_signal.ai_notes}"
-                                log_event(futures_key, symbol, "buy", current_price, sizing_f.quantity, note=note)
-                                notifications.notify_trade_opened(futures_key, symbol, current_price,
-                                                                   note=f"Levier {config.FUTURES_LEVERAGE}x, marge {sizing_f.margin_usd}$")
-                            except Exception as e:
-                                print(f"[main] Échec ouverture Futures pour {futures_symbol} : {e}")
-                elif not futures_signal.is_actionable:
-                    log_event(futures_key, symbol, "signal_rejected", current_price,
-                              note="; ".join(futures_signal.reasons))
-
-            elif config.USE_FUTURES and signal.direction == "sell" and symbol in rm_futures.open_positions:
-                futures_symbol = config.FUTURES_SYMBOLS[symbol]
-                for pos in list(rm_futures.open_positions.get(symbol, [])):
-                    position_id = pos["position_id"] if isinstance(pos, dict) else pos.position_id
-                    quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
-                    real_pnl = None
-                    try:
-                        contracts = client.convert_to_contracts(futures_symbol, quantity)
-                        client.place_futures_close_long(futures_symbol, contracts, config.FUTURES_MARGIN_MODE)
-                        real_pnl = client.get_futures_realized_pnl(futures_symbol)
-                    except Exception as e:
-                        print(f"[main] Échec fermeture ou récupération PnL Futures (signal vente) pour {futures_symbol} : {e}")
-                    pnl = rm_futures.close_position(symbol, current_price, position_id=position_id, pnl_override=real_pnl)
-                    log_event(futures_key, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
-                    notifications.notify_trade_closed(futures_key, symbol, current_price, pnl, "signal_vente")
-
-            # --- Compte RÉEL spot (avec IA) ---
+            # --- Spot réel (avec IA, toujours LONG) ---
             spot_memory_context = memory.get_memory_context(strategy.name, symbol)
-            signal = evaluate(symbol, strategy.name, signal, current_price,
-                               market_context=combined_market_context, memory_context=spot_memory_context)
+            spot_signal = Signal(direction=signal.direction, conviction_score=signal.conviction_score, reasons=list(signal.reasons))
+            spot_signal = evaluate(symbol, strategy.name, spot_signal, current_price,
+                                    market_context=combined_market_context, memory_context=spot_memory_context,
+                                    is_futures=False, side="long")
 
-            if not signal.is_actionable:
-                log_event(strategy.name, symbol, "signal_rejected", current_price,
-                          note="; ".join(signal.reasons))
-                continue
-
-            if signal.direction == "buy":
-                allowed, reason = rm.can_open_position(symbol)
+            if not spot_signal.is_actionable:
+                log_event(strategy.name, symbol, "signal_rejected", current_price, note="; ".join(spot_signal.reasons))
+            elif spot_signal.direction == "buy":
+                allowed, reason = rm.can_open_position(symbol, side="long")
                 if not allowed:
                     log_event(strategy.name, symbol, "skip_buy", current_price, note=reason)
-                    continue
-
-                atr = calculate_atr(candles["high"], candles["low"], candles["close"])
-                sizing = rm.calculate_position(
-                    symbol, current_price, atr, entry_reasons=signal.reasons,
-                    ai_size_factor=signal.ai_size_factor,
-                    ai_sl_tightness=signal.ai_sl_tightness,
-                    ai_tp_extension=signal.ai_tp_extension,
-                )
-                if sizing is None:
-                    continue
-
-                client.place_market_buy(symbol, sizing.quantity)
-                algo_id = client.place_stop_loss_take_profit(
-                    symbol, sizing.quantity, sizing.stop_loss_price, sizing.take_profit_price
-                )
-                sizing.algo_id = algo_id
-                rm.register_open_position(sizing)
-                note = f"score={signal.conviction_score:.0f} | SL={sizing.stop_loss_price} TP={sizing.take_profit_price} [{sizing.position_id}]"
-                if signal.ai_reviewed:
-                    note += f" | IA: {signal.ai_notes} (taille x{signal.ai_size_factor:.2f})"
-                log_event(strategy.name, symbol, "buy", current_price, sizing.quantity, note=note)
-                notifications.notify_trade_opened(strategy.name, symbol, current_price,
-                                                   note=f"Score: {signal.conviction_score:.0f}/100")
-
-            elif signal.direction == "sell" and symbol in rm.open_positions:
+                else:
+                    atr = calculate_atr(candles["high"], candles["low"], candles["close"])
+                    sizing = rm.calculate_position(
+                        symbol, current_price, atr, entry_reasons=spot_signal.reasons,
+                        ai_size_factor=spot_signal.ai_size_factor, ai_sl_tightness=spot_signal.ai_sl_tightness,
+                        ai_tp_extension=spot_signal.ai_tp_extension,
+                    )
+                    if sizing is not None:
+                        client.place_market_buy(symbol, sizing.quantity)
+                        algo_id = client.place_stop_loss_take_profit(symbol, sizing.quantity, sizing.stop_loss_price, sizing.take_profit_price)
+                        sizing.algo_id = algo_id
+                        rm.register_open_position(sizing)
+                        note = f"score={spot_signal.conviction_score:.0f} | SL={sizing.stop_loss_price} TP={sizing.take_profit_price} [{sizing.position_id}]"
+                        if spot_signal.ai_reviewed:
+                            note += f" | IA: {spot_signal.ai_notes} (taille x{spot_signal.ai_size_factor:.2f})"
+                        log_event(strategy.name, symbol, "buy", current_price, sizing.quantity, note=note)
+                        notifications.notify_trade_opened(strategy.name, symbol, current_price, note=f"Score: {spot_signal.conviction_score:.0f}/100")
+            elif spot_signal.direction == "sell" and symbol in rm.open_positions:
                 for pos in list(rm.open_positions.get(symbol, [])):
-                    position_id = pos["position_id"] if isinstance(pos, dict) else pos.position_id
-                    quantity = pos["quantity"] if isinstance(pos, dict) else pos.quantity
+                    position_id = _get_field(pos, "position_id")
+                    quantity = _get_field(pos, "quantity")
                     client.place_market_sell(symbol, quantity)
                     pnl = rm.close_position(symbol, current_price, position_id=position_id)
-                    log_event(strategy.name, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
+                    log_event(strategy.name, symbol, "sell_signal_close", current_price, quantity, pnl)
                     notifications.notify_trade_closed(strategy.name, symbol, current_price, pnl, "signal_vente")
 
-        if rm.trading_halted and not was_halted:
-            notifications.notify_circuit_breaker(strategy.name)
-        if rm.strategy_paused and not was_paused:
-            notifications.notify_strategy_paused(strategy.name)
-        if rm.profit_ceiling_hit and not was_ceiling_hit:
-            notifications.notify_profit_ceiling(strategy.name)
+            # --- Futures (avec IA, levier, LONG et SHORT) ---
+            if rm_futures:
+                futures_symbol = config.FUTURES_SYMBOLS[symbol]
+                existing_positions = rm_futures.open_positions.get(symbol, [])
+                existing_side = _get_field(existing_positions[0], "side", "long") if existing_positions else None
+
+                futures_action = None
+                intended_side = None
+                if signal.direction == "buy":
+                    if existing_side == "short":
+                        futures_action = "close"
+                    else:
+                        futures_action = "open"
+                        intended_side = "long"
+                elif signal.direction == "sell":
+                    if existing_side == "long":
+                        futures_action = "close"
+                    elif config.FUTURES_ALLOW_SHORT:
+                        futures_action = "open"
+                        intended_side = "short"
+
+                if futures_action == "close":
+                    _close_all_futures_positions(client, rm_futures, futures_key, futures_key, symbol, futures_symbol, current_price)
+                elif futures_action == "open":
+                    futures_memory_context = memory.get_memory_context(futures_key, symbol)
+                    futures_signal = Signal(direction=signal.direction, conviction_score=signal.conviction_score, reasons=list(signal.reasons))
+                    futures_signal = evaluate(symbol, strategy.name, futures_signal, current_price,
+                                               market_context=combined_market_context, memory_context=futures_memory_context,
+                                               is_futures=True, leverage=config.FUTURES_LEVERAGE, side=intended_side)
+                    if not futures_signal.is_actionable:
+                        log_event(futures_key, symbol, "signal_rejected", current_price, note="; ".join(futures_signal.reasons))
+                    else:
+                        atr = calculate_atr(candles["high"], candles["low"], candles["close"])
+                        _open_futures_position(client, rm_futures, futures_key, futures_key, symbol, futures_symbol,
+                                                intended_side, current_price, atr, futures_signal)
+
+        for r, key in [(rm, strategy.name), (rm_shadow, shadow_key)] + ([(rm_futures, futures_key)] if rm_futures else []):
+            if r.trading_halted and key == strategy.name and not was_halted:
+                notifications.notify_circuit_breaker(strategy.name)
+            if r.strategy_paused and key == strategy.name and not was_paused:
+                notifications.notify_strategy_paused(strategy.name)
+            if r.profit_ceiling_hit and key == strategy.name and not was_ceiling:
+                notifications.notify_profit_ceiling(strategy.name)
 
         state[strategy.name] = dump_risk_manager(rm)
         state[shadow_key] = dump_risk_manager(rm_shadow)
-        if config.USE_FUTURES:
+        if rm_futures:
             state[futures_key] = dump_risk_manager(rm_futures)
 
     save_state(state)
