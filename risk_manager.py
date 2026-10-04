@@ -1,9 +1,31 @@
-"""risk_manager.py"""
+"""
+risk_manager.py
+================
+Gère la taille de position, le SL/TP, les sorties, le circuit breaker,
+le plafond de profit mensuel, et désormais le SENS de la position
+(long ou short) -- le short n'existe que pour les Futures, jamais pour
+le spot (structurellement impossible en spot).
+
+GARDE-FOUS IA inchangés : l'IA ne peut jamais augmenter le risque au-delà
+des plafonds fixés ici.
+
+LONG vs SHORT -- ce qui change :
+  - SL/TP : pour un long, le SL est EN DESSOUS de l'entrée, le TP AU-DESSUS.
+    Pour un short, c'est l'inverse : le SL est AU-DESSUS, le TP EN DESSOUS
+    (on gagne quand le prix baisse).
+  - PnL : pour un long, profit = quantité x (sortie - entrée).
+    Pour un short, profit = quantité x (entrée - sortie).
+  - Trailing stop : pour un long, on suit le PLUS HAUT prix atteint et le
+    SL ne fait que monter. Pour un short, on suit le PLUS BAS prix atteint
+    et le SL ne fait que descendre.
+"""
+
 from dataclasses import dataclass, field
 from typing import Optional
 import time
 import uuid
 import numpy as np
+from datetime import datetime, timezone
 
 import performance_tracker
 
@@ -11,7 +33,6 @@ MAX_POSITION_PCT = 0.10
 CIRCUIT_BREAKER_LOSS_PCT = 0.20
 MAX_OPEN_POSITIONS_PER_SYMBOL = 2
 MAX_TOTAL_OPEN_POSITIONS = 3
-MONTHLY_PROFIT_CEILING_PCT = 0.15   # +15% sur le mois -> arrêt de sécurité (verrouille les gains)
 
 ATR_STOP_LOSS_MULTIPLIER = 1.5
 ATR_TAKE_PROFIT_MULTIPLIER = 3.0
@@ -23,6 +44,12 @@ MAX_AI_TP_EXTENSION = 2.0
 MAX_POSITION_AGE_HOURS = 72
 STAGNANT_MOVE_THRESHOLD = 0.01
 TRAILING_STOP_MIN_PROGRESS_PCT = 0.005
+
+MONTHLY_PROFIT_CEILING_PCT = 0.15
+
+
+def _clamp(value, low, high):
+    return max(low, min(high, value))
 
 
 @dataclass
@@ -40,48 +67,48 @@ class PositionSizing:
     opened_at: float = field(default_factory=time.time)
     entry_reasons: list = field(default_factory=list)
     algo_id: str = ""
-    highest_price_seen: float = 0.0
-    leverage: float = 1.0          # 1.0 = spot (pas de levier)
-    margin_usd: float = 0.0        # marge réellement immobilisée (= position_size_usd si spot)
-
-
-def _clamp(value, low, high):
-    return max(low, min(high, value))
+    highest_price_seen: float = 0.0   # pour un short, sert de "plus bas prix vu" (nom conservé pour compat)
+    leverage: float = 1.0
+    margin_usd: float = 0.0
+    side: str = "long"   # "long" ou "short" -- "long" toujours en spot
 
 
 class RiskManager:
-    def __init__(self, strategy_name, starting_capital, month_label=None, month_start_balance=None, profit_ceiling_hit=False):
+    def __init__(self, strategy_name, starting_capital):
         self.strategy_name = strategy_name
         self.starting_capital = starting_capital
         self.current_balance = starting_capital
-        self.open_positions = {}
+        self.open_positions: dict[str, list] = {}
         self.trading_halted = False
         self.strategy_paused = False
         self.pnl_history = []
-        # Suivi du plafond de profit MENSUEL -- référence qui se
-        # réinitialise à chaque nouveau mois calendaire (voir
-        # check_monthly_rollover), indépendamment du capital de départ
-        # d'origine du bot.
-        self.month_label = month_label
-        self.month_start_balance = month_start_balance if month_start_balance is not None else starting_capital
-        self.profit_ceiling_hit = profit_ceiling_hit
+        self.current_month = None
+        self.month_start_balance = starting_capital
+        self.profit_ceiling_hit = False
 
-    def check_monthly_rollover(self, current_month_label: str) -> bool:
-        """
-        Si le mois calendaire (UTC) a changé depuis la dernière exécution,
-        réinitialise la référence de calcul du plafond de profit sur le
-        solde ACTUEL (nouveau départ pour le nouveau mois) et lève le
-        plafond éventuellement déclenché le mois précédent.
-        Retourne True si un changement de mois vient d'être détecté.
-        """
-        if self.month_label != current_month_label:
-            self.month_label = current_month_label
+    # ------------------------------------------------------------------
+    # CIRCUIT BREAKER
+    # ------------------------------------------------------------------
+    def check_circuit_breaker(self):
+        loss_pct = (self.starting_capital - self.current_balance) / self.starting_capital
+        if loss_pct >= CIRCUIT_BREAKER_LOSS_PCT:
+            self.trading_halted = True
+        return self.trading_halted
+
+    # ------------------------------------------------------------------
+    # PLAFOND DE PROFIT MENSUEL
+    # ------------------------------------------------------------------
+    def check_monthly_rollover(self, month_str: str = None) -> bool:
+        """Retourne True si un nouveau mois vient de commencer (reset)."""
+        month_now = month_str or datetime.now(timezone.utc).strftime("%Y-%m")
+        if self.current_month != month_now:
+            self.current_month = month_now
             self.month_start_balance = self.current_balance
             self.profit_ceiling_hit = False
             return True
         return False
 
-    def check_profit_ceiling(self) -> bool:
+    def check_monthly_ceiling(self):
         if self.month_start_balance <= 0:
             return self.profit_ceiling_hit
         gain_pct = (self.current_balance - self.month_start_balance) / self.month_start_balance
@@ -89,16 +116,10 @@ class RiskManager:
             self.profit_ceiling_hit = True
         return self.profit_ceiling_hit
 
-    def check_circuit_breaker(self):
-        loss_pct = (self.starting_capital - self.current_balance) / self.starting_capital
-        if loss_pct >= CIRCUIT_BREAKER_LOSS_PCT:
-            self.trading_halted = True
-        return self.trading_halted
-
     def update_balance(self, new_balance):
         self.current_balance = new_balance
         self.check_circuit_breaker()
-        self.check_profit_ceiling()
+        self.check_monthly_ceiling()
 
     def record_trade_result(self, pnl):
         self.pnl_history = performance_tracker.update_pnl_history(self.pnl_history, pnl)
@@ -106,19 +127,35 @@ class RiskManager:
         self.strategy_paused = stats["should_pause"]
         return stats
 
+    # ------------------------------------------------------------------
+    # VÉRIFICATIONS AVANT OUVERTURE
+    # ------------------------------------------------------------------
     def _position_count(self, symbol):
         return len(self.open_positions.get(symbol, []))
 
     def _total_position_count(self):
         return sum(len(v) for v in self.open_positions.values())
 
-    def can_open_position(self, symbol):
+    def _opposite_side_open(self, symbol: str, side: str) -> bool:
+        """Vérifie si une position de sens OPPOSÉ est déjà ouverte sur ce
+        symbole -- on ferme toujours l'opposée avant d'en ouvrir une
+        nouvelle (pas de long ET short simultanés sur la même crypto)."""
+        opposite = "short" if side == "long" else "long"
+        for pos in self.open_positions.get(symbol, []):
+            pos_side = pos["side"] if isinstance(pos, dict) else getattr(pos, "side", "long")
+            if pos_side == opposite:
+                return True
+        return False
+
+    def can_open_position(self, symbol, side: str = "long"):
         if self.trading_halted:
             return False, "Circuit breaker actif : perte cumulée >= seuil"
-        if self.strategy_paused:
-            return False, "Stratégie en pause : performance récente dégradée"
         if self.profit_ceiling_hit:
             return False, f"Plafond de profit mensuel atteint (+{MONTHLY_PROFIT_CEILING_PCT*100:.0f}%) : gains verrouillés jusqu'au mois prochain"
+        if self.strategy_paused:
+            return False, "Stratégie en pause : performance récente dégradée"
+        if self._opposite_side_open(symbol, side):
+            return False, f"Position {('short' if side=='long' else 'long')} opposée déjà ouverte sur {symbol} : fermeture prioritaire"
         if self._total_position_count() >= MAX_TOTAL_OPEN_POSITIONS:
             return False, f"Limite d'exposition globale atteinte ({MAX_TOTAL_OPEN_POSITIONS} positions max)"
         if self._position_count(symbol) >= MAX_OPEN_POSITIONS_PER_SYMBOL:
@@ -127,9 +164,12 @@ class RiskManager:
             return False, "Solde épuisé"
         return True, "OK"
 
+    # ------------------------------------------------------------------
+    # CALCUL DE POSITION -- SPOT (toujours long)
+    # ------------------------------------------------------------------
     def calculate_position(self, symbol, entry_price, atr, entry_reasons=None,
                             ai_size_factor=1.0, ai_sl_tightness=1.0, ai_tp_extension=1.0):
-        allowed, reason = self.can_open_position(symbol)
+        allowed, reason = self.can_open_position(symbol, side="long")
         if not allowed:
             return None
 
@@ -156,26 +196,16 @@ class RiskManager:
             stop_loss_price=round(stop_loss_price, 4), take_profit_price=round(take_profit_price, 4),
             risk_amount_usd=round(risk_amount_usd, 2), reward_amount_usd=round(reward_amount_usd, 2),
             risk_reward_ratio=round(risk_reward_ratio, 2), entry_reasons=entry_reasons or [],
-            highest_price_seen=entry_price,
+            highest_price_seen=entry_price, leverage=1.0, margin_usd=position_size_usd, side="long",
         )
 
-    def calculate_leveraged_position(self, symbol, entry_price, atr, leverage, entry_reasons=None,
+    # ------------------------------------------------------------------
+    # CALCUL DE POSITION -- FUTURES (long OU short)
+    # ------------------------------------------------------------------
+    def calculate_leveraged_position(self, symbol, entry_price, atr, leverage,
+                                      side: str = "long", entry_reasons=None,
                                       ai_size_factor=1.0, ai_sl_tightness=1.0, ai_tp_extension=1.0):
-        """
-        Calcule une position À LEVIER (Futures) en gardant EXACTEMENT le
-        même risque en dollars que ce que ferait calculate_position() en
-        spot, dans TOUS les cas -- pas seulement les cas "normaux".
-
-        Principe : on utilise le MÊME notionnel que ce que le spot
-        utiliserait comme taille de position (10% du solde), donc le même
-        risque en dollars en découle automatiquement (même formule, même
-        quantité). Le levier sert UNIQUEMENT à réduire la marge
-        nécessaire pour tenir ce même notionnel -- jamais à l'augmenter.
-        C'est plus simple et plus sûr qu'une logique de "risque cible
-        avec plafond" qui peut se retourner contre nous sur des cas
-        limites (stop-loss très serré).
-        """
-        allowed, reason = self.can_open_position(symbol)
+        allowed, reason = self.can_open_position(symbol, side=side)
         if not allowed:
             return None
 
@@ -183,18 +213,21 @@ class RiskManager:
         safe_sl_tightness = _clamp(ai_sl_tightness, MIN_AI_SL_TIGHTNESS, 1.0)
         safe_tp_extension = _clamp(ai_tp_extension, 1.0, MAX_AI_TP_EXTENSION)
 
-        # EXACTEMENT la même formule de notionnel que calculate_position()
-        # en spot -- garantit le même risque en dollars par construction,
-        # quelle que soit la distance du SL.
-        notional_used = self.current_balance * MAX_POSITION_PCT * safe_size_factor
-        margin_used = notional_used / leverage   # le levier réduit la marge, jamais le notionnel
-
-        quantity = notional_used / entry_price
+        # Même notionnel et même risque en $ que le spot aurait utilisé --
+        # le levier ne fait que réduire la marge nécessaire pour l'obtenir.
+        position_size_usd = self.current_balance * MAX_POSITION_PCT * safe_size_factor
+        quantity = position_size_usd / entry_price
+        margin_usd = position_size_usd / leverage
 
         sl_distance = atr * ATR_STOP_LOSS_MULTIPLIER * safe_sl_tightness
         tp_distance = atr * ATR_TAKE_PROFIT_MULTIPLIER * safe_tp_extension
-        stop_loss_price = entry_price - sl_distance
-        take_profit_price = entry_price + tp_distance
+
+        if side == "long":
+            stop_loss_price = entry_price - sl_distance
+            take_profit_price = entry_price + tp_distance
+        else:  # short : SL au-dessus de l'entrée, TP en dessous
+            stop_loss_price = entry_price + sl_distance
+            take_profit_price = entry_price - tp_distance
 
         risk_amount_usd = quantity * sl_distance
         reward_amount_usd = quantity * tp_distance
@@ -202,23 +235,20 @@ class RiskManager:
 
         return PositionSizing(
             symbol=symbol, entry_price=entry_price,
-            position_size_usd=round(notional_used, 2), quantity=round(quantity, 8),
+            position_size_usd=round(position_size_usd, 2), quantity=round(quantity, 8),
             stop_loss_price=round(stop_loss_price, 4), take_profit_price=round(take_profit_price, 4),
             risk_amount_usd=round(risk_amount_usd, 2), reward_amount_usd=round(reward_amount_usd, 2),
             risk_reward_ratio=round(risk_reward_ratio, 2), entry_reasons=entry_reasons or [],
-            highest_price_seen=entry_price, leverage=leverage, margin_usd=round(margin_used, 2),
+            highest_price_seen=entry_price, leverage=leverage, margin_usd=round(margin_usd, 2), side=side,
         )
 
-    def register_open_position(self, sizing):
+    # ------------------------------------------------------------------
+    # OUVERTURE / FERMETURE
+    # ------------------------------------------------------------------
+    def register_open_position(self, sizing: PositionSizing):
         self.open_positions.setdefault(sizing.symbol, []).append(sizing)
 
     def close_position(self, symbol, exit_price, position_id=None, pnl_override=None):
-        """
-        pnl_override : si fourni (ex: le vrai P&L renvoyé par OKX pour les
-        Futures, frais et funding déjà déduits), il est utilisé TEL QUEL
-        à la place du calcul interne simplifié (quantité x variation de
-        prix), qui ne connaît ni les frais ni le funding.
-        """
         positions = self.open_positions.get(symbol, [])
         if not positions:
             return 0.0
@@ -237,15 +267,28 @@ class RiskManager:
         else:
             entry_price = match["entry_price"] if isinstance(match, dict) else match.entry_price
             quantity = match["quantity"] if isinstance(match, dict) else match.quantity
-            pnl = quantity * (exit_price - entry_price)
+            side = match["side"] if isinstance(match, dict) else getattr(match, "side", "long")
+            if side == "short":
+                pnl = quantity * (entry_price - exit_price)   # profit quand le prix baisse
+            else:
+                pnl = quantity * (exit_price - entry_price)
 
         self.update_balance(self.current_balance + pnl)
         self.record_trade_result(pnl)
         return round(pnl, 2)
 
+    # ------------------------------------------------------------------
+    # SORTIES INTELLIGENTES
+    # ------------------------------------------------------------------
     def check_exit_conditions_for_position(self, position, current_price, current_signal_direction=None):
-        if current_signal_direction == "sell":
+        side = position["side"] if isinstance(position, dict) else getattr(position, "side", "long")
+
+        # Invalidation : un signal qui va dans le sens OPPOSÉ à la position invalide celle-ci.
+        if side == "long" and current_signal_direction == "sell":
             return "invalidation"
+        if side == "short" and current_signal_direction == "buy":
+            return "invalidation"
+
         opened_at = position["opened_at"] if isinstance(position, dict) else getattr(position, "opened_at", time.time())
         entry_price = position["entry_price"] if isinstance(position, dict) else position.entry_price
         age_hours = (time.time() - opened_at) / 3600
@@ -255,21 +298,38 @@ class RiskManager:
                 return "stagnation_temporelle"
         return None
 
+    # ------------------------------------------------------------------
+    # STOP-LOSS SUIVEUR (long et short)
+    # ------------------------------------------------------------------
     def compute_trailing_stop_update(self, position, current_price):
+        side = position["side"] if isinstance(position, dict) else getattr(position, "side", "long")
         entry_price = position["entry_price"] if isinstance(position, dict) else position.entry_price
         current_sl = position["stop_loss_price"] if isinstance(position, dict) else position.stop_loss_price
-        highest_seen = position.get("highest_price_seen", entry_price) if isinstance(position, dict) \
+        extreme_seen = position.get("highest_price_seen", entry_price) if isinstance(position, dict) \
             else getattr(position, "highest_price_seen", entry_price)
-        original_sl_distance = entry_price - current_sl if current_sl < entry_price else 0
-        if original_sl_distance <= 0:
+
+        if side == "long":
+            original_sl_distance = entry_price - current_sl if current_sl < entry_price else 0
+            if original_sl_distance <= 0:
+                return None
+            new_extreme = max(extreme_seen, current_price)
+            if new_extreme <= extreme_seen * (1 + TRAILING_STOP_MIN_PROGRESS_PCT):
+                return None
+            candidate_new_sl = new_extreme - original_sl_distance
+            if candidate_new_sl > current_sl:
+                return round(candidate_new_sl, 4), round(new_extreme, 4)
             return None
-        new_highest = max(highest_seen, current_price)
-        if new_highest <= highest_seen * (1 + TRAILING_STOP_MIN_PROGRESS_PCT):
+        else:  # short : on suit le plus BAS prix vu, le SL ne descend que vers le bas
+            original_sl_distance = current_sl - entry_price if current_sl > entry_price else 0
+            if original_sl_distance <= 0:
+                return None
+            new_extreme = min(extreme_seen, current_price)
+            if new_extreme >= extreme_seen * (1 - TRAILING_STOP_MIN_PROGRESS_PCT):
+                return None
+            candidate_new_sl = new_extreme + original_sl_distance
+            if candidate_new_sl < current_sl:
+                return round(candidate_new_sl, 4), round(new_extreme, 4)
             return None
-        candidate_new_sl = new_highest - original_sl_distance
-        if candidate_new_sl > current_sl:
-            return round(candidate_new_sl, 4)
-        return None
 
 
 def calculate_atr(high, low, close, period=14):
