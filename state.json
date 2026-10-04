@@ -26,8 +26,8 @@
       -0.8541164607029993,
       -0.18324695199999705
     ],
-    "month_label": "2026-10",
-    "month_start_balance": 501.07387675985865,
+    "current_month": "2026-10",
+    "month_start_balance": 500.5513895539557,
     "profit_ceiling_hit": false,
     "open_positions": {}
   },
@@ -46,7 +46,7 @@
       -0.04084934699999879,
       -0.054267407999996346
     ],
-    "month_label": "2026-10",
+    "current_month": "2026-10",
     "month_start_balance": 497.3201756732518,
     "profit_ceiling_hit": false,
     "open_positions": {}
@@ -78,8 +78,8 @@
       -0.8293314763200021,
       -0.18303927599999703
     ],
-    "month_label": "2026-10",
-    "month_start_balance": 501.93199311909365,
+    "current_month": "2026-10",
+    "month_start_balance": 501.34353970357364,
     "profit_ceiling_hit": false,
     "open_positions": {}
   },
@@ -108,8 +108,8 @@
       -0.7911808128000007,
       -0.058813955999998516
     ],
-    "month_label": "2026-10",
-    "month_start_balance": 500.3692353796967,
+    "current_month": "2026-10",
+    "month_start_balance": 499.7079291148127,
     "profit_ceiling_hit": false,
     "open_positions": {}
   },
@@ -122,7 +122,7 @@
       0.8706400400000034,
       0.9469873700000053
     ],
-    "month_label": "2026-10",
+    "current_month": "2026-10",
     "month_start_balance": 501.81762741,
     "profit_ceiling_hit": false,
     "open_positions": {}
@@ -152,8 +152,8 @@
       -1.2755877750000009,
       -0.059285699999998505
     ],
-    "month_label": "2026-10",
-    "month_start_balance": 505.543677112697,
+    "current_month": "2026-10",
+    "month_start_balance": 504.22983694510503,
     "profit_ceiling_hit": false,
     "open_positions": {}
   },
@@ -174,8 +174,8 @@
       -0.8401628547674993,
       -0.21898022999999855
     ],
-    "month_label": "2026-10",
-    "month_start_balance": 493.00170065819793,
+    "current_month": "2026-10",
+    "month_start_balance": 492.3311509070304,
     "profit_ceiling_hit": false,
     "open_positions": {}
   },
@@ -189,7 +189,7 @@
       0.043124249899997295,
       -0.03584667300000245
     ],
-    "month_label": "2026-10",
+    "current_month": "2026-10",
     "month_start_balance": 499.85423561690004,
     "profit_ceiling_hit": false,
     "open_positions": {}
@@ -211,8 +211,8 @@
       -0.8364262864120013,
       -0.19324317000000002
     ],
-    "month_label": "2026-10",
-    "month_start_balance": 494.31601090478716,
+    "current_month": "2026-10",
+    "month_start_balance": 493.23791363537515,
     "profit_ceiling_hit": false,
     "open_positions": {}
   }
