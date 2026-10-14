@@ -2,11 +2,15 @@ name: Bot de trading horaire
 
 on:
   schedule:
-    - cron: "23 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch: {}
 
 permissions:
   contents: write
+
+concurrency:
+  group: trading-bot
+  cancel-in-progress: false
 
 jobs:
   run-bot:
@@ -15,15 +19,29 @@ jobs:
       - name: Récupérer le code du dépôt
         uses: actions/checkout@v4
 
+      - name: Vérifier si cette heure a déjà été traitée
+        id: guard
+        run: |
+          current=$(date -u +%Y%m%d%H)
+          last=$(cat last_run.txt 2>/dev/null || echo none)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$current" = "$last" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Installer Python
+        if: steps.guard.outputs.skip == 'false'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Installer les dépendances
+        if: steps.guard.outputs.skip == 'false'
         run: pip install -r requirements.txt
 
       - name: Lancer le bot
+        if: steps.guard.outputs.skip == 'false'
         env:
           OKX_API_KEY: ${{ secrets.OKX_API_KEY }}
           OKX_API_SECRET: ${{ secrets.OKX_API_SECRET }}
@@ -34,12 +52,16 @@ jobs:
         run: python main.py
 
       - name: Afficher le rapport de suivi
+        if: steps.guard.outputs.skip == 'false'
         run: python generate_report.py
 
       - name: Sauvegarder l'état et les logs dans le dépôt
+        if: steps.guard.outputs.skip == 'false'
         run: |
           git config user.name "trading-bot"
           git config user.email "trading-bot@users.noreply.github.com"
+          date -u +%Y%m%d%H > last_run.txt
+          git add last_run.txt
           [ -f state.json ] && git add state.json
           [ -f trading_log.csv ] && git add trading_log.csv
           git diff --staged --quiet || git commit -m "Mise a jour etat du bot"
