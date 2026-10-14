@@ -371,3 +371,13 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-14T13:50:36.612078+00:00,adaptive_hybrid__shadow,ETH-USDT,buy,2477.88,0.02034924,0.0,score=55 (Niveau 1 seul) [70b6f05a]
 2026-10-14T13:50:37.078486+00:00,adaptive_hybrid,ETH-USDT,buy,2477.88,0.02023276,0.0,score=55 | SL=2428.8804 TP=2575.8793 [2fe8bbb5]
 2026-10-14T13:50:37.699820+00:00,adaptive_hybrid__futures,ETH-USDT,skip_open,2477.88,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-14T18:43:27.117516+00:00,trend_following,ETH-USDT,close,2424.43,0.02018833,-1.11,stop_loss [d2856de1]
+2026-10-14T18:43:27.943597+00:00,trend_following__shadow,ETH-USDT,close,2424.43,0.02015431,-1.11,stop_loss [b8997f8b]
+2026-10-14T18:43:29.976798+00:00,mean_reversion__shadow,BTC-USDT,buy,81600.2,0.00061497,0.0,score=55 (Niveau 1 seul) [c0f96bb2]
+2026-10-14T18:43:30.495015+00:00,mean_reversion,BTC-USDT,skip_buy,81600.2,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-14T18:43:31.641917+00:00,mean_reversion__futures,BTC-USDT,buy,81600.2,0.00061256,0.0,score=55 | side=long | SL=80763.1786 TP=83274.2429 [ef077851]
+2026-10-14T18:43:33.774239+00:00,adaptive_hybrid,ETH-USDT,close,2424.53,0.02023276,-1.08,stop_loss [2fe8bbb5]
+2026-10-14T18:43:34.599163+00:00,adaptive_hybrid__shadow,ETH-USDT,close,2424.78,0.02034924,-1.08,stop_loss [70b6f05a]
+2026-10-14T18:43:35.340479+00:00,adaptive_hybrid__shadow,BTC-USDT,buy,81600.2,0.0006166,0.0,score=55 (Niveau 1 seul) [a9683102]
+2026-10-14T18:43:35.842176+00:00,adaptive_hybrid,BTC-USDT,buy,81600.2,0.00061307,0.0,score=55 | SL=80763.1786 TP=83274.2429 [275d7c31]
+2026-10-14T18:43:36.561357+00:00,adaptive_hybrid__futures,BTC-USDT,skip_open,81600.2,0.0,0.0,Stratégie en pause : performance récente dégradée
