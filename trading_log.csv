@@ -406,3 +406,9 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-16T20:32:46.072943+00:00,adaptive_hybrid__shadow,BNB-USDT,buy,721.6,0.06969066,0.0,score=60 (Niveau 1 seul) [2b92ee1a]
 2026-10-16T20:32:46.500076+00:00,adaptive_hybrid,BNB-USDT,buy,721.6,0.06925707,0.0,score=60 | SL=715.8464 TP=733.1071 [613cd419]
 2026-10-16T20:32:47.159470+00:00,adaptive_hybrid__futures,BNB-USDT,skip_open,721.6,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-16T22:59:31.889353+00:00,mean_reversion__shadow,BNB-USDT,buy,722.5,0.06945573,0.0,score=60 (Niveau 1 seul) [55dfd0a2]
+2026-10-16T22:59:32.572057+00:00,mean_reversion,BNB-USDT,skip_buy,722.5,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-16T22:59:33.724344+00:00,mean_reversion__futures,BNB-USDT,buy,722.5,0.06918398,0.0,score=60 | side=long | SL=716.7036 TP=734.0929 [b51c5826]
+2026-10-16T22:59:36.954465+00:00,adaptive_hybrid__shadow,BNB-USDT,buy,722.5,0.06960385,0.0,score=60 (Niveau 1 seul) [8165be9f]
+2026-10-16T22:59:37.406549+00:00,adaptive_hybrid,BNB-USDT,buy,722.5,0.0691708,0.0,score=60 | SL=716.7036 TP=734.0929 [ca3942f2]
+2026-10-16T22:59:37.991454+00:00,adaptive_hybrid__futures,BNB-USDT,skip_open,722.5,0.0,0.0,Stratégie en pause : performance récente dégradée
