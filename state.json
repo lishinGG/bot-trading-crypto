@@ -1,11 +1,10 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 499.4414351705557,
+    "current_balance": 499.1818786405557,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      0.8825389005096018,
       -0.2920707529999987,
       -0.3757068,
       0.3689916859999991,
@@ -24,27 +23,13 @@
       -0.5281966592000005,
       -0.8541164607029993,
       -0.18324695199999705,
-      -1.1099543834000005
+      -1.1099543834000005,
+      -0.25955653000000467
     ],
     "current_month": "2026-10",
     "month_start_balance": 500.5513895539557,
     "profit_ceiling_hit": false,
     "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "b7aeb68e",
-          "entry_price": 731.2,
-          "quantity": 0.06830435,
-          "stop_loss_price": 727.4393,
-          "take_profit_price": 738.7214,
-          "opened_at": 1792142405.7942202,
-          "algo_id": "",
-          "highest_price_seen": 731.2,
-          "leverage": 1.0,
-          "margin_usd": 49.94414351705557,
-          "side": "long"
-        }
-      ],
       "XLM-USDT": [
         {
           "position_id": "e2feb64e",
@@ -84,11 +69,10 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 500.26412195757365,
+    "current_balance": 500.00413785157366,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.03745171799999905,
       -0.4090957680000012,
       -0.3270927251999992,
       -0.22732110000000383,
@@ -107,7 +91,8 @@
       -0.4262970592000005,
       -0.8293314763200021,
       -0.18303927599999703,
-      -1.079417745999998
+      -1.079417745999998,
+      -0.2599841060000047
     ],
     "current_month": "2026-10",
     "month_start_balance": 501.34353970357364,
@@ -127,27 +112,12 @@
           "margin_usd": 50.026412195757366,
           "side": "long"
         }
-      ],
-      "BNB-USDT": [
-        {
-          "position_id": "b3076868",
-          "entry_price": 731.2,
-          "quantity": 0.06841687,
-          "stop_loss_price": 727.4393,
-          "take_profit_price": 738.7214,
-          "opened_at": 1792142414.2043417,
-          "algo_id": "",
-          "highest_price_seen": 731.2,
-          "leverage": 1.0,
-          "margin_usd": 50.026412195757366,
-          "side": "long"
-        }
       ]
     }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 498.5998451510127,
+    "current_balance": 498.3407259630127,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -169,27 +139,13 @@
       -0.8529153450839994,
       -0.7911808128000007,
       -0.058813955999998516,
-      -1.1080839638000004
+      -1.1080839638000004,
+      -0.25911918800000466
     ],
     "current_month": "2026-10",
     "month_start_balance": 499.7079291148127,
     "profit_ceiling_hit": false,
     "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "e8ff3da0",
-          "entry_price": 731.2,
-          "quantity": 0.06818926,
-          "stop_loss_price": 727.4393,
-          "take_profit_price": 738.7214,
-          "opened_at": 1792142405.3655138,
-          "algo_id": "",
-          "highest_price_seen": 731.2,
-          "leverage": 1.0,
-          "margin_usd": 49.859984515101274,
-          "side": "long"
-        }
-      ],
       "XLM-USDT": [
         {
           "position_id": "ddc4c59f",
@@ -239,7 +195,7 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 503.14929230110505,
+    "current_balance": 502.88780879110504,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
@@ -261,7 +217,8 @@
       -0.8352989845920021,
       -1.2755877750000009,
       -0.059285699999998505,
-      -1.0805446439999982
+      -1.0805446439999982,
+      -0.2614835100000047
     ],
     "current_month": "2026-10",
     "month_start_balance": 504.22983694510503,
@@ -277,21 +234,6 @@
           "opened_at": 1792003415.3403993,
           "algo_id": "",
           "highest_price_seen": 81600.2,
-          "leverage": 1.0,
-          "margin_usd": 50.31492923011051,
-          "side": "long"
-        }
-      ],
-      "BNB-USDT": [
-        {
-          "position_id": "1ec1ed72",
-          "entry_price": 731.2,
-          "quantity": 0.06881145,
-          "stop_loss_price": 727.4393,
-          "take_profit_price": 738.7214,
-          "opened_at": 1792142414.107713,
-          "algo_id": "",
-          "highest_price_seen": 731.2,
           "leverage": 1.0,
           "margin_usd": 50.31492923011051,
           "side": "long"
