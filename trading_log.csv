@@ -383,3 +383,12 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-14T18:43:36.561357+00:00,adaptive_hybrid__futures,BTC-USDT,skip_open,81600.2,0.0,0.0,Stratégie en pause : performance récente dégradée
 2026-10-15T19:04:14.231843+00:00,mean_reversion__futures,BTC-USDT,trailing_stop_update,82477.0,0.00061256,0.0,Nouveau SL=81639.9786 [long] [ef077851]
 2026-10-15T19:04:15.766914+00:00,adaptive_hybrid,BTC-USDT,trailing_stop_update,82479.6,0.00061307,0.0,Nouveau SL=81642.5786 [275d7c31]
+2026-10-16T09:20:05.365606+00:00,trend_following__shadow,BNB-USDT,buy,731.2,0.06818926,0.0,score=90 (Niveau 1 seul) [e8ff3da0]
+2026-10-16T09:20:06.416375+00:00,trend_following,BNB-USDT,buy,731.2,0.06830435,0.0,score=90 | SL=727.4393 TP=738.7214 [b7aeb68e]
+2026-10-16T09:20:08.176137+00:00,trend_following__futures,BNB-USDT,skip_open,731.2,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-16T09:20:08.885811+00:00,trend_following__shadow,XLM-USDT,buy,0.18421,270.66926071,0.0,score=55 (Niveau 1 seul) [ddc4c59f]
+2026-10-16T09:20:09.352219+00:00,trend_following,XLM-USDT,buy,0.18421,271.12612517,0.0,score=55 | SL=0.1826 TP=0.1874 [e2feb64e]
+2026-10-16T09:20:09.890373+00:00,trend_following__futures,XLM-USDT,skip_open,0.18421,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-16T09:20:14.107787+00:00,adaptive_hybrid__shadow,BNB-USDT,buy,731.2,0.06881145,0.0,score=90 (Niveau 1 seul) [1ec1ed72]
+2026-10-16T09:20:14.544275+00:00,adaptive_hybrid,BNB-USDT,buy,731.2,0.06841687,0.0,score=90 | SL=727.4393 TP=738.7214 [b3076868]
+2026-10-16T09:20:15.111418+00:00,adaptive_hybrid__futures,BNB-USDT,skip_open,731.2,0.0,0.0,Stratégie en pause : performance récente dégradée
