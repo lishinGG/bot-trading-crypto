@@ -81,7 +81,23 @@
     "current_month": "2026-10",
     "month_start_balance": 501.34353970357364,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "613cd419",
+          "entry_price": 721.6,
+          "quantity": 0.06925707,
+          "stop_loss_price": 715.8464,
+          "take_profit_price": 733.1071,
+          "opened_at": 1792182766.1419773,
+          "algo_id": "",
+          "highest_price_seen": 721.6,
+          "leverage": 1.0,
+          "margin_usd": 49.97590324655737,
+          "side": "long"
+        }
+      ]
+    }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
@@ -142,6 +158,21 @@
           "margin_usd": 50.181762741,
           "side": "long"
         }
+      ],
+      "BNB-USDT": [
+        {
+          "position_id": "ca152481",
+          "entry_price": 721.6,
+          "quantity": 0.06954235,
+          "stop_loss_price": 715.8464,
+          "take_profit_price": 733.1071,
+          "opened_at": 1792182761.9389377,
+          "algo_id": "",
+          "highest_price_seen": 721.6,
+          "leverage": 1.0,
+          "margin_usd": 50.181762741,
+          "side": "long"
+        }
       ]
     }
   },
@@ -190,6 +221,21 @@
           "margin_usd": 50.31492923011051,
           "side": "long"
         }
+      ],
+      "BNB-USDT": [
+        {
+          "position_id": "2b92ee1a",
+          "entry_price": 721.6,
+          "quantity": 0.06969066,
+          "stop_loss_price": 715.8464,
+          "take_profit_price": 733.1071,
+          "opened_at": 1792182766.0728407,
+          "algo_id": "",
+          "highest_price_seen": 721.6,
+          "leverage": 1.0,
+          "margin_usd": 50.288780879110504,
+          "side": "long"
+        }
       ]
     }
   },
@@ -229,7 +275,23 @@
     "current_month": "2026-10",
     "month_start_balance": 499.85423561690004,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "BNB-USDT": [
+        {
+          "position_id": "801b536e",
+          "entry_price": 721.6,
+          "quantity": 0.06927026,
+          "stop_loss_price": 715.8464,
+          "take_profit_price": 733.1071,
+          "opened_at": 1792182762.5818415,
+          "algo_id": "",
+          "highest_price_seen": 721.6,
+          "leverage": 5,
+          "margin_usd": 10.0,
+          "side": "long"
+        }
+      ]
+    }
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
