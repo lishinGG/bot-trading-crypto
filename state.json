@@ -1,11 +1,10 @@
 {
   "trend_following": {
     "starting_capital": 500.0,
-    "current_balance": 499.1818786405557,
+    "current_balance": 498.0973741398757,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.2920707529999987,
       -0.3757068,
       0.3689916859999991,
       1.8941894383280005,
@@ -24,28 +23,13 @@
       -0.8541164607029993,
       -0.18324695199999705,
       -1.1099543834000005,
-      -0.25955653000000467
+      -0.25955653000000467,
+      -1.0845045006800011
     ],
     "current_month": "2026-10",
     "month_start_balance": 500.5513895539557,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "XLM-USDT": [
-        {
-          "position_id": "e2feb64e",
-          "entry_price": 0.18421,
-          "quantity": 271.12612517,
-          "stop_loss_price": 0.1826,
-          "take_profit_price": 0.1874,
-          "opened_at": 1792142408.9847865,
-          "algo_id": "",
-          "highest_price_seen": 0.18421,
-          "leverage": 1.0,
-          "margin_usd": 49.94414351705557,
-          "side": "long"
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -69,11 +53,10 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 500.00413785157366,
+    "current_balance": 499.7590324655737,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.4090957680000012,
       -0.3270927251999992,
       -0.22732110000000383,
       -0.0221965260000023,
@@ -92,36 +75,20 @@
       -0.8293314763200021,
       -0.18303927599999703,
       -1.079417745999998,
-      -0.2599841060000047
+      -0.2599841060000047,
+      -0.24510538600000176
     ],
     "current_month": "2026-10",
     "month_start_balance": 501.34353970357364,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "275d7c31",
-          "entry_price": 81600.2,
-          "quantity": 0.00061307,
-          "stop_loss_price": 81642.5786,
-          "take_profit_price": 83274.2429,
-          "opened_at": 1792003415.501392,
-          "algo_id": "",
-          "highest_price_seen": 82479.6,
-          "leverage": 1.0,
-          "margin_usd": 50.026412195757366,
-          "side": "long"
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 498.3407259630127,
+    "current_balance": 497.2580489201727,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.3099835,
       1.3901708857999993,
       1.1397332590000018,
       2.2389491548160008,
@@ -140,28 +107,13 @@
       -0.7911808128000007,
       -0.058813955999998516,
       -1.1080839638000004,
-      -0.25911918800000466
+      -0.25911918800000466,
+      -1.082677042840001
     ],
     "current_month": "2026-10",
     "month_start_balance": 499.7079291148127,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "XLM-USDT": [
-        {
-          "position_id": "ddc4c59f",
-          "entry_price": 0.18421,
-          "quantity": 270.66926071,
-          "stop_loss_price": 0.1826,
-          "take_profit_price": 0.1874,
-          "opened_at": 1792142408.8857415,
-          "algo_id": "",
-          "highest_price_seen": 0.18421,
-          "leverage": 1.0,
-          "margin_usd": 49.859984515101274,
-          "side": "long"
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -265,34 +217,19 @@
   },
   "mean_reversion__futures": {
     "starting_capital": 500.0,
-    "current_balance": 499.85423561690004,
+    "current_balance": 499.85423061690005,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       -0.15304196000000087,
       0.043124249899997295,
-      -0.03584667300000245
+      -0.03584667300000245,
+      -5e-06
     ],
     "current_month": "2026-10",
     "month_start_balance": 499.85423561690004,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "ef077851",
-          "entry_price": 81600.2,
-          "quantity": 0.00061256,
-          "stop_loss_price": 81639.9786,
-          "take_profit_price": 83274.2429,
-          "opened_at": 1792003410.7037497,
-          "algo_id": "",
-          "highest_price_seen": 82477.0,
-          "leverage": 5,
-          "margin_usd": 10.0,
-          "side": "long"
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "adaptive_hybrid__futures": {
     "starting_capital": 500.0,
