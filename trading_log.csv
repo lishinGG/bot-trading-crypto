@@ -418,3 +418,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-17T16:27:31.900909+00:00,adaptive_hybrid,BNB-USDT,close,715.0,0.0691708,-0.52,stop_loss [ca3942f2]
 2026-10-17T16:27:33.607814+00:00,adaptive_hybrid__shadow,BNB-USDT,close,715.0,0.06969066,-0.46,stop_loss [2b92ee1a]
 2026-10-17T16:27:33.607900+00:00,adaptive_hybrid__shadow,BNB-USDT,close,715.0,0.06960385,-0.52,stop_loss [8165be9f]
+2026-10-17T21:00:01.639018+00:00,mean_reversion__shadow,BTC-USDT,close,81648.1,0.00061497,0.03,stagnation_temporelle [c0f96bb2]
+2026-10-17T21:00:04.218673+00:00,adaptive_hybrid__shadow,BTC-USDT,close,81648.3,0.0006166,0.03,stagnation_temporelle [a9683102]
