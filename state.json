@@ -53,12 +53,10 @@
   },
   "adaptive_hybrid": {
     "starting_capital": 500.0,
-    "current_balance": 499.7590324655737,
+    "current_balance": 498.78315480357367,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.3270927251999992,
-      -0.22732110000000383,
       -0.0221965260000023,
       0.3073550029999992,
       0.8096564254999981,
@@ -76,41 +74,14 @@
       -0.18303927599999703,
       -1.079417745999998,
       -0.2599841060000047,
-      -0.24510538600000176
+      -0.24510538600000176,
+      -0.4570966620000016,
+      -0.518781
     ],
     "current_month": "2026-10",
     "month_start_balance": 501.34353970357364,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BNB-USDT": [
-        {
-          "position_id": "613cd419",
-          "entry_price": 721.6,
-          "quantity": 0.06925707,
-          "stop_loss_price": 715.8464,
-          "take_profit_price": 733.1071,
-          "opened_at": 1792182766.1419773,
-          "algo_id": "",
-          "highest_price_seen": 721.6,
-          "leverage": 1.0,
-          "margin_usd": 49.97590324655737,
-          "side": "long"
-        },
-        {
-          "position_id": "ca3942f2",
-          "entry_price": 722.5,
-          "quantity": 0.0691708,
-          "stop_loss_price": 716.7036,
-          "take_profit_price": 734.0929,
-          "opened_at": 1792191577.0671024,
-          "algo_id": "",
-          "highest_price_seen": 722.5,
-          "leverage": 1.0,
-          "margin_usd": 49.97590324655737,
-          "side": "long"
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
@@ -146,12 +117,14 @@
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 501.81762741,
+    "current_balance": 500.837729925,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
       0.8706400400000034,
-      0.9469873700000053
+      0.9469873700000053,
+      -0.4589795100000016,
+      -0.5209179749999999
     ],
     "current_month": "2026-10",
     "month_start_balance": 501.81762741,
@@ -171,45 +144,15 @@
           "margin_usd": 50.181762741,
           "side": "long"
         }
-      ],
-      "BNB-USDT": [
-        {
-          "position_id": "ca152481",
-          "entry_price": 721.6,
-          "quantity": 0.06954235,
-          "stop_loss_price": 715.8464,
-          "take_profit_price": 733.1071,
-          "opened_at": 1792182761.9389377,
-          "algo_id": "",
-          "highest_price_seen": 721.6,
-          "leverage": 1.0,
-          "margin_usd": 50.181762741,
-          "side": "long"
-        },
-        {
-          "position_id": "55dfd0a2",
-          "entry_price": 722.5,
-          "quantity": 0.06945573,
-          "stop_loss_price": 716.7036,
-          "take_profit_price": 734.0929,
-          "opened_at": 1792191571.8892734,
-          "algo_id": "",
-          "highest_price_seen": 722.5,
-          "leverage": 1.0,
-          "margin_usd": 50.181762741,
-          "side": "long"
-        }
       ]
     }
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 502.88780879110504,
+    "current_balance": 501.90582156010504,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.3099835,
-      1.3932069384999966,
       1.1397332590000018,
       2.2389626463600005,
       1.3806579060000044,
@@ -227,7 +170,9 @@
       -1.2755877750000009,
       -0.059285699999998505,
       -1.0805446439999982,
-      -0.2614835100000047
+      -0.2614835100000047,
+      -0.45995835600000157,
+      -0.522028875
     ],
     "current_month": "2026-10",
     "month_start_balance": 504.22983694510503,
@@ -245,34 +190,6 @@
           "highest_price_seen": 81600.2,
           "leverage": 1.0,
           "margin_usd": 50.31492923011051,
-          "side": "long"
-        }
-      ],
-      "BNB-USDT": [
-        {
-          "position_id": "2b92ee1a",
-          "entry_price": 721.6,
-          "quantity": 0.06969066,
-          "stop_loss_price": 715.8464,
-          "take_profit_price": 733.1071,
-          "opened_at": 1792182766.0728407,
-          "algo_id": "",
-          "highest_price_seen": 721.6,
-          "leverage": 1.0,
-          "margin_usd": 50.288780879110504,
-          "side": "long"
-        },
-        {
-          "position_id": "8165be9f",
-          "entry_price": 722.5,
-          "quantity": 0.06960385,
-          "stop_loss_price": 716.7036,
-          "take_profit_price": 734.0929,
-          "opened_at": 1792191576.9543877,
-          "algo_id": "",
-          "highest_price_seen": 722.5,
-          "leverage": 1.0,
-          "margin_usd": 50.288780879110504,
           "side": "long"
         }
       ]
