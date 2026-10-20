@@ -29,7 +29,23 @@
     "current_month": "2026-10",
     "month_start_balance": 500.5513895539557,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "ETH-USDT": [
+        {
+          "position_id": "81c270b2",
+          "entry_price": 2452.73,
+          "quantity": 0.02030788,
+          "stop_loss_price": 2414.8561,
+          "take_profit_price": 2528.4779,
+          "opened_at": 1792515450.2886944,
+          "algo_id": "",
+          "highest_price_seen": 2452.73,
+          "leverage": 1.0,
+          "margin_usd": 49.80973741398757,
+          "side": "long"
+        }
+      ]
+    }
   },
   "mean_reversion": {
     "starting_capital": 500.0,
@@ -81,7 +97,23 @@
     "current_month": "2026-10",
     "month_start_balance": 501.34353970357364,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "ETH-USDT": [
+        {
+          "position_id": "6ec5a6dc",
+          "entry_price": 2452.7,
+          "quantity": 0.02033608,
+          "stop_loss_price": 2414.8261,
+          "take_profit_price": 2528.4479,
+          "opened_at": 1792515455.066498,
+          "algo_id": "",
+          "highest_price_seen": 2452.7,
+          "leverage": 1.0,
+          "margin_usd": 49.87831548035737,
+          "side": "long"
+        }
+      ]
+    }
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
@@ -113,7 +145,23 @@
     "current_month": "2026-10",
     "month_start_balance": 499.7079291148127,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "ETH-USDT": [
+        {
+          "position_id": "94a1a007",
+          "entry_price": 2452.73,
+          "quantity": 0.02027366,
+          "stop_loss_price": 2414.8561,
+          "take_profit_price": 2528.4779,
+          "opened_at": 1792515449.7132406,
+          "algo_id": "",
+          "highest_price_seen": 2452.73,
+          "leverage": 1.0,
+          "margin_usd": 49.72580489201727,
+          "side": "long"
+        }
+      ]
+    }
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -162,7 +210,23 @@
     "current_month": "2026-10",
     "month_start_balance": 504.22983694510503,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "ETH-USDT": [
+        {
+          "position_id": "aab94a78",
+          "entry_price": 2452.7,
+          "quantity": 0.02046461,
+          "stop_loss_price": 2414.8261,
+          "take_profit_price": 2528.4479,
+          "opened_at": 1792515455.002299,
+          "algo_id": "",
+          "highest_price_seen": 2452.7,
+          "leverage": 1.0,
+          "margin_usd": 50.19354800201051,
+          "side": "long"
+        }
+      ]
+    }
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
