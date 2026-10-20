@@ -44,6 +44,21 @@
           "margin_usd": 49.80973741398757,
           "side": "long"
         }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "78f7fc4c",
+          "entry_price": 82980.2,
+          "quantity": 0.00060026,
+          "stop_loss_price": 82231.1107,
+          "take_profit_price": 84478.3786,
+          "opened_at": 1792537969.4726465,
+          "algo_id": "",
+          "highest_price_seen": 82980.2,
+          "leverage": 1.0,
+          "margin_usd": 49.80973741398757,
+          "side": "long"
+        }
       ]
     }
   },
@@ -112,6 +127,21 @@
           "margin_usd": 49.87831548035737,
           "side": "long"
         }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "a9caa747",
+          "entry_price": 82980.2,
+          "quantity": 0.00060109,
+          "stop_loss_price": 82231.1107,
+          "take_profit_price": 84478.3786,
+          "opened_at": 1792537973.800638,
+          "algo_id": "",
+          "highest_price_seen": 82980.2,
+          "leverage": 1.0,
+          "margin_usd": 49.87831548035737,
+          "side": "long"
+        }
       ]
     }
   },
@@ -156,6 +186,21 @@
           "opened_at": 1792515449.7132406,
           "algo_id": "",
           "highest_price_seen": 2452.73,
+          "leverage": 1.0,
+          "margin_usd": 49.72580489201727,
+          "side": "long"
+        }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "1d96181b",
+          "entry_price": 82980.2,
+          "quantity": 0.00059925,
+          "stop_loss_price": 82231.1107,
+          "take_profit_price": 84478.3786,
+          "opened_at": 1792537968.8688104,
+          "algo_id": "",
+          "highest_price_seen": 82980.2,
           "leverage": 1.0,
           "margin_usd": 49.72580489201727,
           "side": "long"
@@ -221,6 +266,21 @@
           "opened_at": 1792515455.002299,
           "algo_id": "",
           "highest_price_seen": 2452.7,
+          "leverage": 1.0,
+          "margin_usd": 50.19354800201051,
+          "side": "long"
+        }
+      ],
+      "BTC-USDT": [
+        {
+          "position_id": "1f145712",
+          "entry_price": 82980.2,
+          "quantity": 0.00060489,
+          "stop_loss_price": 82231.1107,
+          "take_profit_price": 84478.3786,
+          "opened_at": 1792537973.7275877,
+          "algo_id": "",
+          "highest_price_seen": 82980.2,
           "leverage": 1.0,
           "margin_usd": 50.19354800201051,
           "side": "long"
