@@ -434,3 +434,7 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-20T23:12:53.727656+00:00,adaptive_hybrid__shadow,BTC-USDT,buy,82980.2,0.00060489,0.0,score=70 (Niveau 1 seul) [1f145712]
 2026-10-20T23:12:54.053231+00:00,adaptive_hybrid,BTC-USDT,buy,82980.2,0.00060109,0.0,score=70 | SL=82231.1107 TP=84478.3786 [a9caa747]
 2026-10-20T23:12:54.636159+00:00,adaptive_hybrid__futures,BTC-USDT,skip_open,82980.2,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-21T12:18:24.556150+00:00,trend_following,ETH-USDT,trailing_stop_update,2467.82,0.02030788,0.0,Nouveau SL=2429.9461 [81c270b2]
+2026-10-21T12:18:24.816312+00:00,trend_following,BTC-USDT,trailing_stop_update,83541.9,0.00060026,0.0,Nouveau SL=82792.8107 [78f7fc4c]
+2026-10-21T12:18:27.412039+00:00,adaptive_hybrid,ETH-USDT,trailing_stop_update,2467.82,0.02033608,0.0,Nouveau SL=2429.9461 [6ec5a6dc]
+2026-10-21T12:18:27.666816+00:00,adaptive_hybrid,BTC-USDT,trailing_stop_update,83541.9,0.00060109,0.0,Nouveau SL=82792.8107 [a9caa747]
