@@ -444,3 +444,5 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-21T17:20:51.828772+00:00,adaptive_hybrid,ETH-USDT,trailing_stop_update,2511.46,0.02033608,0.0,Nouveau SL=2488.7061 [6ec5a6dc]
 2026-10-21T17:20:52.085616+00:00,adaptive_hybrid,BTC-USDT,close,84658.1,0.00060109,1.01,take_profit [a9caa747]
 2026-10-21T17:20:53.182427+00:00,adaptive_hybrid__shadow,BTC-USDT,close,84658.1,0.00060489,1.01,take_profit [1f145712]
+2026-10-21T23:41:17.324174+00:00,trend_following,ETH-USDT,close,2475.87,0.02030788,0.47,stop_loss [81c270b2]
+2026-10-21T23:41:20.289443+00:00,adaptive_hybrid,ETH-USDT,close,2475.87,0.02033608,0.47,stop_loss [6ec5a6dc]
