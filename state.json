@@ -85,11 +85,10 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 498.26353049517274,
+    "current_balance": 496.7898381497727,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.1397332590000018,
       2.2389491548160008,
       1.4000953680000017,
       1.6909279750000001,
@@ -108,28 +107,13 @@
       -1.1080839638000004,
       -0.25911918800000466,
       -1.082677042840001,
-      1.0054815750000052
+      1.0054815750000052,
+      -1.473692345400001
     ],
     "current_month": "2026-10",
     "month_start_balance": 499.7079291148127,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "94a1a007",
-          "entry_price": 2452.73,
-          "quantity": 0.02027366,
-          "stop_loss_price": 2414.8561,
-          "take_profit_price": 2528.4779,
-          "opened_at": 1792515449.7132406,
-          "algo_id": "",
-          "highest_price_seen": 2452.73,
-          "leverage": 1.0,
-          "margin_usd": 49.72580489201727,
-          "side": "long"
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "mean_reversion__shadow": {
     "starting_capital": 500.0,
@@ -150,11 +134,10 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 502.95042495110505,
+    "current_balance": 501.46060134310505,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      1.3806579060000044,
       1.6916935463999991,
       -0.3467516821999965,
       -0.3124313760000044,
@@ -173,28 +156,13 @@
       -0.45995835600000157,
       -0.522028875,
       0.029658460000003592,
-      1.0149449310000052
+      1.0149449310000052,
+      -1.4898236079999945
     ],
     "current_month": "2026-10",
     "month_start_balance": 504.22983694510503,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "ETH-USDT": [
-        {
-          "position_id": "aab94a78",
-          "entry_price": 2452.7,
-          "quantity": 0.02046461,
-          "stop_loss_price": 2414.8261,
-          "take_profit_price": 2528.4479,
-          "opened_at": 1792515455.002299,
-          "algo_id": "",
-          "highest_price_seen": 2452.7,
-          "leverage": 1.0,
-          "margin_usd": 50.19354800201051,
-          "side": "long"
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
