@@ -448,3 +448,9 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-21T23:41:20.289443+00:00,adaptive_hybrid,ETH-USDT,close,2475.87,0.02033608,0.47,stop_loss [6ec5a6dc]
 2026-10-22T17:36:48.672508+00:00,trend_following__shadow,ETH-USDT,close,2380.04,0.02027366,-1.47,stop_loss [94a1a007]
 2026-10-22T17:36:51.414881+00:00,adaptive_hybrid__shadow,ETH-USDT,close,2379.9,0.02046461,-1.49,stop_loss [aab94a78]
+2026-10-25T13:14:32.610392+00:00,trend_following__shadow,BNB-USDT,buy,738.7,0.06725191,0.0,score=55 (Niveau 1 seul) [333e256d]
+2026-10-25T13:14:33.740234+00:00,trend_following,BNB-USDT,buy,738.7,0.06762887,0.0,score=55 | SL=732.6679 TP=750.7643 [301ec0be]
+2026-10-25T13:14:34.266777+00:00,trend_following__futures,BNB-USDT,skip_open,738.7,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-25T13:14:36.977124+00:00,adaptive_hybrid__shadow,BNB-USDT,buy,738.7,0.0678842,0.0,score=55 (Niveau 1 seul) [e70ce576]
+2026-10-25T13:14:37.377586+00:00,adaptive_hybrid,BNB-USDT,buy,738.7,0.06772207,0.0,score=55 | SL=732.6679 TP=750.7643 [73c90b0e]
+2026-10-25T13:14:38.045973+00:00,adaptive_hybrid__futures,BNB-USDT,skip_open,738.7,0.0,0.0,Stratégie en pause : performance récente dégradée
