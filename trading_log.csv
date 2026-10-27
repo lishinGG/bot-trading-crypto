@@ -456,3 +456,7 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-25T13:14:38.045973+00:00,adaptive_hybrid__futures,BNB-USDT,skip_open,738.7,0.0,0.0,Stratégie en pause : performance récente dégradée
 2026-10-25T17:04:14.814515+00:00,trend_following,BNB-USDT,trailing_stop_update,743.0,0.06762887,0.0,Nouveau SL=736.9679 [301ec0be]
 2026-10-25T17:04:18.543342+00:00,adaptive_hybrid,BNB-USDT,trailing_stop_update,743.0,0.06772207,0.0,Nouveau SL=736.9679 [73c90b0e]
+2026-10-27T16:07:19.176390+00:00,trend_following,BNB-USDT,close,752.4,0.06762887,0.93,take_profit [301ec0be]
+2026-10-27T16:07:20.159590+00:00,trend_following__shadow,BNB-USDT,close,752.4,0.06725191,0.92,take_profit [333e256d]
+2026-10-27T16:07:23.262095+00:00,adaptive_hybrid,BNB-USDT,close,752.4,0.06772207,0.93,take_profit [73c90b0e]
+2026-10-27T16:07:23.955840+00:00,adaptive_hybrid__shadow,BNB-USDT,close,752.4,0.0678842,0.93,take_profit [e70ce576]
