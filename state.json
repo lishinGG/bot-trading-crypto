@@ -44,6 +44,21 @@
           "margin_usd": 50.05009902560757,
           "side": "long"
         }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "9a8b8af3",
+          "entry_price": 0.1703,
+          "quantity": 293.89371125,
+          "stop_loss_price": 0.1692,
+          "take_profit_price": 0.1726,
+          "opened_at": 1793145554.014855,
+          "algo_id": "",
+          "highest_price_seen": 0.1703,
+          "leverage": 1.0,
+          "margin_usd": 50.05009902560757,
+          "side": "long"
+        }
       ]
     }
   },
@@ -112,6 +127,21 @@
           "margin_usd": 50.119070304717376,
           "side": "long"
         }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "3635b18e",
+          "entry_price": 0.1703,
+          "quantity": 294.29870995,
+          "stop_loss_price": 0.1692,
+          "take_profit_price": 0.1726,
+          "opened_at": 1793145557.7206705,
+          "algo_id": "",
+          "highest_price_seen": 0.1703,
+          "leverage": 1.0,
+          "margin_usd": 50.119070304717376,
+          "side": "long"
+        }
       ]
     }
   },
@@ -156,6 +186,21 @@
           "opened_at": 1793133540.1026711,
           "algo_id": "",
           "highest_price_seen": 2341.82,
+          "leverage": 1.0,
+          "margin_usd": 49.77111893167728,
+          "side": "long"
+        }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "d00341f3",
+          "entry_price": 0.1703,
+          "quantity": 292.25554276,
+          "stop_loss_price": 0.1692,
+          "take_profit_price": 0.1726,
+          "opened_at": 1793145553.375661,
+          "algo_id": "",
+          "highest_price_seen": 0.1703,
           "leverage": 1.0,
           "margin_usd": 49.77111893167728,
           "side": "long"
@@ -221,6 +266,21 @@
           "opened_at": 1793133545.0984519,
           "algo_id": "",
           "highest_price_seen": 2341.82,
+          "leverage": 1.0,
+          "margin_usd": 50.23906148831051,
+          "side": "long"
+        }
+      ],
+      "XLM-USDT": [
+        {
+          "position_id": "34d0008e",
+          "entry_price": 0.1703,
+          "quantity": 295.00329705,
+          "stop_loss_price": 0.1692,
+          "take_profit_price": 0.1726,
+          "opened_at": 1793145557.656156,
+          "algo_id": "",
+          "highest_price_seen": 0.1703,
           "leverage": 1.0,
           "margin_usd": 50.23906148831051,
           "side": "long"
