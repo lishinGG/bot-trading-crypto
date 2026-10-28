@@ -498,3 +498,8 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-28T16:50:41.041494+00:00,trend_pullback_4h,LINK-USDT,close,11.492,4.23585225,-1.32,stop_loss [bc7d22a3]
 2026-10-28T16:50:41.638547+00:00,trend_pullback_4h__shadow,LINK-USDT,close,11.492,4.23585225,-1.32,stop_loss [6fe1993b]
 2026-10-28T16:50:42.036874+00:00,trend_pullback_4h__futures,LINK-USDT,close,11.484,4.23585225,-0.0,stop_loss [long] [4c0285ae]
+2026-10-28T21:26:38.522590+00:00,trend_following__shadow,XLM-USDT,close,0.17339,292.25554276,0.9,take_profit [d00341f3]
+2026-10-28T21:26:40.003345+00:00,adaptive_hybrid__shadow,XLM-USDT,close,0.17339,295.00329705,0.91,take_profit [34d0008e]
+2026-10-28T21:26:40.524341+00:00,trend_pullback_4h__shadow,BTC-USDT,buy,81309.2,0.00061331,0.0,score=80 (Niveau 1 seul) [b6c2c940]
+2026-10-28T21:26:41.308436+00:00,trend_pullback_4h,BTC-USDT,buy,81309.2,0.00061331,0.0,score=80 | SL=80133.2285 TP=83661.1429 [4947715c]
+2026-10-28T21:26:42.745851+00:00,trend_pullback_4h__futures,BTC-USDT,buy,81309.2,0.00061494,0.0,score=80 | side=long | SL=80133.2285 TP=83661.1429 [7010597f]
