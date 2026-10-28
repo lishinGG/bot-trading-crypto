@@ -1,23 +1,13 @@
 """
 risk_manager.py
 ================
-Gère la taille de position, le SL/TP, les sorties, le circuit breaker,
-le plafond de profit mensuel, et désormais le SENS de la position
-(long ou short) -- le short n'existe que pour les Futures, jamais pour
-le spot (structurellement impossible en spot).
+Taille de position, SL/TP, sorties, circuit breaker, plafond de profit mensuel, sens long/short
+(short = Futures uniquement). Garde-fous IA : l'IA ne peut jamais augmenter le risque.
 
-GARDE-FOUS IA inchangés : l'IA ne peut jamais augmenter le risque au-delà
-des plafonds fixés ici.
-
-LONG vs SHORT -- ce qui change :
-  - SL/TP : pour un long, le SL est EN DESSOUS de l'entrée, le TP AU-DESSUS.
-    Pour un short, c'est l'inverse : le SL est AU-DESSUS, le TP EN DESSOUS
-    (on gagne quand le prix baisse).
-  - PnL : pour un long, profit = quantité x (sortie - entrée).
-    Pour un short, profit = quantité x (entrée - sortie).
-  - Trailing stop : pour un long, on suit le PLUS HAUT prix atteint et le
-    SL ne fait que monter. Pour un short, on suit le PLUS BAS prix atteint
-    et le SL ne fait que descendre.
+Deux modes de trailing :
+  - "constant"  : le SL suit le plus haut/bas atteint à distance constante (stratégies 1h)
+  - "atr_stage" : break-even à +1,5 ATR puis trailing 1 ATR, évalués à la CLÔTURE 4h,
+                  avec l'ATR d'entrée (stratégie Trend Pullback 4H)
 """
 
 from dataclasses import dataclass, field
@@ -47,6 +37,9 @@ TRAILING_STOP_MIN_PROGRESS_PCT = 0.005
 
 MONTHLY_PROFIT_CEILING_PCT = 0.15
 
+STAGED_BREAKEVEN_TRIGGER_ATR = 1.5
+STAGED_TRAIL_ATR = 1.0
+
 
 def _clamp(value, low, high):
     return max(low, min(high, value))
@@ -67,10 +60,13 @@ class PositionSizing:
     opened_at: float = field(default_factory=time.time)
     entry_reasons: list = field(default_factory=list)
     algo_id: str = ""
-    highest_price_seen: float = 0.0   # pour un short, sert de "plus bas prix vu" (nom conservé pour compat)
+    highest_price_seen: float = 0.0
     leverage: float = 1.0
     margin_usd: float = 0.0
-    side: str = "long"   # "long" ou "short" -- "long" toujours en spot
+    side: str = "long"
+    atr_at_entry: float = 0.0
+    trail_mode: str = "constant"
+    trail_ts: int = 0   # horodatage de la dernière bougie 4h déjà traitée par le trailing par paliers
 
 
 class RiskManager:
@@ -85,21 +81,17 @@ class RiskManager:
         self.current_month = None
         self.month_start_balance = starting_capital
         self.profit_ceiling_hit = False
+        self.max_position_age_hours = MAX_POSITION_AGE_HOURS
 
-    # ------------------------------------------------------------------
-    # CIRCUIT BREAKER
-    # ------------------------------------------------------------------
+    # --- circuit breaker -------------------------------------------------
     def check_circuit_breaker(self):
         loss_pct = (self.starting_capital - self.current_balance) / self.starting_capital
         if loss_pct >= CIRCUIT_BREAKER_LOSS_PCT:
             self.trading_halted = True
         return self.trading_halted
 
-    # ------------------------------------------------------------------
-    # PLAFOND DE PROFIT MENSUEL
-    # ------------------------------------------------------------------
+    # --- plafond mensuel -------------------------------------------------
     def check_monthly_rollover(self, month_str: str = None) -> bool:
-        """Retourne True si un nouveau mois vient de commencer (reset)."""
         month_now = month_str or datetime.now(timezone.utc).strftime("%Y-%m")
         if self.current_month != month_now:
             self.current_month = month_now
@@ -127,9 +119,7 @@ class RiskManager:
         self.strategy_paused = stats["should_pause"]
         return stats
 
-    # ------------------------------------------------------------------
-    # VÉRIFICATIONS AVANT OUVERTURE
-    # ------------------------------------------------------------------
+    # --- vérifications avant ouverture ----------------------------------
     def _position_count(self, symbol):
         return len(self.open_positions.get(symbol, []))
 
@@ -137,9 +127,6 @@ class RiskManager:
         return sum(len(v) for v in self.open_positions.values())
 
     def _opposite_side_open(self, symbol: str, side: str) -> bool:
-        """Vérifie si une position de sens OPPOSÉ est déjà ouverte sur ce
-        symbole -- on ferme toujours l'opposée avant d'en ouvrir une
-        nouvelle (pas de long ET short simultanés sur la même crypto)."""
         opposite = "short" if side == "long" else "long"
         for pos in self.open_positions.get(symbol, []):
             pos_side = pos["side"] if isinstance(pos, dict) else getattr(pos, "side", "long")
@@ -164,28 +151,23 @@ class RiskManager:
             return False, "Solde épuisé"
         return True, "OK"
 
-    # ------------------------------------------------------------------
-    # CALCUL DE POSITION -- SPOT (toujours long)
-    # ------------------------------------------------------------------
+    # --- calcul de position : spot (toujours long) ----------------------
     def calculate_position(self, symbol, entry_price, atr, entry_reasons=None,
-                            ai_size_factor=1.0, ai_sl_tightness=1.0, ai_tp_extension=1.0):
+                            ai_size_factor=1.0, ai_sl_tightness=1.0, ai_tp_extension=1.0,
+                            trail_mode="constant"):
         allowed, reason = self.can_open_position(symbol, side="long")
         if not allowed:
             return None
-
         safe_size_factor = _clamp(ai_size_factor, MIN_AI_SIZE_FACTOR, 1.0)
         safe_sl_tightness = _clamp(ai_sl_tightness, MIN_AI_SL_TIGHTNESS, 1.0)
         safe_tp_extension = _clamp(ai_tp_extension, 1.0, MAX_AI_TP_EXTENSION)
 
         position_size_usd = self.current_balance * MAX_POSITION_PCT * safe_size_factor
         quantity = position_size_usd / entry_price
-
         sl_distance = atr * ATR_STOP_LOSS_MULTIPLIER * safe_sl_tightness
         tp_distance = atr * ATR_TAKE_PROFIT_MULTIPLIER * safe_tp_extension
-
         stop_loss_price = entry_price - sl_distance
         take_profit_price = entry_price + tp_distance
-
         risk_amount_usd = quantity * (entry_price - stop_loss_price)
         reward_amount_usd = quantity * (take_profit_price - entry_price)
         risk_reward_ratio = reward_amount_usd / risk_amount_usd if risk_amount_usd > 0 else 0
@@ -197,35 +179,31 @@ class RiskManager:
             risk_amount_usd=round(risk_amount_usd, 2), reward_amount_usd=round(reward_amount_usd, 2),
             risk_reward_ratio=round(risk_reward_ratio, 2), entry_reasons=entry_reasons or [],
             highest_price_seen=entry_price, leverage=1.0, margin_usd=position_size_usd, side="long",
+            atr_at_entry=atr, trail_mode=trail_mode,
         )
 
-    # ------------------------------------------------------------------
-    # CALCUL DE POSITION -- FUTURES (long OU short)
-    # ------------------------------------------------------------------
+    # --- calcul de position : Futures (long ou short) -------------------
     def calculate_leveraged_position(self, symbol, entry_price, atr, leverage,
                                       side: str = "long", entry_reasons=None,
-                                      ai_size_factor=1.0, ai_sl_tightness=1.0, ai_tp_extension=1.0):
+                                      ai_size_factor=1.0, ai_sl_tightness=1.0, ai_tp_extension=1.0,
+                                      trail_mode="constant"):
         allowed, reason = self.can_open_position(symbol, side=side)
         if not allowed:
             return None
-
         safe_size_factor = _clamp(ai_size_factor, MIN_AI_SIZE_FACTOR, 1.0)
         safe_sl_tightness = _clamp(ai_sl_tightness, MIN_AI_SL_TIGHTNESS, 1.0)
         safe_tp_extension = _clamp(ai_tp_extension, 1.0, MAX_AI_TP_EXTENSION)
 
-        # Même notionnel et même risque en $ que le spot aurait utilisé --
-        # le levier ne fait que réduire la marge nécessaire pour l'obtenir.
         position_size_usd = self.current_balance * MAX_POSITION_PCT * safe_size_factor
         quantity = position_size_usd / entry_price
         margin_usd = position_size_usd / leverage
-
         sl_distance = atr * ATR_STOP_LOSS_MULTIPLIER * safe_sl_tightness
         tp_distance = atr * ATR_TAKE_PROFIT_MULTIPLIER * safe_tp_extension
 
         if side == "long":
             stop_loss_price = entry_price - sl_distance
             take_profit_price = entry_price + tp_distance
-        else:  # short : SL au-dessus de l'entrée, TP en dessous
+        else:
             stop_loss_price = entry_price + sl_distance
             take_profit_price = entry_price - tp_distance
 
@@ -240,11 +218,10 @@ class RiskManager:
             risk_amount_usd=round(risk_amount_usd, 2), reward_amount_usd=round(reward_amount_usd, 2),
             risk_reward_ratio=round(risk_reward_ratio, 2), entry_reasons=entry_reasons or [],
             highest_price_seen=entry_price, leverage=leverage, margin_usd=round(margin_usd, 2), side=side,
+            atr_at_entry=atr, trail_mode=trail_mode,
         )
 
-    # ------------------------------------------------------------------
-    # OUVERTURE / FERMETURE
-    # ------------------------------------------------------------------
+    # --- ouverture / fermeture ------------------------------------------
     def register_open_position(self, sizing: PositionSizing):
         self.open_positions.setdefault(sizing.symbol, []).append(sizing)
 
@@ -269,7 +246,7 @@ class RiskManager:
             quantity = match["quantity"] if isinstance(match, dict) else match.quantity
             side = match["side"] if isinstance(match, dict) else getattr(match, "side", "long")
             if side == "short":
-                pnl = quantity * (entry_price - exit_price)   # profit quand le prix baisse
+                pnl = quantity * (entry_price - exit_price)
             else:
                 pnl = quantity * (exit_price - entry_price)
 
@@ -277,13 +254,9 @@ class RiskManager:
         self.record_trade_result(pnl)
         return round(pnl, 2)
 
-    # ------------------------------------------------------------------
-    # SORTIES INTELLIGENTES
-    # ------------------------------------------------------------------
+    # --- sorties intelligentes ------------------------------------------
     def check_exit_conditions_for_position(self, position, current_price, current_signal_direction=None):
         side = position["side"] if isinstance(position, dict) else getattr(position, "side", "long")
-
-        # Invalidation : un signal qui va dans le sens OPPOSÉ à la position invalide celle-ci.
         if side == "long" and current_signal_direction == "sell":
             return "invalidation"
         if side == "short" and current_signal_direction == "buy":
@@ -292,15 +265,13 @@ class RiskManager:
         opened_at = position["opened_at"] if isinstance(position, dict) else getattr(position, "opened_at", time.time())
         entry_price = position["entry_price"] if isinstance(position, dict) else position.entry_price
         age_hours = (time.time() - opened_at) / 3600
-        if age_hours >= MAX_POSITION_AGE_HOURS:
+        if age_hours >= self.max_position_age_hours:
             price_move_pct = abs(current_price - entry_price) / entry_price
             if price_move_pct < STAGNANT_MOVE_THRESHOLD:
                 return "stagnation_temporelle"
         return None
 
-    # ------------------------------------------------------------------
-    # STOP-LOSS SUIVEUR (long et short)
-    # ------------------------------------------------------------------
+    # --- trailing "constant" (stratégies 1h) ----------------------------
     def compute_trailing_stop_update(self, position, current_price):
         side = position["side"] if isinstance(position, dict) else getattr(position, "side", "long")
         entry_price = position["entry_price"] if isinstance(position, dict) else position.entry_price
@@ -319,7 +290,7 @@ class RiskManager:
             if candidate_new_sl > current_sl:
                 return round(candidate_new_sl, 4), round(new_extreme, 4)
             return None
-        else:  # short : on suit le plus BAS prix vu, le SL ne descend que vers le bas
+        else:
             original_sl_distance = current_sl - entry_price if current_sl > entry_price else 0
             if original_sl_distance <= 0:
                 return None
@@ -330,6 +301,45 @@ class RiskManager:
             if candidate_new_sl < current_sl:
                 return round(candidate_new_sl, 4), round(new_extreme, 4)
             return None
+
+    # --- trailing "atr_stage" (Trend Pullback 4H) ------------------------
+    def compute_staged_trailing_update(self, position, ref_close, candle_ts=0):
+        """
+        Étape 1 : dès qu'une clôture 4h est à +1,5 ATR (ATR d'entrée) de l'entrée, le SL passe au
+        prix d'entrée (break-even). Étape 2 : aux clôtures 4h SUIVANTES, nouveau SL = clôture -/+ 1 ATR,
+        uniquement s'il est plus serré. Le SL ne recule jamais. Retourne (nouveau_sl, extrême) ou None.
+        """
+        get = (lambda k, d=None: position.get(k, d)) if isinstance(position, dict) \
+            else (lambda k, d=None: getattr(position, k, d))
+        side, entry, sl = get("side", "long"), get("entry_price"), get("stop_loss_price")
+        atr, trail_ts = get("atr_at_entry", 0.0), get("trail_ts", 0) or 0
+        if not atr or atr <= 0:
+            return None
+        be_level = round(entry, 4)
+        new_candle = (candle_ts == 0) or (candle_ts > trail_ts)
+
+        if side == "long":
+            if ref_close - entry < STAGED_BREAKEVEN_TRIGGER_ATR * atr:
+                return None
+            if sl < be_level - 1e-12:
+                return be_level, round(ref_close, 4)
+            if not new_candle:
+                return None
+            candidate = round(ref_close - STAGED_TRAIL_ATR * atr, 4)
+            if candidate > sl:
+                return candidate, round(ref_close, 4)
+            return None
+
+        if entry - ref_close < STAGED_BREAKEVEN_TRIGGER_ATR * atr:
+            return None
+        if sl > be_level + 1e-12:
+            return be_level, round(ref_close, 4)
+        if not new_candle:
+            return None
+        candidate = round(ref_close + STAGED_TRAIL_ATR * atr, 4)
+        if candidate < sl:
+            return candidate, round(ref_close, 4)
+        return None
 
 
 def calculate_atr(high, low, close, period=14):
