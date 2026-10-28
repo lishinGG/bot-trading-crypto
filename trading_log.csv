@@ -472,3 +472,13 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-27T23:59:17.656258+00:00,adaptive_hybrid__shadow,XLM-USDT,buy,0.1703,295.00329705,0.0,score=55 (Niveau 1 seul) [34d0008e]
 2026-10-27T23:59:17.955768+00:00,adaptive_hybrid,XLM-USDT,buy,0.1703,294.29870995,0.0,score=55 | SL=0.1692 TP=0.1726 [3635b18e]
 2026-10-27T23:59:18.514256+00:00,adaptive_hybrid__futures,XLM-USDT,skip_open,0.1703,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-28T04:30:55.016433+00:00,trend_following,ETH-USDT,trailing_stop_update,2354.04,0.02137231,0.0,Nouveau SL=2325.1854 [d8784040]
+2026-10-28T04:30:55.406436+00:00,trend_following,XLM-USDT,trailing_stop_update,0.17164,293.89371125,0.0,Nouveau SL=0.1705 [9a8b8af3]
+2026-10-28T04:30:56.447901+00:00,trend_following__shadow,SOL-USDT,buy,101.78,0.48900687,0.0,score=55 (Niveau 1 seul) [94e44b0c]
+2026-10-28T04:30:57.593637+00:00,trend_following,SOL-USDT,buy,101.78,0.49174788,0.0,score=55 | SL=100.805 TP=103.73 [6b460f31]
+2026-10-28T04:30:58.113140+00:00,trend_following__futures,SOL-USDT,skip_open,101.78,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-10-28T04:30:58.852339+00:00,adaptive_hybrid,ETH-USDT,trailing_stop_update,2354.04,0.02140176,0.0,Nouveau SL=2325.1854 [88c06284]
+2026-10-28T04:30:59.027000+00:00,adaptive_hybrid,XLM-USDT,trailing_stop_update,0.17164,294.29870995,0.0,Nouveau SL=0.1705 [3635b18e]
+2026-10-28T04:30:59.679647+00:00,adaptive_hybrid__shadow,SOL-USDT,buy,101.78,0.49360446,0.0,score=55 (Niveau 1 seul) [e1e1ac58]
+2026-10-28T04:31:00.142449+00:00,adaptive_hybrid,SOL-USDT,buy,101.78,0.49242553,0.0,score=55 | SL=100.805 TP=103.73 [fd3e5549]
+2026-10-28T04:31:00.624037+00:00,adaptive_hybrid__futures,SOL-USDT,skip_open,101.78,0.0,0.0,Stratégie en pause : performance récente dégradée

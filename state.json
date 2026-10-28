@@ -35,14 +35,17 @@
           "position_id": "d8784040",
           "entry_price": 2341.82,
           "quantity": 0.02137231,
-          "stop_loss_price": 2312.9654,
+          "stop_loss_price": 2325.1854,
           "take_profit_price": 2399.5293,
           "opened_at": 1793133540.66593,
           "algo_id": "",
-          "highest_price_seen": 2341.82,
+          "highest_price_seen": 2354.04,
           "leverage": 1.0,
           "margin_usd": 50.05009902560757,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ],
       "XLM-USDT": [
@@ -50,14 +53,35 @@
           "position_id": "9a8b8af3",
           "entry_price": 0.1703,
           "quantity": 293.89371125,
-          "stop_loss_price": 0.1692,
+          "stop_loss_price": 0.1705,
           "take_profit_price": 0.1726,
           "opened_at": 1793145554.014855,
           "algo_id": "",
-          "highest_price_seen": 0.1703,
+          "highest_price_seen": 0.1716,
           "leverage": 1.0,
           "margin_usd": 50.05009902560757,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
+        }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "6b460f31",
+          "entry_price": 101.78,
+          "quantity": 0.49174788,
+          "stop_loss_price": 100.805,
+          "take_profit_price": 103.73,
+          "opened_at": 1793161857.066067,
+          "algo_id": "",
+          "highest_price_seen": 101.78,
+          "leverage": 1.0,
+          "margin_usd": 50.05009902560757,
+          "side": "long",
+          "atr_at_entry": 0.6499999999999996,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ]
     }
@@ -118,14 +142,17 @@
           "position_id": "88c06284",
           "entry_price": 2341.82,
           "quantity": 0.02140176,
-          "stop_loss_price": 2312.9654,
+          "stop_loss_price": 2325.1854,
           "take_profit_price": 2399.5293,
           "opened_at": 1793133545.2070272,
           "algo_id": "",
-          "highest_price_seen": 2341.82,
+          "highest_price_seen": 2354.04,
           "leverage": 1.0,
           "margin_usd": 50.119070304717376,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ],
       "XLM-USDT": [
@@ -133,14 +160,35 @@
           "position_id": "3635b18e",
           "entry_price": 0.1703,
           "quantity": 294.29870995,
-          "stop_loss_price": 0.1692,
+          "stop_loss_price": 0.1705,
           "take_profit_price": 0.1726,
           "opened_at": 1793145557.7206705,
           "algo_id": "",
-          "highest_price_seen": 0.1703,
+          "highest_price_seen": 0.1716,
           "leverage": 1.0,
           "margin_usd": 50.119070304717376,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
+        }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "fd3e5549",
+          "entry_price": 101.78,
+          "quantity": 0.49242553,
+          "stop_loss_price": 100.805,
+          "take_profit_price": 103.73,
+          "opened_at": 1793161859.7895837,
+          "algo_id": "",
+          "highest_price_seen": 101.78,
+          "leverage": 1.0,
+          "margin_usd": 50.119070304717376,
+          "side": "long",
+          "atr_at_entry": 0.6499999999999996,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ]
     }
@@ -188,7 +236,10 @@
           "highest_price_seen": 2341.82,
           "leverage": 1.0,
           "margin_usd": 49.77111893167728,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ],
       "XLM-USDT": [
@@ -203,7 +254,28 @@
           "highest_price_seen": 0.1703,
           "leverage": 1.0,
           "margin_usd": 49.77111893167728,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
+        }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "94e44b0c",
+          "entry_price": 101.78,
+          "quantity": 0.48900687,
+          "stop_loss_price": 100.805,
+          "take_profit_price": 103.73,
+          "opened_at": 1793161856.4478319,
+          "algo_id": "",
+          "highest_price_seen": 101.78,
+          "leverage": 1.0,
+          "margin_usd": 49.77111893167728,
+          "side": "long",
+          "atr_at_entry": 0.6499999999999996,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ]
     }
@@ -268,7 +340,10 @@
           "highest_price_seen": 2341.82,
           "leverage": 1.0,
           "margin_usd": 50.23906148831051,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ],
       "XLM-USDT": [
@@ -283,7 +358,28 @@
           "highest_price_seen": 0.1703,
           "leverage": 1.0,
           "margin_usd": 50.23906148831051,
-          "side": "long"
+          "side": "long",
+          "atr_at_entry": 0.0,
+          "trail_mode": "constant",
+          "trail_ts": 0
+        }
+      ],
+      "SOL-USDT": [
+        {
+          "position_id": "e1e1ac58",
+          "entry_price": 101.78,
+          "quantity": 0.49360446,
+          "stop_loss_price": 100.805,
+          "take_profit_price": 103.73,
+          "opened_at": 1793161859.6795762,
+          "algo_id": "",
+          "highest_price_seen": 101.78,
+          "leverage": 1.0,
+          "margin_usd": 50.23906148831051,
+          "side": "long",
+          "atr_at_entry": 0.6499999999999996,
+          "trail_mode": "constant",
+          "trail_ts": 0
         }
       ]
     }
@@ -349,5 +445,49 @@
     "month_start_balance": 493.23791363537515,
     "profit_ceiling_hit": false,
     "open_positions": {}
+  },
+  "trend_pullback_4h": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "current_month": "2026-10",
+    "month_start_balance": 500.0,
+    "profit_ceiling_hit": false,
+    "open_positions": {}
+  },
+  "trend_pullback_4h__shadow": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "current_month": "2026-10",
+    "month_start_balance": 500.0,
+    "profit_ceiling_hit": false,
+    "open_positions": {}
+  },
+  "trend_pullback_4h__futures": {
+    "starting_capital": 500.0,
+    "current_balance": 500.0,
+    "trading_halted": false,
+    "strategy_paused": false,
+    "pnl_history": [],
+    "current_month": "2026-10",
+    "month_start_balance": 500.0,
+    "profit_ceiling_hit": false,
+    "open_positions": {}
+  },
+  "_meta": {
+    "signal_cursor": {
+      "trend_pullback_4h|BTC-USDT": 1793145600000,
+      "trend_pullback_4h|ETH-USDT": 1793145600000,
+      "trend_pullback_4h|SOL-USDT": 1793145600000,
+      "trend_pullback_4h|BNB-USDT": 1793145600000,
+      "trend_pullback_4h|XLM-USDT": 1793145600000,
+      "trend_pullback_4h|DOGE-USDT": 1793145600000,
+      "trend_pullback_4h|LINK-USDT": 1793145600000
+    }
   }
 }
