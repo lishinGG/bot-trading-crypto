@@ -85,11 +85,10 @@
   },
   "trend_following__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 498.6142589439011,
+    "current_balance": 498.1105818678011,
     "trading_halted": false,
-    "strategy_paused": false,
+    "strategy_paused": true,
     "pnl_history": [
-      1.6909279750000001,
       -0.386185720799998,
       -0.31241673600000447,
       -2.172449731936401,
@@ -108,7 +107,8 @@
       1.0054815750000052,
       -1.473692345400001,
       0.9213511669999954,
-      0.9030696271283947
+      0.9030696271283947,
+      -0.5036770761000006
     ],
     "current_month": "2026-10",
     "month_start_balance": 499.7079291148127,
@@ -128,24 +128,6 @@
           "margin_usd": 49.77111893167728,
           "side": "long",
           "atr_at_entry": 0.0,
-          "trail_mode": "constant",
-          "trail_ts": 0
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "94e44b0c",
-          "entry_price": 101.78,
-          "quantity": 0.48900687,
-          "stop_loss_price": 100.805,
-          "take_profit_price": 103.73,
-          "opened_at": 1793161856.4478319,
-          "algo_id": "",
-          "highest_price_seen": 101.78,
-          "leverage": 1.0,
-          "margin_usd": 49.77111893167728,
-          "side": "long",
-          "atr_at_entry": 0.6499999999999996,
           "trail_mode": "constant",
           "trail_ts": 0
         }
@@ -171,11 +153,10 @@
   },
   "adaptive_hybrid__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 503.30217507098956,
+    "current_balance": 502.79376247718955,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.3124313760000044,
       0.8815120900000017,
       0.9648878120000018,
       -2.172551405115001,
@@ -194,7 +175,8 @@
       1.0149449310000052,
       -1.4898236079999945,
       0.9300135399999955,
-      0.9115601878844947
+      0.9115601878844947,
+      -0.5084125938000006
     ],
     "current_month": "2026-10",
     "month_start_balance": 504.22983694510503,
@@ -214,24 +196,6 @@
           "margin_usd": 50.23906148831051,
           "side": "long",
           "atr_at_entry": 0.0,
-          "trail_mode": "constant",
-          "trail_ts": 0
-        }
-      ],
-      "SOL-USDT": [
-        {
-          "position_id": "e1e1ac58",
-          "entry_price": 101.78,
-          "quantity": 0.49360446,
-          "stop_loss_price": 100.805,
-          "take_profit_price": 103.73,
-          "opened_at": 1793161859.6795762,
-          "algo_id": "",
-          "highest_price_seen": 101.78,
-          "leverage": 1.0,
-          "margin_usd": 50.23906148831051,
-          "side": "long",
-          "atr_at_entry": 0.6499999999999996,
           "trail_mode": "constant",
           "trail_ts": 0
         }
@@ -302,109 +266,55 @@
   },
   "trend_pullback_4h": {
     "starting_capital": 500.0,
-    "current_balance": 498.678414098,
+    "current_balance": 498.13097359200003,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -1.3215859019999974
+      -1.3215859019999974,
+      -0.5474405059999947
     ],
     "current_month": "2026-10",
     "month_start_balance": 500.0,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "4947715c",
-          "entry_price": 81309.2,
-          "quantity": 0.00061331,
-          "stop_loss_price": 80133.2285,
-          "take_profit_price": 83661.1429,
-          "opened_at": 1793222800.9485002,
-          "algo_id": "",
-          "highest_price_seen": 81309.2,
-          "leverage": 1.0,
-          "margin_usd": 49.86784140980001,
-          "side": "long",
-          "atr_at_entry": 783.9809734944356,
-          "trail_mode": "atr_stage",
-          "trail_ts": 0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_pullback_4h__shadow": {
     "starting_capital": 500.0,
-    "current_balance": 498.678414098,
+    "current_balance": 498.091721752,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -1.3215859019999974
+      -1.3215859019999974,
+      -0.5866923459999946
     ],
     "current_month": "2026-10",
     "month_start_balance": 500.0,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "b6c2c940",
-          "entry_price": 81309.2,
-          "quantity": 0.00061331,
-          "stop_loss_price": 80133.2285,
-          "take_profit_price": 83661.1429,
-          "opened_at": 1793222800.5242999,
-          "algo_id": "",
-          "highest_price_seen": 81309.2,
-          "leverage": 1.0,
-          "margin_usd": 49.86784140980001,
-          "side": "long",
-          "atr_at_entry": 783.9809734944356,
-          "trail_mode": "atr_stage",
-          "trail_ts": 0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "trend_pullback_4h__futures": {
     "starting_capital": 500.0,
-    "current_balance": 499.9993,
+    "current_balance": 499.999295,
     "trading_halted": false,
     "strategy_paused": false,
     "pnl_history": [
-      -0.0007
+      -0.0007,
+      -5e-06
     ],
     "current_month": "2026-10",
     "month_start_balance": 500.0,
     "profit_ceiling_hit": false,
-    "open_positions": {
-      "BTC-USDT": [
-        {
-          "position_id": "7010597f",
-          "entry_price": 81309.2,
-          "quantity": 0.00061494,
-          "stop_loss_price": 80133.2285,
-          "take_profit_price": 83661.1429,
-          "opened_at": 1793222801.9450753,
-          "algo_id": "",
-          "highest_price_seen": 81309.2,
-          "leverage": 5,
-          "margin_usd": 10.0,
-          "side": "long",
-          "atr_at_entry": 783.9809734944356,
-          "trail_mode": "atr_stage",
-          "trail_ts": 0
-        }
-      ]
-    }
+    "open_positions": {}
   },
   "_meta": {
     "signal_cursor": {
-      "trend_pullback_4h|BTC-USDT": 1793217600000,
-      "trend_pullback_4h|ETH-USDT": 1793217600000,
-      "trend_pullback_4h|SOL-USDT": 1793217600000,
-      "trend_pullback_4h|BNB-USDT": 1793217600000,
-      "trend_pullback_4h|XLM-USDT": 1793217600000,
-      "trend_pullback_4h|DOGE-USDT": 1793217600000,
-      "trend_pullback_4h|LINK-USDT": 1793217600000
+      "trend_pullback_4h|BTC-USDT": 1793260800000,
+      "trend_pullback_4h|ETH-USDT": 1793260800000,
+      "trend_pullback_4h|SOL-USDT": 1793260800000,
+      "trend_pullback_4h|BNB-USDT": 1793260800000,
+      "trend_pullback_4h|XLM-USDT": 1793260800000,
+      "trend_pullback_4h|DOGE-USDT": 1793260800000,
+      "trend_pullback_4h|LINK-USDT": 1793260800000
     }
   }
 }

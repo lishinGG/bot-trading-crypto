@@ -503,3 +503,8 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-10-28T21:26:40.524341+00:00,trend_pullback_4h__shadow,BTC-USDT,buy,81309.2,0.00061331,0.0,score=80 (Niveau 1 seul) [b6c2c940]
 2026-10-28T21:26:41.308436+00:00,trend_pullback_4h,BTC-USDT,buy,81309.2,0.00061331,0.0,score=80 | SL=80133.2285 TP=83661.1429 [4947715c]
 2026-10-28T21:26:42.745851+00:00,trend_pullback_4h__futures,BTC-USDT,buy,81309.2,0.00061494,0.0,score=80 | side=long | SL=80133.2285 TP=83661.1429 [7010597f]
+2026-10-29T13:59:32.491720+00:00,trend_following__shadow,SOL-USDT,close,100.75,0.48900687,-0.5,stop_loss [94e44b0c]
+2026-10-29T13:59:33.888311+00:00,adaptive_hybrid__shadow,SOL-USDT,close,100.75,0.49360446,-0.51,stop_loss [e1e1ac58]
+2026-10-29T13:59:34.716373+00:00,trend_pullback_4h,BTC-USDT,close,80416.6,0.00061331,-0.55,invalidation [4947715c]
+2026-10-29T13:59:35.486234+00:00,trend_pullback_4h__shadow,BTC-USDT,close,80352.6,0.00061331,-0.59,invalidation [b6c2c940]
+2026-10-29T13:59:36.323646+00:00,trend_pullback_4h__futures,BTC-USDT,close,80258.27,0.00061494,-0.0,invalidation [long] [7010597f]
