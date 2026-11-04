@@ -528,3 +528,6 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-11-01T07:57:55.248456+00:00,adaptive_hybrid,DOGE-USDT,skip_buy,0.0758,0.0,0.0,Stratégie en pause : performance récente dégradée
 2026-11-01T07:57:55.305647+00:00,adaptive_hybrid__futures,DOGE-USDT,skip_open,0.0758,0.0,0.0,Stratégie en pause : performance récente dégradée
 2026-11-01T19:13:27.994247+00:00,adaptive_hybrid__shadow,DOGE-USDT,close,0.07505,659.62514804,-0.49,stop_loss [6e5d8d94]
+2026-11-04T16:12:19.712617+00:00,trend_pullback_4h__shadow,SOL-USDT,buy,97.28,0.50565647,0.0,score=80 (Niveau 1 seul) [783fda0d]
+2026-11-04T16:12:20.695945+00:00,trend_pullback_4h,SOL-USDT,buy,97.28,0.50569631,0.0,score=80 | SL=94.3016 TP=103.2367 [38b57bf5]
+2026-11-04T16:12:27.343485+00:00,trend_pullback_4h__futures,SOL-USDT,buy,97.28,0.51175784,0.0,score=80 | side=long | SL=94.3016 TP=103.2367 [a5cab912]

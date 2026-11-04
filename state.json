@@ -240,7 +240,26 @@
     "current_month": "2026-11",
     "month_start_balance": 491.94136827934005,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "SOL-USDT": [
+        {
+          "position_id": "38b57bf5",
+          "entry_price": 97.28,
+          "quantity": 0.50569631,
+          "stop_loss_price": 94.3016,
+          "take_profit_price": 103.2367,
+          "opened_at": 1793808740.2094092,
+          "algo_id": "",
+          "highest_price_seen": 97.28,
+          "leverage": 1.0,
+          "margin_usd": 49.19413682793401,
+          "side": "long",
+          "atr_at_entry": 1.985579151010841,
+          "trail_mode": "atr_stage",
+          "trail_ts": 0
+        }
+      ]
+    }
   },
   "trend_pullback_4h__shadow": {
     "starting_capital": 500.0,
@@ -256,7 +275,26 @@
     "current_month": "2026-11",
     "month_start_balance": 491.90260916586004,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "SOL-USDT": [
+        {
+          "position_id": "783fda0d",
+          "entry_price": 97.28,
+          "quantity": 0.50565647,
+          "stop_loss_price": 94.3016,
+          "take_profit_price": 103.2367,
+          "opened_at": 1793808739.7125359,
+          "algo_id": "",
+          "highest_price_seen": 97.28,
+          "leverage": 1.0,
+          "margin_usd": 49.190260916586006,
+          "side": "long",
+          "atr_at_entry": 1.985579151010841,
+          "trail_mode": "atr_stage",
+          "trail_ts": 0
+        }
+      ]
+    }
   },
   "trend_pullback_4h__futures": {
     "starting_capital": 500.0,
@@ -272,17 +310,36 @@
     "current_month": "2026-11",
     "month_start_balance": 497.83802908,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "SOL-USDT": [
+        {
+          "position_id": "a5cab912",
+          "entry_price": 97.28,
+          "quantity": 0.51175784,
+          "stop_loss_price": 94.3016,
+          "take_profit_price": 103.2367,
+          "opened_at": 1793808746.5851812,
+          "algo_id": "",
+          "highest_price_seen": 97.28,
+          "leverage": 5,
+          "margin_usd": 9.96,
+          "side": "long",
+          "atr_at_entry": 1.985579151010841,
+          "trail_mode": "atr_stage",
+          "trail_ts": 0
+        }
+      ]
+    }
   },
   "_meta": {
     "signal_cursor": {
-      "trend_pullback_4h|BTC-USDT": 1793764800000,
-      "trend_pullback_4h|ETH-USDT": 1793764800000,
-      "trend_pullback_4h|SOL-USDT": 1793764800000,
-      "trend_pullback_4h|BNB-USDT": 1793764800000,
-      "trend_pullback_4h|XLM-USDT": 1793764800000,
-      "trend_pullback_4h|DOGE-USDT": 1793764800000,
-      "trend_pullback_4h|LINK-USDT": 1793764800000
+      "trend_pullback_4h|BTC-USDT": 1793793600000,
+      "trend_pullback_4h|ETH-USDT": 1793793600000,
+      "trend_pullback_4h|SOL-USDT": 1793793600000,
+      "trend_pullback_4h|BNB-USDT": 1793793600000,
+      "trend_pullback_4h|XLM-USDT": 1793793600000,
+      "trend_pullback_4h|DOGE-USDT": 1793793600000,
+      "trend_pullback_4h|LINK-USDT": 1793793600000
     }
   }
 }
