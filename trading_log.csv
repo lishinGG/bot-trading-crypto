@@ -540,3 +540,6 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-11-05T01:54:48.540988+00:00,trend_pullback_4h__shadow,ETH-USDT,buy,2435.46,0.02014541,0.0,score=80 (Niveau 1 seul) [5d5800ae]
 2026-11-05T01:54:49.662609+00:00,trend_pullback_4h,ETH-USDT,buy,2435.46,0.020147,0.0,score=80 | SL=2370.9847 TP=2564.4107 [223f7e3d]
 2026-11-05T01:54:50.888172+00:00,trend_pullback_4h__futures,ETH-USDT,buy,2435.46,0.0204412,0.0,score=80 | side=long | SL=2370.9847 TP=2564.4107 [d7c72d5d]
+2026-11-05T08:45:03.759658+00:00,trend_pullback_4h,BNB-USDT,close,715.7,0.0684245,-0.1,invalidation [a22570dc]
+2026-11-05T08:45:04.941728+00:00,trend_pullback_4h__shadow,BNB-USDT,close,715.7,0.06841911,-0.1,invalidation [4b4d1199]
+2026-11-05T08:45:05.865858+00:00,trend_pullback_4h__futures,BNB-USDT,close,704.1,0.06942367,-0.0,invalidation [long] [f399c19b]
