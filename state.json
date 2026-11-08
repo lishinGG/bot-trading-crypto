@@ -285,13 +285,13 @@
   },
   "_meta": {
     "signal_cursor": {
-      "trend_pullback_4h|BTC-USDT": 1794067200000,
-      "trend_pullback_4h|ETH-USDT": 1794067200000,
-      "trend_pullback_4h|SOL-USDT": 1794067200000,
-      "trend_pullback_4h|BNB-USDT": 1794067200000,
-      "trend_pullback_4h|XLM-USDT": 1794067200000,
-      "trend_pullback_4h|DOGE-USDT": 1794067200000,
-      "trend_pullback_4h|LINK-USDT": 1794067200000
+      "trend_pullback_4h|BTC-USDT": 1794096000000,
+      "trend_pullback_4h|ETH-USDT": 1794096000000,
+      "trend_pullback_4h|SOL-USDT": 1794096000000,
+      "trend_pullback_4h|BNB-USDT": 1794096000000,
+      "trend_pullback_4h|XLM-USDT": 1794096000000,
+      "trend_pullback_4h|DOGE-USDT": 1794096000000,
+      "trend_pullback_4h|LINK-USDT": 1794096000000
     }
   }
 }
