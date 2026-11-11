@@ -551,3 +551,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-11-11T17:35:10.315129+00:00,adaptive_hybrid__shadow,XLM-USDT,buy,0.15121,330.33605142,0.0,score=90 (Niveau 1 seul) [082a2257]
 2026-11-11T17:35:10.435728+00:00,adaptive_hybrid,XLM-USDT,skip_buy,0.15121,0.0,0.0,Stratégie en pause : performance récente dégradée
 2026-11-11T17:35:10.473295+00:00,adaptive_hybrid__futures,XLM-USDT,skip_open,0.15121,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-11-11T23:41:04.553965+00:00,adaptive_hybrid__shadow,XLM-USDT,close,0.14693,330.33605142,-1.41,stop_loss [082a2257]
