@@ -546,3 +546,8 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-11-05T16:52:47.554547+00:00,trend_pullback_4h,ETH-USDT,close,2268.41,0.020147,-3.37,stop_loss [223f7e3d]
 2026-11-05T16:52:48.263702+00:00,trend_pullback_4h__shadow,ETH-USDT,close,2268.41,0.02014541,-3.37,stop_loss [5d5800ae]
 2026-11-05T16:52:48.604660+00:00,trend_pullback_4h__futures,ETH-USDT,close,2271.31,0.0204412,-0.0,stop_loss [long] [d7c72d5d]
+2026-11-11T17:35:09.830531+00:00,trend_following,XLM-USDT,skip_buy,0.15121,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-11-11T17:35:09.923776+00:00,trend_following__futures,XLM-USDT,skip_open,0.15121,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-11-11T17:35:10.315129+00:00,adaptive_hybrid__shadow,XLM-USDT,buy,0.15121,330.33605142,0.0,score=90 (Niveau 1 seul) [082a2257]
+2026-11-11T17:35:10.435728+00:00,adaptive_hybrid,XLM-USDT,skip_buy,0.15121,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-11-11T17:35:10.473295+00:00,adaptive_hybrid__futures,XLM-USDT,skip_open,0.15121,0.0,0.0,Stratégie en pause : performance récente dégradée
