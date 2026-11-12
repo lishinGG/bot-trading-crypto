@@ -162,7 +162,26 @@
     "current_month": "2026-11",
     "month_start_balance": 499.99586221718954,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "SOL-USDT": [
+        {
+          "position_id": "0d995536",
+          "entry_price": 83.15,
+          "quantity": 0.59902262,
+          "stop_loss_price": 81.8064,
+          "take_profit_price": 85.8371,
+          "opened_at": 1794457242.2456067,
+          "algo_id": "",
+          "highest_price_seen": 83.15,
+          "leverage": 1.0,
+          "margin_usd": 49.808730505608196,
+          "side": "long",
+          "atr_at_entry": 0.8957142857142861,
+          "trail_mode": "constant",
+          "trail_ts": 0
+        }
+      ]
+    }
   },
   "trend_following__futures": {
     "starting_capital": 500.0,
@@ -285,13 +304,13 @@
   },
   "_meta": {
     "signal_cursor": {
-      "trend_pullback_4h|BTC-USDT": 1794412800000,
-      "trend_pullback_4h|ETH-USDT": 1794412800000,
-      "trend_pullback_4h|SOL-USDT": 1794412800000,
-      "trend_pullback_4h|BNB-USDT": 1794412800000,
-      "trend_pullback_4h|XLM-USDT": 1794412800000,
-      "trend_pullback_4h|DOGE-USDT": 1794412800000,
-      "trend_pullback_4h|LINK-USDT": 1794412800000
+      "trend_pullback_4h|BTC-USDT": 1794441600000,
+      "trend_pullback_4h|ETH-USDT": 1794441600000,
+      "trend_pullback_4h|SOL-USDT": 1794441600000,
+      "trend_pullback_4h|BNB-USDT": 1794441600000,
+      "trend_pullback_4h|XLM-USDT": 1794441600000,
+      "trend_pullback_4h|DOGE-USDT": 1794441600000,
+      "trend_pullback_4h|LINK-USDT": 1794441600000
     }
   }
 }
