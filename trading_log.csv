@@ -557,3 +557,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-11-12T04:20:42.245689+00:00,adaptive_hybrid__shadow,SOL-USDT,buy,83.15,0.59902262,0.0,score=55 (Niveau 1 seul) [0d995536]
 2026-11-12T04:21:07.478567+00:00,adaptive_hybrid,SOL-USDT,signal_rejected,83.15,0.0,0.0,"[Mode tendance ADX=34]; Croisement de moyennes mobiles (+40); ADX confirme une tendance (34) (+30); Volume faible (0.1x) (-15); [IA a rejeté : Strong bearish bias: 1D price -19% below long MA, 4H -3.6%; basket 0/7 above long MA = 100% bearish bias; low volume 0.1x weakens signal; technical conviction only 55/100; BUY LONG conflicts with multi-timeframe bearish trend.]"
 2026-11-12T04:21:12.201793+00:00,adaptive_hybrid__futures,SOL-USDT,skip_open,83.15,0.0,0.0,Stratégie en pause : performance récente dégradée
+2026-11-12T20:45:17.306031+00:00,adaptive_hybrid__shadow,SOL-USDT,close,81.6,0.59902262,-0.93,stop_loss [0d995536]
