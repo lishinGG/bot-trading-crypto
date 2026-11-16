@@ -4,9 +4,38 @@ IMPORTANT : flag="1" = mode DÉMO. Ne JAMAIS mettre flag="0" (mode réel).
 """
 
 import os
+import re
 import time
 import numpy as np
 from okx import MarketData, Account, Trade, PublicData
+
+
+_UNIT_MS = {"m": 60_000, "H": 3_600_000, "D": 86_400_000, "W": 604_800_000}
+
+
+def _bar_ms(bar: str) -> int:
+    """Durée d'une bougie en millisecondes (ex. '1H' -> 3 600 000)."""
+    m = re.match(r"(\d+)([mHDW])", bar)
+    if not m:
+        return 3_600_000
+    return int(m.group(1)) * _UNIT_MS[m.group(2)]
+
+
+def _keep_closed_candles(raw, bar: str, now_ms: int):
+    """Garde uniquement les bougies TERMINÉES, triées de la plus ancienne à la plus récente.
+    Deux protections : (1) le drapeau 'confirm' d'OKX (dernier champ, '0' = en cours) ;
+    (2) l'horloge : une bougie dont l'heure de fin est dans le futur n'est jamais terminée,
+    même si OKX la marque confirmée. Renvoie (bougies, nb_retirées_par_horloge)."""
+    dur = _bar_ms(bar)
+    kept, clock_dropped = [], 0
+    for c in sorted(raw, key=lambda x: int(x[0])):
+        if str(c[-1]) == "0":
+            continue
+        if int(c[0]) + dur > now_ms:
+            clock_dropped += 1
+            continue
+        kept.append(c)
+    return kept, clock_dropped
 
 
 class OKXDemoClient:
@@ -24,12 +53,14 @@ class OKXDemoClient:
 
     # --- données de marché ------------------------------------------------
     def get_candles(self, symbol: str, bar: str = "1H", limit: int = 100):
-        """Bougies COMPLÈTES (retire celle en cours de formation). Renvoie aussi 'ts' (ms)."""
+        """Bougies COMPLÈTES uniquement (jamais celle en cours de formation). Renvoie aussi 'ts' (ms)."""
         result = self.market_api.get_candlesticks(instId=symbol, bar=bar, limit=str(limit + 1))
-        raw = result["data"]
-        raw.reverse()
-        if raw and raw[-1][-1] == "0":
-            raw = raw[:-1]
+        raw_all = result["data"]
+        now_ms = int(time.time() * 1000)
+        raw, clock_dropped = _keep_closed_candles(raw_all, bar, now_ms)
+        if clock_dropped:
+            print(f"[okx_client] {symbol} {bar} : {clock_dropped} bougie(s) non terminée(s) retirée(s) par contrôle d'horloge "
+                  f"(OKX les marquait confirmées).")
         raw = raw[-limit:]
         opens = np.array([float(c[1]) for c in raw])
         highs = np.array([float(c[2]) for c in raw])
@@ -37,6 +68,15 @@ class OKXDemoClient:
         closes = np.array([float(c[4]) for c in raw])
         volumes = np.array([float(c[5]) for c in raw])
         ts = np.array([int(c[0]) for c in raw])
+
+        # Diagnostic : volume de la dernière bougie anormalement bas -> on trace les données brutes pour comprendre.
+        if len(volumes) > 21:
+            avg = float(np.mean(volumes[-21:-1]))
+            if avg > 0 and volumes[-1] / avg < 0.05:
+                tail = sorted(raw_all, key=lambda x: int(x[0]))[-3:]
+                print(f"[okx_client][DIAG volume] {symbol} {bar} : volume dernière bougie = {volumes[-1] / avg:.3f}x la moyenne. "
+                      f"now_ms={now_ms}. 3 dernières bougies brutes OKX (ts, volume, confirm) : "
+                      f"{[(c[0], c[5], c[-1]) for c in tail]}")
         return {"open": opens, "high": highs, "low": lows, "close": closes, "volume": volumes, "ts": ts}
 
     def get_current_price(self, symbol: str) -> float:
