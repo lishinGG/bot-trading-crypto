@@ -1,7 +1,6 @@
 """
-main.py -- orchestrateur. 3 pistes par stratégie :
+main.py -- orchestrateur. 2 pistes par stratégie :
   - spot (avec IA)            : toujours LONG
-  - spot__shadow (sans IA)    : toujours LONG, référence pure Niveau 1
   - futures (avec IA, levier) : LONG et SHORT
 
 Une stratégie peut déclarer son propre timeframe (ex. "4H"). Elle n'est alors évaluée qu'UNE FOIS par
@@ -121,9 +120,11 @@ def load_state() -> dict:
     if os.path.exists(config.STATE_FILE):
         with open(config.STATE_FILE, "r") as f:
             state = json.load(f)
+    # Ancienne piste retirée (compte fantôme) : on l'efface de l'état.
+    for key in [k for k in state if k.endswith("__shadow")]:
+        del state[key]
     for strat in ALL_STRATEGIES:
         state.setdefault(strat.name, _new_strategy_state())
-        state.setdefault(f"{strat.name}__shadow", _new_strategy_state())
         if config.USE_FUTURES:
             state.setdefault(f"{strat.name}__futures", _new_strategy_state())
     return state
@@ -232,7 +233,7 @@ def _trailing_result(rm, pos, candles, current_price, allow_constant):
 
 
 # ----------------------------------------------------------------------
-# SPOT (et compte fantôme) -- toujours LONG
+# SPOT -- toujours LONG
 # ----------------------------------------------------------------------
 def check_and_close_positions(client, rm, strategy, strategy_name, apply_trailing_stop=True, notify=False):
     tf = getattr(strategy, "timeframe", config.CANDLE_INTERVAL)
@@ -433,11 +434,9 @@ def run():
         trail_mode = getattr(strategy, "trail_mode", "constant")
 
         rm = build_risk_manager(strategy.name, state[strategy.name])
-        shadow_key = f"{strategy.name}__shadow"
-        rm_shadow = build_risk_manager(shadow_key, state[shadow_key])
         futures_key = f"{strategy.name}__futures"
         rm_futures = build_risk_manager(futures_key, state[futures_key]) if config.USE_FUTURES else None
-        all_rms = [rm, rm_shadow] + ([rm_futures] if rm_futures else [])
+        all_rms = [rm] + ([rm_futures] if rm_futures else [])
 
         max_age = getattr(strategy, "max_position_age_hours", None)
         for r in all_rms:
@@ -449,7 +448,6 @@ def run():
         was_halted, was_paused, was_ceiling = rm.trading_halted, rm.strategy_paused, rm.profit_ceiling_hit
 
         check_and_close_positions(client, rm, strategy, strategy.name, apply_trailing_stop=True, notify=True)
-        check_and_close_positions(client, rm_shadow, strategy, shadow_key, apply_trailing_stop=False, notify=False)
         if rm_futures:
             check_and_close_futures_positions(client, rm_futures, strategy, futures_key)
 
@@ -475,23 +473,6 @@ def run():
             current_price = client.get_current_price(symbol)
             higher_tf_context = build_higher_timeframe_context(client, symbol)
             combined_market_context = "\n\n".join(filter(None, [higher_tf_context, market_regime_summary]))
-
-            # --- Compte fantôme (Niveau 1 pur, toujours LONG) ---
-            if signal.direction == "buy":
-                allowed_shadow, _ = rm_shadow.can_open_position(symbol, side="long")
-                if allowed_shadow:
-                    shadow_sizing = rm_shadow.calculate_position(symbol, current_price, _atr_for(signal, candles),
-                                                                 trail_mode=trail_mode)
-                    if shadow_sizing:
-                        rm_shadow.register_open_position(shadow_sizing)
-                        log_event(shadow_key, symbol, "buy", current_price, shadow_sizing.quantity,
-                                  note=f"score={signal.conviction_score:.0f} (Niveau 1 seul) [{shadow_sizing.position_id}]")
-            elif signal.direction == "sell" and symbol in rm_shadow.open_positions:
-                for pos in list(rm_shadow.open_positions.get(symbol, [])):
-                    position_id = _get_field(pos, "position_id")
-                    quantity = _get_field(pos, "quantity")
-                    pnl = rm_shadow.close_position(symbol, current_price, position_id=position_id)
-                    log_event(shadow_key, symbol, "sell_signal_close", current_price, quantity, pnl, f"[{position_id}]")
 
             # --- Spot réel (avec IA, toujours LONG) ---
             spot_memory_context = memory.get_memory_context(strategy.name, symbol)
@@ -570,7 +551,6 @@ def run():
             notifications.notify_profit_ceiling(strategy.name)
 
         state[strategy.name] = dump_risk_manager(rm)
-        state[shadow_key] = dump_risk_manager(rm_shadow)
         if rm_futures:
             state[futures_key] = dump_risk_manager(rm_futures)
 
