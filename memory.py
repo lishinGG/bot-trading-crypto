@@ -28,8 +28,7 @@ def _load_closed_trades(log_key: str, symbol: str) -> list:
     pour cette combinaison stratégie+crypto exacte (log_key doit
     correspondre EXACTEMENT à la colonne 'strategy' du CSV, ex:
     'trend_following' pour le spot réel, 'trend_following__futures'
-    pour la piste Futures -- jamais le compte fantôme, qui reste une
-    référence Niveau 1 pure, non affectée par la mémoire)."""
+    pour la piste Futures)."""
     if not os.path.exists(config.LOG_FILE):
         return []
 
