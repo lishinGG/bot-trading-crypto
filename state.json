@@ -181,17 +181,36 @@
     "current_month": "2026-11",
     "month_start_balance": 497.83802908,
     "profit_ceiling_hit": false,
-    "open_positions": {}
+    "open_positions": {
+      "ETH-USDT": [
+        {
+          "position_id": "c58abaa4",
+          "entry_price": 1837.0,
+          "quantity": 0.01355021,
+          "stop_loss_price": 1864.7291,
+          "take_profit_price": 1709.0194,
+          "opened_at": 1794934390.081757,
+          "algo_id": "",
+          "highest_price_seen": 1837.0,
+          "leverage": 5,
+          "margin_usd": 4.98,
+          "side": "short",
+          "atr_at_entry": 28.44013702383823,
+          "trail_mode": "atr_stage",
+          "trail_ts": 0
+        }
+      ]
+    }
   },
   "_meta": {
     "signal_cursor": {
-      "trend_pullback_4h|BTC-USDT": 1794888000000,
-      "trend_pullback_4h|ETH-USDT": 1794888000000,
-      "trend_pullback_4h|SOL-USDT": 1794888000000,
-      "trend_pullback_4h|BNB-USDT": 1794888000000,
-      "trend_pullback_4h|XLM-USDT": 1794888000000,
-      "trend_pullback_4h|DOGE-USDT": 1794888000000,
-      "trend_pullback_4h|LINK-USDT": 1794888000000
+      "trend_pullback_4h|BTC-USDT": 1794916800000,
+      "trend_pullback_4h|ETH-USDT": 1794916800000,
+      "trend_pullback_4h|SOL-USDT": 1794916800000,
+      "trend_pullback_4h|BNB-USDT": 1794916800000,
+      "trend_pullback_4h|XLM-USDT": 1794916800000,
+      "trend_pullback_4h|DOGE-USDT": 1794916800000,
+      "trend_pullback_4h|LINK-USDT": 1794916800000
     }
   }
 }
