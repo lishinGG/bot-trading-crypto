@@ -187,17 +187,17 @@
           "position_id": "c58abaa4",
           "entry_price": 1837.0,
           "quantity": 0.01355021,
-          "stop_loss_price": 1805.6001,
+          "stop_loss_price": 1798.6301,
           "take_profit_price": 1709.0194,
           "opened_at": 1794934390.081757,
           "algo_id": "",
-          "highest_price_seen": 1777.16,
+          "highest_price_seen": 1770.19,
           "leverage": 5,
           "margin_usd": 4.98,
           "side": "short",
           "atr_at_entry": 28.44013702383823,
           "trail_mode": "atr_stage",
-          "trail_ts": 1795032000000
+          "trail_ts": 1795132800000
         }
       ],
       "SOL-USDT": [
@@ -240,13 +240,13 @@
   },
   "_meta": {
     "signal_cursor": {
-      "trend_pullback_4h|BTC-USDT": 1795104000000,
-      "trend_pullback_4h|ETH-USDT": 1795104000000,
-      "trend_pullback_4h|SOL-USDT": 1795104000000,
-      "trend_pullback_4h|BNB-USDT": 1795104000000,
-      "trend_pullback_4h|XLM-USDT": 1795104000000,
-      "trend_pullback_4h|DOGE-USDT": 1795104000000,
-      "trend_pullback_4h|LINK-USDT": 1795104000000
+      "trend_pullback_4h|BTC-USDT": 1795132800000,
+      "trend_pullback_4h|ETH-USDT": 1795132800000,
+      "trend_pullback_4h|SOL-USDT": 1795132800000,
+      "trend_pullback_4h|BNB-USDT": 1795132800000,
+      "trend_pullback_4h|XLM-USDT": 1795132800000,
+      "trend_pullback_4h|DOGE-USDT": 1795132800000,
+      "trend_pullback_4h|LINK-USDT": 1795132800000
     }
   }
 }
