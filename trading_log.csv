@@ -605,3 +605,4 @@ timestamp,strategy,symbol,action,price,quantity,pnl,note
 2026-11-20T20:46:11.829583+00:00,trend_pullback_4h__futures,ETH-USDT,close,1602.4,0.01355021,3.18,take_profit [short] [c58abaa4]
 2026-11-20T20:46:12.698973+00:00,trend_pullback_4h__futures,SOL-USDT,close,67.71,0.33701249,-0.0,take_profit [short] [6c0882f6]
 2026-11-20T20:46:13.431620+00:00,trend_pullback_4h__futures,LINK-USDT,trailing_stop_update,8.356,3.01551946,0.0,Nouveau SL=9.08 [short] [fba526df]
+2026-11-21T01:47:57.838662+00:00,trend_pullback_4h__futures,LINK-USDT,trailing_stop_update,8.561,3.01551946,0.0,Nouveau SL=8.843 [short] [fba526df]
